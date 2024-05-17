@@ -58,7 +58,7 @@
     <!-- ------------------------------------------------------------------------------------Create------------ -->
     <x-dialog-modal wire:model="create_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Analisis</h2>
+            <h2 class="text-center">Nueva Especie</h2>
         </x-slot>
         <x-slot name='content'>
             <form wire:submit="create">
@@ -80,7 +80,7 @@
     
     <x-dialog-modal wire:model="version_view">
         <x-slot name='title'>
-            <h2 class="text-center">Verciones Analisis</h2>
+            <h2 class="text-center">Verciones Especie</h2>
         </x-slot>
         <x-slot name='content'>
             @livewire('especies.version',[
@@ -93,7 +93,7 @@
     <!-- ------------------------------------------------------------------------------------Update------------ -->
     <x-dialog-modal wire:model="update_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Metodo</h2>
+            <h2 class="text-center">Nuevo Especie</h2>
         </x-slot>
         <x-slot name='content'>
             <form wire:submit="update">
