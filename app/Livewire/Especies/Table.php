@@ -3,9 +3,11 @@
 namespace App\Livewire\Especies;
 
 use App\Models\especies;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Lazy]
 class Table extends Component
 {
      //---------------paginacion-------------------------------
