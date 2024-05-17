@@ -32,13 +32,13 @@ class Table extends Component
             'inventario' =>'required|min:3|max:30|unique:equipos',
             'nombre' =>'required|min:3|max:30|',
         ],[
-            'inventario.required' => 'El inventario es requerido',
-            'inventario.min' => 'El inventario debe tener minimo 3 caracteres',
-            'inventario.max' => 'El inventario debe tener maximo 30 caracteres',
+            'inventario.required' => 'El numero de inventario es requerido',
+            'inventario.min' => 'El numero de inventario debe tener minimo 3 caracteres',
+            'inventario.max' => 'El numero de inventario debe tener maximo 30 caracteres',
             'inventario.unique' => 'Este numero de inventario pertenece a otro equipo',
-            'nombre.required' => 'El nombre del analsisi es requerido',
-            'nombre.min' => 'El nombre debe tener minimo 3 caracteres',
-            'nombre.max' => 'El nombre debe tener maximo 30 caracteres',
+            'nombre.required' => 'El nombre del equipo es requerido',
+            'nombre.min' => 'El nombre del equipo debe tener minimo 3 caracteres',
+            'nombre.max' => 'El nombre del equipo debe tener maximo 30 caracteres',
 
         ]);
 
@@ -95,13 +95,13 @@ class Table extends Component
             'equipoEdit.inventario' =>'required|min:3|max:30|unique:equipos,inventario,'.$this->equipoIdEdit,
             'equipoEdit.nombre' =>'required|min:3|max:30|'
         ],[
-            'equipoEdit.inventario.required' => 'El nombre del analsisi es requerido',
-            'equipoEdit.inventario.min' => 'El nombre debe tener minimo 3 caracteres',
-            'equipoEdit.inventario.max' => 'El nombre debe tener maximo 30 caracteres',
+            'equipoEdit.inventario.required' => 'El numero de inventario es requerido',
+            'equipoEdit.inventario.min' => 'El numero de inventario debe tener minimo 3 caracteres',
+            'equipoEdit.inventario.max' => 'El numero de inventario debe tener maximo 30 caracteres',
             'equipoEdit.inventario.unique' => 'Este numero de inventario pertenece a otro equipo',
-            'equipoEdit.nombre.required' => 'El nombre del analsisi es requerido',
-            'equipoEdit.nombre.min' => 'El nombre debe tener minimo 3 caracteres',
-            'equipoEdit.nombre.max' => 'El nombre debe tener maximo 30 caracteres',
+            'equipoEdit.nombre.required' => 'El nombre del equipo es requerido',
+            'equipoEdit.nombre.min' => 'El nombre del equipo debe tener minimo 3 caracteres',
+            'equipoEdit.nombre.max' => 'El nombre del equipo debe tener maximo 30 caracteres',
 
         ]);
 
@@ -116,7 +116,7 @@ class Table extends Component
         $this->reset(['equipoEdit']);
 
         //Mensaje
-        session()->flash('up_msg', 'equipo actualizado correctamente');
+        session()->flash('up_msg', 'Equipo actualizado correctamente');
 
     }
     public function cancel_update(){
@@ -150,7 +150,7 @@ class Table extends Component
         $this->reset(['equipoDown']);
 
         //Mensaje
-        session()->flash('down_msg', 'equipo reparado correctamente');
+        session()->flash('down_msg', 'El equipo a sido dado de baja correctamente');
     }
 
     public function down_rep(){
@@ -163,7 +163,7 @@ class Table extends Component
         $this->reset(['equipoDown']);
 
         //Mensaje
-        session()->flash('down_msg', 'equipo reparado correctamente');
+        session()->flash('down_msg', 'El estado del equipo cambio correctamente');
     }
 
     public function cancel_down(){

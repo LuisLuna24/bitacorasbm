@@ -29,9 +29,9 @@ class Table extends Component
         $this->validate([
             'nombre' =>'required|min:3|max:30|unique:metodos',
         ],[
-            'nombre.required' => 'El nombre del analsisi es requerido',
-            'nombre.min' => 'El nombre debe tener minimo 3 caracteres',
-            'nombre.max' => 'El nombre debe tener maximo 30 caracteres',
+            'nombre.required' => 'El nombre del metodo es requerido',
+            'nombre.min' => 'El nombre del metodo debe tener minimo 3 caracteres',
+            'nombre.max' => 'El nombre del metodo debe tener maximo 30 caracteres',
             'nombre.unique' => 'Este metodo ya a sido registrado',
         ]);
 
@@ -83,10 +83,10 @@ class Table extends Component
         $this->validate([
             'metodoEdit.nombre' =>'required|min:3|max:30|unique:metodos,nombre,'.$this->metodoIdEdit,
         ],[
-            'metodoEdit.nombre.required' => 'El nombre del analsisi es requerido',
-            'metodoEdit.nombre.min' => 'El nombre debe tener minimo 3 caracteres',
-            'metodoEdit.nombre.max' => 'El nombre debe tener maximo 30 caracteres',
-            'metodoEdit.nombre.unique' => 'metodo existente',
+            'metodoEdit.nombre.required' => 'El nombre del metodo es requerido',
+            'metodoEdit.nombre.min' => 'El nombre del metodo debe tener minimo 3 caracteres',
+            'metodoEdit.nombre.max' => 'El nombre del metodo debe tener maximo 30 caracteres',
+            'metodoEdit.nombre.unique' => 'Este metodo ya a sido registrado',
         ]);
 
         //Actualizar
@@ -98,7 +98,7 @@ class Table extends Component
         $this->reset(['metodoEdit']);
 
         //Mensaje
-        session()->flash('up_msg', 'metodo actualizado correctamente');
+        session()->flash('up_msg', 'Metodo actualizado correctamente');
 
     }
     public function cancel_update(){

@@ -29,10 +29,10 @@ class Table extends Component
          $this->validate([
              'nombre' =>'required|min:3|max:30|unique:especies',
          ],[
-             'nombre.required' => 'El nombre del analsisi es requerido',
-             'nombre.min' => 'El nombre debe tener minimo 3 caracteres',
-             'nombre.max' => 'El nombre debe tener maximo 30 caracteres',
-             'nombre.unique' => 'Este especie ya a sido registrado',
+             'nombre.required' => 'El nombre de la especie es requerida',
+             'nombre.min' => 'El nombre de la especie debe tener minimo 3 caracteres',
+             'nombre.max' => 'El nombre de la especie debe tener maximo 30 caracteres',
+             'nombre.unique' => 'Esta especie ya esta registrada',
          ]);
  
          especies::create([
@@ -83,10 +83,10 @@ class Table extends Component
          $this->validate([
              'especieEdit.nombre' =>'required|min:3|max:30|unique:especies,nombre,'.$this->especieIdEdit,
          ],[
-             'especieEdit.nombre.required' => 'El nombre del analsisi es requerido',
-             'especieEdit.nombre.min' => 'El nombre debe tener minimo 3 caracteres',
-             'especieEdit.nombre.max' => 'El nombre debe tener maximo 30 caracteres',
-             'especieEdit.nombre.unique' => 'especie existente',
+             'especieEdit.nombre.required' => 'El nombre de la especie es requerido',
+             'especieEdit.nombre.min' => 'El nombre de la especie debe tener minimo 3 caracteres',
+             'especieEdit.nombre.max' => 'El nombre de la especie debe tener maximo 30 caracteres',
+             'especieEdit.nombre.unique' => 'Esta especie ya esta registrada',
          ]);
  
          //Actualizar
@@ -98,7 +98,7 @@ class Table extends Component
          $this->reset(['especieEdit']);
  
          //Mensaje
-         session()->flash('up_msg', 'especie actualizado correctamente');
+         session()->flash('up_msg', 'Especie actualizada correctamente');
  
      }
      public function cancel_update(){

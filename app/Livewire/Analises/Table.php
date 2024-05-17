@@ -30,8 +30,8 @@ class Table extends Component
             'nombre' =>'required|min:3|max:30|unique:analises',
         ],[
             'nombre.required' => 'El nombre del analsisi es requerido',
-            'nombre.min' => 'El nombre debe tener minimo 3 caracteres',
-            'nombre.max' => 'El nombre debe tener maximo 30 caracteres',
+            'nombre.min' => 'El nombre del analisis debe tener minimo 3 caracteres',
+            'nombre.max' => 'El nombre del analisis debe tener maximo 30 caracteres',
             'nombre.unique' => 'Este analisis ya a sido registrado',
         ]);
 
@@ -84,8 +84,8 @@ class Table extends Component
             'analisisEdit.nombre' =>'required|min:3|max:30|unique:analises,nombre,'.$this->analisisIdEdit,
         ],[
             'analisisEdit.nombre.required' => 'El nombre del analsisi es requerido',
-            'analisisEdit.nombre.min' => 'El nombre debe tener minimo 3 caracteres',
-            'analisisEdit.nombre.max' => 'El nombre debe tener maximo 30 caracteres',
+            'analisisEdit.nombre.min' => 'El nombre del analisis debe tener minimo 3 caracteres',
+            'analisisEdit.nombre.max' => 'El nombre del analisis debe tener maximo 30 caracteres',
             'analisisEdit.nombre.unique' => 'Analisis existente',
         ]);
 
