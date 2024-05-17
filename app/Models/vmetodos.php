@@ -15,7 +15,7 @@ class vmetodos extends Model
 
     //muchos a uno
     public function metodos(){
-        return $this->hasMany(metodos::class);
+        return $this->belongsTo(metodos::class);
     }
 
     //usuario a anamises

@@ -15,7 +15,7 @@ class vespecies extends Model
 
     //muchos a uno
     public function especies(){
-        return $this->hasMany(especies::class);
+        return $this->belongsTo(especies::class);
     }
 
     //usuario a anamises

@@ -15,7 +15,7 @@ class vanalises extends Model
 
     //muchos a uno
     public function analises(){
-        return $this->hasMany(analises::class);
+        return $this->belongsTo(analises::class);
     }
 
     //usuario a anamises
