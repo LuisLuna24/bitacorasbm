@@ -1,0 +1,158 @@
+-------------------------------------------------------------Analisis
+BEGIN
+SET @usuario_anterior=OLD.user_id;
+SET @anlsisi_id=OLD.id;
+SET @version_anterior=OLD.version;
+SET @nombre_anterior=OLD.name;
+
+INSERT INTO vanalises (
+	user_id,
+    analisis_id,
+    version,
+    nombre,
+    created_at,
+    updated_at
+)VALUES(
+    @usuario_anterior,
+    @anlsisi_id,
+    @version_anterior,
+    @nombre_anterior,
+    CURRENT_DATE,
+    CURRENT_DATE
+);
+
+SET NEW.version = OLD.version + 1;
+
+END
+
+-------------------------------------------------------------Metodos
+BEGIN
+SET @usuario_anterior=OLD.user_id;
+SET @metodo_id=OLD.id;
+SET @version_anterior=OLD.version;
+SET @nombre_anterior=OLD.nombre;
+
+INSERT INTO vmetodos (
+	user_id,
+    metodo_id,
+    version,
+    nombre,
+    created_at,
+    updated_at
+)VALUES(
+    @usuario_anterior,
+    @metodo_id,
+    @version_anterior,
+    @nombre_anterior,
+    CURRENT_DATE,
+    CURRENT_DATE
+);
+
+SET NEW.version = OLD.version + 1;
+
+END
+
+-------------------------------------------------------------Especies
+BEGIN
+SET @usuario_anterior=OLD.user_id;
+SET @especie_id=OLD.id;
+SET @version_anterior=OLD.version;
+SET @nombre_anterior=OLD.nombre;
+
+INSERT INTO vespecies (
+	user_id,
+    especie_id,
+    version,
+    nombre,
+    created_at,
+    updated_at
+)VALUES(
+    @usuario_anterior,
+    @especie_id,
+    @version_anterior,
+    @nombre_anterior,
+    CURRENT_DATE,
+    CURRENT_DATE
+);
+
+SET NEW.version = OLD.version + 1;
+
+END
+
+-------------------------------------------------------------Equipos
+
+BEGIN
+SET @usuario_anterior=OLD.user_id;
+SET @version_anterior=OLD.version;
+SET @inventario_anterior=OLD.inventario;
+SET @nombre_anterior=OLD.nombre;
+SET @estado_antierior=OLD.estado;
+SET @descripcion_anterior=OLD.descripcion;
+SET @equipo_id=OLD.id;
+
+
+INSERT INTO vequipos (
+	user_id,
+    equipo_id,
+    version,
+    inventario,
+    nombre,
+    estado,
+    descripcion,
+    created_at,
+    updated_at
+)VALUES(
+    @usuario_anterior,
+    @equipo_id,
+    @version_anterior,
+    @inventario_anterior,
+    @nombre_anterior,
+    @estado_antierior,
+    @descripcion_anterior,
+    CURRENT_DATE,
+    CURRENT_DATE
+);
+
+SET NEW.version = OLD.version + 1;
+
+END
+
+-------------------------------------------------------------reactivos
+
+BEGIN
+SET @usuario_anterior=OLD.user_id;
+SET @reactivo_id=OLD.id;
+SET @name_anterior=OLD.nombre;
+SET @version_anterior=OLD.version;
+SET @folio_anterior=OLD.folio;
+SET @description_anterior=OLD.descripcion;
+SET @stock_anterior=OLD.existencia;
+SET @estado_anterior=OLD.estado;
+
+INSERT INTO reactivos_versiones (
+	user_id,
+    reactivo_id,
+    version,
+    nombre,
+    folio,
+    descripcion,
+    existencia,
+    estado,
+    created_at,
+    updated_at
+)VALUES(
+    @usuario_anterior,
+    @reactivo_id,
+    @version_anterior,
+    @name_anterior,
+    @folio_anterior,
+    @description_anterior,
+    @stock_anterior,
+    @estado_anterior,
+    CURRENT_DATE,
+    CURRENT_DATE
+);
+
+SET NEW.version = OLD.version + 1;
+
+END
