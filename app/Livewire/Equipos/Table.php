@@ -16,6 +16,7 @@ class Table extends Component
     //---------------Filtros----------------------------------
     public $search = '';
     public $datos=10;
+    public $estate='Activo';
 
     //---------------Create----------------------------------
     public $create_new=false;
@@ -44,7 +45,7 @@ class Table extends Component
         equipos::create([
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
-            'inventario' => $this->inventario,
+            'inventario' => 'GISENA-'.$this->inventario,
             'user_id' => auth()->user()->id,
         ]);
         
@@ -106,7 +107,9 @@ class Table extends Component
 
         //Actualizar
         equipos::find($this->equipoIdEdit)->update([
-            'nombre' => $this->equipoEdit['nombre']
+            'nombre' => $this->equipoEdit['nombre'],
+            'descripcion' => $this->equipoEdit['descripcion'],
+            'inventario' => $this->equipoEdit['inventario']
         ]);
 
         $this->update_new=false;
@@ -119,7 +122,93 @@ class Table extends Component
     public function cancel_update(){
         $this->update_new=false;
     }
+    //---------------Eliminar--------------------------------
+    public $down_new=false;
+    public $equipoIdDown;
+    public $equipoDown=[
+        'nombre' => '',
+        'inventario' => ''
+    ];
 
+    public function down($equipoId){
+        $this->down_new=true;
+        $this->equipoIdDown = $equipoId;
+        $equipo = equipos::find($equipoId);
+        $this->equipoDown = [
+            'nombre' => $equipo->nombre,
+            'inventario' => $equipo->inventario,
+        ];
+    }
+
+    public function down_reg(){
+        //Cambiar estado a rearacion
+        equipos::find($this->equipoIdDown)->update([
+            'estado' => 'Baja'
+        ]);
+
+        $this->down_new=false;
+        $this->reset(['equipoDown']);
+
+        //Mensaje
+        session()->flash('down_msg', 'equipo reparado correctamente');
+    }
+
+    public function down_rep(){
+        //Cambiar estado a rearacion
+        equipos::find($this->equipoIdDown)->update([
+            'estado' => 'Reparacion'
+        ]);
+
+        $this->down_new=false;
+        $this->reset(['equipoDown']);
+
+        //Mensaje
+        session()->flash('down_msg', 'equipo reparado correctamente');
+    }
+
+    public function cancel_down(){
+        $this->down_new=false;
+    }
+
+    //---------------activar--------------------------------
+    public $active_new=false;
+    public $equipoIdActive;
+    public $equipoActive=[
+        'nombre' => '',
+        'inventario' => ''
+    ];
+
+    public function active($equipoId){
+        $this->active_new=true;
+        $this->equipoIdActive = $equipoId;
+        $equipo = equipos::find($equipoId);
+        $this->equipoActive = [
+            'nombre' => $equipo->nombre,
+            'inventario' => $equipo->inventario,
+        ];
+    }
+
+    public function active_reg(){
+        //Cambiar estado a rearacion
+        equipos::find($this->equipoIdActive)->update([
+            'estado' => 'Activo'
+        ]);
+
+        $this->active_new=false;
+        $this->reset(['equipoActive']);
+
+        //Mensaje
+        session()->flash('up_msg', 'Equipo activado correctamente');
+    }
+
+    public function cancel_active(){
+        $this->active_new=false;
+    }
+
+    
+
+
+    
     //---------------Lazy-------------------------------
     public function placeholder()
     {
@@ -129,7 +218,7 @@ class Table extends Component
     //---------------Render-------------------------------
     public function render()
     {
-        $equipos = equipos::where('nombre','LIKE','%' . $this->search . '%')->paginate($this->datos);
+        $equipos = equipos::where('nombre','LIKE','%' . $this->search . '%')->where('estado','=',$this->estate) ->paginate($this->datos);
         return view('livewire.equipos.table',compact('equipos'));
     }
 }

@@ -1,14 +1,19 @@
 <div>
     @if (session('add_msg'))
         <x-alert-add>
-            <x-slot name="content">{{session('add_analisis')}}</x-slot>
+            <x-slot name="content">{{session('add_msg')}}</x-slot>
         </x-alert-add>
     @endif
     
     @if (session('up_msg'))
         <x-alert-up>
-            <x-slot name="content">{{session('up_analisis')}}</x-slot>
+            <x-slot name="content">{{session('up_msg')}}</x-slot>
         </x-alert-up>
+    @endif
+    @if (session('down_msg'))
+        <x-alert-down>
+            <x-slot name="content">{{session('down_msg')}}</x-slot>
+        </x-alert-down>
     @endif
     
 
@@ -18,6 +23,11 @@
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="30">30</option>
+        </x-select>
+        <x-select wire:model.live="estate">
+            <option value="Activo">Activo</option>
+            <option value="Baja">Baja</option>
+            <option value="Reparacion">Reparacion</option>
         </x-select>
         <x-input class="w-full" placeholder="Buscar Analisis (nombre)" wire:model.live="search" />
         <x-button class="m-2" wire:click="new">Nuevo</x-button>
@@ -32,6 +42,7 @@
                     <th scope="col" class="px-6 py-3 text-center">Usuario</th>
                     <th scope="col" class="px-6 py-3 text-center">Editar</th>
                     <th scope="col" class="px-6 py-3 text-center">Verciones</th>
+                    <th scope="col" class="px-6 py-3 text-center">Estado</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,6 +66,15 @@
                             <td class="px-6 py-4 text-center">
                                 <x-button wire:click="vercion({{ $equipo->id }})">Verciones</x-button>
                             </td>
+                            @if($equipo->estado == 'Activo')
+                            <td class="px-6 py-4 text-center">
+                                <x-danger-button wire:click="down({{ $equipo->id }})">Baja/Reparacion</x-danger-button>
+                            </td>
+                            @else
+                            <td class="px-6 py-4 text-center">
+                                <x-button wire:click="active({{ $equipo->id }})">Activo</x-button>
+                            </td>
+                            @endif
                         </tr>
                 @endforeach
             </tbody>
@@ -137,5 +157,61 @@
             </form>
         </x-slot>
         <x-slot name='footer'></x-slot>
+    </x-dialog-modal>
+
+    <!-- ------------------------------------------------------------------------------------Down------------ -->
+    <x-dialog-modal wire:model="down_new">
+        <x-slot name='title'>
+            <h2 class="text-center">¿Desea dar de baja o reparacion?</h2>
+        </x-slot>
+        <x-slot name='content'>
+            <form wire:submit="down">
+                <div>
+                    <x-label>Inventario:</x-label>
+                    <x-input wire:model="equipoDown.inventario" type="text" class="block mt-1 w-full" readonly/>
+                    <x-input-error for="equipoDown.inventario" />
+                </div>
+                <div>
+                    <x-label>Nombre:</x-label>
+                    <x-input wire:model="equipoDown.nombre" type="text" class="block mt-1 w-full" readonly/>
+                    <x-input-error for="equipoDown.nombre" />
+                </div>
+            </form>
+        </x-slot>
+        <x-slot name='footer' class="w-full">
+            <div class="mt-5 flex justify-around w-full">
+                <x-danger-button wire:click="down_reg">Baja</x-danger-button>
+                <x-danger-button wire:click="down_rep">Reparacion</x-danger-button>
+                <x-button wire:click="cancel_down">Cancelar</x-button>
+            </div>
+        </x-slot>
+    </x-dialog-modal>
+
+    <!-- ------------------------------------------------------------------------------------active------------ -->
+    <x-dialog-modal wire:model="active_new">
+        <x-slot name='title'>
+            <h2 class="text-center">¿Desea activar el equipo?</h2>
+        </x-slot>
+        <x-slot name='content'>
+            <form wire:submit="active">
+                <div>
+                    <x-label>Inventario:</x-label>
+                    <x-input wire:model="equipoActive.inventario" type="text" class="block mt-1 w-full" readonly/>
+                    <x-input-error for="equipoActive.inventario" />
+                </div>
+                <div>
+                    <x-label>Nombre:</x-label>
+                    <x-input wire:model="equipoActive.nombre" type="text" class="block mt-1 w-full" readonly/>
+                    <x-input-error for="equipoActive.nombre" />
+                </div>
+            </form>
+            
+        </x-slot>
+        <x-slot name='footer' class="w-full">
+            <div class="mt-5 flex justify-around w-full">
+                <x-button wire:click="active_reg">Activar</x-button>
+                <x-danger-button wire:click="cancel_active">Cancelar</x-danger-button>
+            </div>
+        </x-slot>
     </x-dialog-modal>
 </div>
