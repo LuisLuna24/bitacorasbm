@@ -66,9 +66,6 @@ class Table extends Component
     public function vercion($versionId){
         $this->version_view=true;
         $this->VersionEquipoId = $versionId;
-
-        
-
     }
 
     //---------------Actualizar--------------------------------

@@ -23,7 +23,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('bitacoras.dashboard');
     })->name('dashboard');
     Route::get('/inventarios', function () {
         return view('inventarios.index');
@@ -31,6 +31,9 @@ Route::middleware([
     Route::get('/catalogos', function () {
         return view('catalogos.index');
     })->name('catalogos.index');
+    Route::get('/configuracion',function () {
+        return view('configuracion.index');
+    })->name('configuracion.index');
 });
 
 //-------------------------------------------------------Inventarios
@@ -62,4 +65,24 @@ Route::middleware([
     Route::get('/catalogos/metodos', function () {
         return view('catalogos.metodos');
     })->name('catalogos.metodos');
+});
+
+//-------------------------------------------------------Bitacoras
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/bitacoras/pcr', function () {
+        return view('bitacoras.pcr');
+    })->name('bitacoras.pcr');
+    Route::get('/bitacoras/pcr_tiemporeal', function () {
+        return view('bitacoras.pcreal');
+    })->name('bitacoras.pcreal');
+    Route::get('/bitacoras/extraccion', function () {
+        return view('bitacoras.extraccion');
+    })->name('bitacoras.extraccion');
+    Route::get('/bitacoras/reactivos', function () {
+        return view('bitacoras.reactivos');
+    })->name('bitacoras.reactivos');
 });

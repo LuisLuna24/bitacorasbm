@@ -124,18 +124,18 @@ SET @usuario_anterior=OLD.user_id;
 SET @reactivo_id=OLD.id;
 SET @name_anterior=OLD.nombre;
 SET @version_anterior=OLD.version;
-SET @folio_anterior=OLD.folio;
-SET @description_anterior=OLD.descripcion;
+SET @folio_anterior=OLD.lote;
+SET @description_anterior=OLD.description;
 SET @stock_anterior=OLD.existencia;
 SET @estado_anterior=OLD.estado;
 
-INSERT INTO reactivos_versiones (
+INSERT INTO vreactivos (
 	user_id,
     reactivo_id,
     version,
     nombre,
-    folio,
-    descripcion,
+    lote,
+    description,
     existencia,
     estado,
     created_at,
