@@ -27,5 +27,10 @@ class equipos extends Model
         return $this->hasMany(vequipos::class);
     }
 
+    //relacion inversa muchos a muchos con pcrs
+    public function pcrs(){
+        return $this->belongsToMany(pcrs::class);
+    }
+
     use HasFactory;
 }
