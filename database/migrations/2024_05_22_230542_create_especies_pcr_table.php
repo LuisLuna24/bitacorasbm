@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pcrs_especies', function (Blueprint $table) {
+        Schema::create('equipos_pcr', function (Blueprint $table) {
             $table->id();
-            $table->integer('version');  
-            $table->unsignedBigInteger('especie_id');
-            $table->foreign('especie_id')->references('id')->on('especies')->onDelete('cascade');
+            $table->integer('version')->default(1);  
+            $table->unsignedBigInteger('equipos_id');
+            $table->foreign('equipos_id')->references('id')->on('equipos')->onDelete('cascade');
             $table->unsignedBigInteger('pcr_id');
             $table->foreign('pcr_id')->references('id')->on('pcrs')->onDelete('cascade');
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pcrs_especies');
+        Schema::dropIfExists('pcrs_equipos');
     }
 };

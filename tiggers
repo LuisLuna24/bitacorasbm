@@ -3,7 +3,7 @@ BEGIN
 SET @usuario_anterior=OLD.user_id;
 SET @anlsisi_id=OLD.id;
 SET @version_anterior=OLD.version;
-SET @nombre_anterior=OLD.name;
+SET @nombre_anterior=OLD.nombre;
 
 INSERT INTO vanalises (
 	user_id,

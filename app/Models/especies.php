@@ -22,5 +22,17 @@ class especies extends Model
     public function vespecies(){
         return $this->hasMany(vespecies::class);
     }
+
+    
+    public function pcr()
+    {
+        return $this->belongsToMany(pcr::class);
+    }
+
+    public function pcrs_especies()
+    {
+        return $this->hasMany(pcrs_especies::class);
+    }
+
     use HasFactory;
 }

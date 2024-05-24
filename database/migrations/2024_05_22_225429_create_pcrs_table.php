@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('tiempo',30)->nullable();
             $table->boolean('sanitizo')->default(false);
             $table->boolean('tiempouv')->default(false);
+            $table->string('Validado',30)->default('Sin Validacion');
             $table->timestamps();
         });
     }

@@ -23,5 +23,11 @@ class analises extends Model
         return $this->hasMany(vanalises::class);
     }
 
+    //un analisis puede estar en varios Pcr
+    public function pcr()
+    {
+        return $this->hasMany(pcr::class);
+    }
+
     use HasFactory;
 }

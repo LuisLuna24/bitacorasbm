@@ -28,8 +28,14 @@ class equipos extends Model
     }
 
     //relacion inversa muchos a muchos con pcrs
-    public function pcrs(){
-        return $this->belongsToMany(pcrs::class);
+    public function pcr()
+    {
+        return $this->belongsToMany(pcr::class);
+    }
+
+    public function pcrs_equipos()
+    {
+        return $this->hasMany(pcrs_equipos::class);
     }
 
     use HasFactory;
