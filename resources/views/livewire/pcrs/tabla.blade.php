@@ -118,6 +118,13 @@
                         <x-input-error for="no_registro" />
                     </div>
                     <div class="flex flex-col">
+                        <label for="">Cantidad:</label>
+                        <x-input wire:model='cantidad' value='1' />
+                        <x-input-error for="cantidad" />
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
+                    <div class="flex flex-col">
                         <label for="">Analisis:</label>
                         <x-select wire:model='analisis' >
                             <option value="">Seleccione un analisis</option>
@@ -127,13 +134,13 @@
                         </x-select>
                         <x-input-error for="analisis" />
                     </div>
-                </div>
-                <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
                     <div class="flex flex-col">
                         <label for="">Fecha:</label>
                         <x-input class="w-full" type="date" wire:model='fecha' />
                         <x-input-error for="fecha" />
                     </div>
+                </div>
+                <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
                     <div class="flex flex-col">
                         <label for="">Resultado:</label>
                         <x-select wire:model='resultado' >
@@ -142,13 +149,13 @@
                         </x-select>
                         <x-input-error for="resultado" />
                     </div>
-                </div>
-                <div class="grid grid-cols-3 max-md:grid-cols-1 gap-5">
                     <div class="flex flex-col">
                         <label for="">Agarosa</label>
                         <x-input wire:model='agarosa' />
                         <x-input-error for="agarosa" />
                     </div>
+                </div>
+                <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
                     <div class="flex flex-col">
                         <label for="">Voltaje</label>
                         <x-input wire:model='voltaje' />

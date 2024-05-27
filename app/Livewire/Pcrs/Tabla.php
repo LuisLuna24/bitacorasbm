@@ -24,8 +24,6 @@ class Tabla extends Component
     public $date=''; 
 
     public $analises, $especies, $equipos;
-    public $selectedTagsEspecie = [];
-    public $selectedTagsEquipo = [];
 
     //----------------------------------------------------------------Mostrar datos
     public function mount()
@@ -38,7 +36,9 @@ class Tabla extends Component
 
     //----------------------------------------------------------------create
     public $create_new = false;
-    public $no_registro, $analisis, $fecha, $resultado, $agarosa, $voltaje, $tiempo, $sanitizo = 0, $tiempouv = 0;
+    public $no_registro, $cantidad, $analisis, $fecha, $resultado, $agarosa, $voltaje, $tiempo, $sanitizo = 0, $tiempouv = 0;
+    public $selectedTagsEspecie = [];
+    public $selectedTagsEquipo = [];
 
     public function new()
     {
@@ -57,6 +57,7 @@ class Tabla extends Component
             'tiempo' => 'required|numeric',
             'selectedTagsEspecie' => 'required',
             'selectedTagsEquipo' => 'required',
+            'cantidad' => 'required|numeric',
         ], [
             'no_registro.required' => 'El No. de registro es obligatorio',
             'no_registro.min' => 'El No. de registro debe tener al menos 5 caracteres',
@@ -73,22 +74,29 @@ class Tabla extends Component
             'tiempo.numeric' => 'El tiempo debe ser un numero',
             'selectedTagsEspecie.required' => 'Seleccione una especie',
             'selectedTagsEquipo.required' => 'Seleccione un equipo',
-        ]);
-        $pcr = pcr::create([
-            'no_registro' => $this->no_registro,
-            'fecha' => $this->fecha,
-            'analisis_id' => $this->analisis,
-            'resultado' => $this->resultado,
-            'agarosa' => $this->agarosa,
-            'voltaje' => $this->voltaje,
-            'tiempo' => $this->tiempo,
-            'sanitizo' => $this->sanitizo,
-            'tiempouv' => $this->tiempouv,
-            'user_id' => auth()->user()->id,
+            'cantidad.required' => 'Ingrese la cantidad',
+            'cantidad.numeric' => 'La cantidad debe ser un numero',
         ]);
 
-        $pcr->especies()->attach($this->selectedTagsEspecie);
-        $pcr->equipos()->attach($this->selectedTagsEquipo);
+        for($i=0;$i<$this->cantidad;$i++){
+            $pcr = pcr::create([
+                'no_registro' => $this->no_registro.'-'.$i+1,
+                'fecha' => $this->fecha,
+                'analisis_id' => $this->analisis,
+                'resultado' => $this->resultado,
+                'agarosa' => $this->agarosa,
+                'voltaje' => $this->voltaje,
+                'tiempo' => $this->tiempo,
+                'sanitizo' => $this->sanitizo,
+                'tiempouv' => $this->tiempouv,
+                'user_id' => auth()->user()->id,
+            ]);
+            $pcr->especies()->attach($this->selectedTagsEspecie);
+            $pcr->equipos()->attach($this->selectedTagsEquipo);
+        }
+        
+
+        
 
         $this->create_new = false;
         $this->reset(['no_registro', 'fecha', 'analisis', 'resultado', 'agarosa', 'voltaje', 'tiempo', 'sanitizo', 'tiempouv', 'selectedTagsEspecie', 'selectedTagsEquipo']);
@@ -183,7 +191,7 @@ class Tabla extends Component
     public function update()
     {
         $this->validate([
-            'pcrEdit.no_registro' => 'required|min:4|integer',
+            'pcrEdit.no_registro' => 'required|min:4',
             'pcrEdit.analisis' => 'required',
             'pcrEdit.fecha' => 'required',
             'pcrEdit.resultado' => 'required',
@@ -196,7 +204,6 @@ class Tabla extends Component
             'pcrEdit.no_registro.required' => 'El No. de registro es obligatorio',
             'pcrEdit.no_registro.min' => 'El No. de registro debe tener al menos 5 caracteres',
             'pcrEdit.no_registro.max' => 'El No. de registro debe tener como maximo 6 caracteres',
-            'pcrEdit.no_registro.integer' => 'El No. de registro debe ser un numero entero',
             'pcrEdit.analisis.required' => 'Seleccione un analisis',
             'pcrEdit.fecha.required' => 'Inserte fecha',
             'pcrEdit.resultado.required' => 'Seleccione resultado',
