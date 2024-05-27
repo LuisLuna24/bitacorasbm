@@ -10,7 +10,17 @@ class pcr extends Model
     protected $table = 'pcrs';
 
     protected $fillable = [
-        'nombre'
+        'no_registro', 
+        'analisis_id', 
+        'fecha', 
+        'resultado', 
+        'agarosa', 
+        'voltaje', 
+        'tiempo', 
+        'sanitizo', 
+        'tiempouv',
+        'user_id',
+        'validacion'
     ];
 
     //relacion muchos a muchos con equipos

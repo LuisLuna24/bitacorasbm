@@ -11,16 +11,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-10">
                 <div class="flex flex-wrap justify-center items-center gap-5">
-                    <x-card >
-                        <x-slot name="title">
-                            Especies
-                        </x-slot>
-                        <x-slot name="body">
-                            <p>Agregar, editar, elimiar y visualisar especies</p>
-                            <br>
-                            <x-button-routing href="{{ route('catalogos.especies') }}">Entrar</x-button-routing>
-                        </x-slot>
-                    </x-card>
                     <x-card>
                         <x-slot name="title">
                             Analisis
@@ -30,6 +20,16 @@
                             <br>
                             <x-button-routing href="{{ route('catalogos.analises') }}">Entrar</x-button-routing>
                         </x-slot> 
+                    </x-card>
+                    <x-card >
+                        <x-slot name="title">
+                            Especies
+                        </x-slot>
+                        <x-slot name="body">
+                            <p>Agregar, editar, elimiar y visualisar especies</p>
+                            <br>
+                            <x-button-routing href="{{ route('catalogos.especies') }}">Entrar</x-button-routing>
+                        </x-slot>
                     </x-card>
                     <x-card>
                         <x-slot name="title">

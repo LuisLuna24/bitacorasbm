@@ -18,19 +18,27 @@
     
 
 
-    <div class="flex gap-3 m-2">
-        <x-select wire:model.live="datos">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-        </x-select>
-        <x-select wire:model.live="estate">
-            <option value="Activo">Activo</option>
-            <option value="Baja">Baja</option>
-            <option value="Reparacion">Reparacion</option>
-        </x-select>
-        <x-input class="w-full" placeholder="Buscar Analisis (nombre)" wire:model.live="search" />
-        <x-button class="m-2" wire:click="new">Nuevo</x-button>
+    <div class="flex gap-3 m-2 max-md:flex-col max-md:justify-center">
+        <div class="flex gap-3 m-2 max-md:w-full">
+            <x-select wire:model.live="datos">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+            </x-select>
+            <x-select wire:model.live="estate" class="max-md:w-full">
+                <option value="">Todos</option>
+                <option value="Validada">Validada</option>
+                <option value="Sin Validacion">Sin Validacion</option>
+            </x-select>
+        </div>
+        <div class="flex gap-3 m-2 w-full max-md:flex-col">
+            <x-input class="w-full" placeholder="Buscar Analisis (nombre)" wire:model.live="search" />
+            <div>
+                <label for="" class="text-black dark:text-white md:hidden">Fecha:</label>
+                <x-input class=" max-md:w-full" type="date" wire:model.live="date" />
+            </div>
+        </div>
+        <x-button class="m-2 max-md:w-full" wire:click="new">Nuevo</x-button>
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" wire:model="currentPageTable1">
@@ -71,16 +79,22 @@
                                 @endforeach
                             </td>
                             <td class="px-6 py-4 text-center">
-                                Sin validar
+                                {{$pcr->validacion}}
                             </td>
                             <td class="px-6 py-4 text-center">
                                 {{$pcr->user->name}}
                             </td>
+                            @if ($pcr->validacion=='Sin Validacion')
+                                <td class="px-6 py-4 text-center">
+                                    <x-button wire:click="edit({{ $pcr->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg></x-button>
+                                </td>
+                            @else
+                                <td class="px-6 py-4 text-center">
+                                </td> 
+                            @endif
+                            
                             <td class="px-6 py-4 text-center">
-                                <x-button wire:click="edit({{ $pcr->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg></x-button>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <x-button wire:click="view({{ $pcr->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M12 18c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /><path d="M16 19h6" /><path d="M19 16v6" /></svg></x-button>
+                                <x-button wire:click="view({{ $pcr->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg></x-button>
                             </td>
                         </tr>
                 @endforeach
@@ -88,7 +102,7 @@
         </table>
     </div>
     <div class="m-3">
-        {{--$equipos->links()--}}
+        {{$pcrs->links()}}
     </div>
     <!-- ------------------------------------------------------------------------------------Create------------ -->
     <x-dialog-modal wire:model="create_new">
@@ -96,21 +110,87 @@
             <h2 class="text-center">Nuevo Equipo</h2>
         </x-slot>
         <x-slot name='content'>
-            <form wire:submit="create">
-                <div>
-                    <x-label>Inventario:</x-label>
-                    <x-input wire:model="inventario" type="text" class="block mt-1 w-full" />
-                    <x-input-error for="inventario" />
+            <form class="grid gap-3" wire:submit="create">
+                <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
+                    <div class="flex flex-col">
+                        <label for="">No. Registro:</label>
+                        <x-input wire:model='no_registro' />
+                        <x-input-error for="no_registro" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="">Analisis:</label>
+                        <x-select wire:model='analisis' >
+                            <option value="">Seleccione un analisis</option>
+                            @foreach ($analises as $analisis)
+                                <option value="{{ $analisis->id }}">{{ $analisis->nombre }}</option>
+                            @endforeach
+                        </x-select>
+                        <x-input-error for="analisis" />
+                    </div>
                 </div>
-                <div>
-                    <x-label>Nombre:</x-label>
-                    <x-input wire:model="nombre" type="text" class="block mt-1 w-full" />
-                    <x-input-error for="nombre" />
+                <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
+                    <div class="flex flex-col">
+                        <label for="">Fecha:</label>
+                        <x-input class="w-full" type="date" wire:model='fecha' />
+                        <x-input-error for="fecha" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="">Resultado:</label>
+                        <x-select wire:model='resultado' >
+                            <option value="Negativo">Negativo</option>
+                            <option value="Positivo">Positivo</option>
+                        </x-select>
+                        <x-input-error for="resultado" />
+                    </div>
                 </div>
-                <div>
-                    <x-label>Descripcion:</x-label>
-                    <x-input wire:model="descripcion" type="text" class="block mt-1 w-full" />
-                    <x-input-error for="descripcion" />
+                <div class="grid grid-cols-3 max-md:grid-cols-1 gap-5">
+                    <div class="flex flex-col">
+                        <label for="">Agarosa</label>
+                        <x-input wire:model='agarosa' />
+                        <x-input-error for="agarosa" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="">Voltaje</label>
+                        <x-input wire:model='voltaje' />
+                        <x-input-error for="voltaje" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="">Tiempo: (min)</label>
+                        <x-input wire:model='tiempo' />
+                        <x-input-error for="tiempo" />
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5 place-items-center">
+                    <div class="">
+                        <label for="">Sanitizo:</label>
+                        <x-input type='checkbox'  wire:model='sanitizo' />
+                    </div>
+                    <div class="">
+                        <label for="">Tiempo Uv</label>
+                        <x-input type='checkbox'  wire:model='tiempouv' />
+                    </div>
+                </div>
+                
+                <div class="">
+                    <h2>Especies:</h2>
+                    <hr class="mb-2">
+                    <ul class="flex flex-wrap justify-around gap-5  overflow-auto max-h-36 v-scroll">
+                        @foreach($especies as $especie)
+                            <li><x-checkbox wire:model="selectedTagsEspecie" value="{{$especie->id}} " /><span class="text-white">{{$especie->nombre}}</span></li>
+                        @endforeach
+                    </ul>
+                    <x-input-error for="selectedTagsEspecie" />
+                </div>
+                
+                <div class="">
+                    <h2>Equipos:</h2>
+                    <hr class="mb-2">
+                    <ul class="flex flex-wrap justify-around gap-5 overflow-auto max-h-36 v-scroll">
+                        @foreach($equipos as $equipo)
+                            <li><x-checkbox wire:model="selectedTagsEquipo" value="{{$equipo->id}} " /><span class="text-white">{{$equipo->nombre}}</span></li>
+                        @endforeach
+                    </ul>
+                    <x-input-error for="selectedTagsEquipo" />
                 </div>
                 <div class="mt-5 flex justify-around">
                     <x-button>Agregar</x-button>
@@ -174,8 +254,8 @@
                     </div>
                     <div class="">
                         <label for="">Tiempo Uv</label>
-                        @if($tiempouv==1)
-                        <x-input type='checkbox' checked="{{$tiempouv}}" wire:model='VerPcr.tiempouv' disabled/>
+                        @if($tiempouvs==1)
+                        <x-input type='checkbox' checked="{{$tiempouvs}}" wire:model='VerPcr.tiempouv' disabled/>
                         @else
                         <x-input type='checkbox'  wire:model='VerPcr.tiempouv' disabled/>
                         @endif
@@ -188,6 +268,10 @@
             @livewire('pcrs.equipos',[
                 'especiesPcrId'=>$especiesPcrId
             ])
+            <div class="flex justify-around mt-5">
+                <x-button wire:click="alert_validar">Validar</x-button>
+                <x-danger-button wire:click="cerrar_view">Cerrar</x-danger-button>
+            </div>
         </x-slot>
         <x-slot name='footer'></x-slot>
     </x-dialog-modal>
@@ -198,27 +282,110 @@
             <h2 class="text-center">Nuevo Equipo</h2>
         </x-slot>
         <x-slot name='content'>
-            <form wire:submit="update">
-                <div>
-                    <x-label>Inventario:</x-label>
-                    <x-input wire:model="equipoEdit.inventario" type="text" class="block mt-1 w-full" />
-                    <x-input-error for="equipoEdit.inventario" />
+            <form class="grid gap-3" wire:submit="update">
+                <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
+                    <div class="flex flex-col">
+                        <label for="">No. Registro:</label>
+                        <x-input wire:model='pcrEdit.no_registro' />
+                        <x-input-error for="pcrEdit.no_registro" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="">Analisis:</label>
+                        <x-select wire:model='pcrEdit.analisis' >
+                            <option value="">Seleccione un analisis</option>
+                            @foreach ($analises as $analisis)
+                                <option value="{{ $analisis->id }}">{{ $analisis->nombre }}</option>
+                            @endforeach
+                        </x-select>
+                        <x-input-error for="pcrEdit.analisis" />
+                    </div>
                 </div>
-                <div>
-                    <x-label>Nombre:</x-label>
-                    <x-input wire:model="equipoEdit.nombre" type="text" class="block mt-1 w-full" />
-                    <x-input-error for="equipoEdit.nombre" />
+                <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
+                    <div class="flex flex-col">
+                        <label for="">Fecha:</label>
+                        <x-input  class="w-full" type="date" wire:model='pcrEdit.fecha' />
+                        <x-input-error for="pcrEdit.fecha" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="">Resultado:</label>
+                        <x-select wire:model='pcrEdit.resultado' >
+                            <option value="Negativo">Negativo</option>
+                            <option value="Positivo">Positivo</option>
+                        </x-select>
+                        <x-input-error for="pcrEdit.resultado" />
+                    </div>
                 </div>
-                <div>
-                    <x-label>Descripcion:</x-label>
-                    <x-input wire:model="equipoEdit.descripcion" type="text" class="block mt-1 w-full" />
-                    <x-input-error for="equipoEdit.descripcion" />
+                <div class="grid grid-cols-3 max-md:grid-cols-1 gap-5">
+                    <div class="flex flex-col">
+                        <label for="">Agarosa</label>
+                        <x-input wire:model='pcrEdit.agarosa' />
+                        <x-input-error for="pcrEdit.agarosa" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="">Voltaje</label>
+                        <x-input wire:model='pcrEdit.voltaje' />
+                        <x-input-error for="pcrEdit.voltaje" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="">Tiempo: (min)</label>
+                        <x-input wire:model='pcrEdit.tiempo' />
+                        <x-input-error for="pcrEdit.tiempo" />
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5 place-items-center">
+                    <div class="">
+                        <label for="">Sanitizo:</label>
+                        <x-input type='checkbox'  wire:model='pcrEdit.sanitizo' />
+                    </div>
+                    <div class="">
+                        <label for="">Tiempo Uv</label>
+                        <x-input type='checkbox'   wire:model='pcrEdit.tiempouv' />
+                    </div>
+                </div>
+                
+                <div class="">
+                    <h2>Especies:</h2>
+                    <hr class="mb-2">
+                    <ul class="flex flex-wrap justify-around gap-5 overflow-auto max-h-36 v-scroll">
+                        @foreach($especies as $especie)
+                            <li><x-checkbox wire:model="pcrEdit.selectedTagsEspecie" value="{{$especie->id}} " /><span class="text-white">{{$especie->nombre}}</span></li>
+                        @endforeach
+                    </ul>
+                    <x-input-error for="pcrEdit.selectedTagsEspecie" />
+                </div>
+                <div class="">
+                    <h2>Equipos:</h2>
+                    <hr class="mb-2">
+                    <ul class="flex flex-wrap justify-around gap-5 overflow-auto max-h-36 v-scroll">
+                        @foreach($equipos as $equipo)
+                            <li><x-checkbox wire:model="pcrEdit.selectedTagsEquipo" value="{{$equipo->id}} " /><span class="text-white">{{$equipo->nombre}}</span></li>
+                        @endforeach
+                    </ul>
+                    <x-input-error for="pcrEdit.selectedTagsEquipo" />
                 </div>
                 <div class="mt-5 flex justify-around">
-                    <x-button>Guardar</x-button>
+                    <x-button>Actualizar</x-button>
                     <x-danger-button wire:click="cancel_update">Cancelar</x-danger-button>
                 </div>
             </form>
+        </x-slot>
+        <x-slot name='footer'></x-slot>
+    </x-dialog-modal>
+
+    <!-- ------------------------------------------------------------------------------------Validar------------ -->
+    <x-dialog-modal wire:model="validar_vitacora">
+        <x-slot name='title'>
+            <h2 class="text-center">¿Validar bitacora PCR?</h2>
+        </x-slot>
+        <x-slot name='content'>
+            <div class="flex flex-col">
+                <label for="">No. Registro</label>
+                <x-input wire:model='pcrVal.no_registro' disabled/>
+            </div>
+            <div class="flex justify-around mt-4">
+                <x-button wire:click="validar">Validar</x-button>
+                <x-danger-button wire:click="cerrar_validar">Cancelar</x-danger-button>
+            </div>
         </x-slot>
         <x-slot name='footer'></x-slot>
     </x-dialog-modal>

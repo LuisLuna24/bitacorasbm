@@ -18,7 +18,7 @@
     
 
 
-    <div class="flex gap-3 m-2">
+    <div class="flex gap-3 m-2 max-md:flex-col">
         <x-select wire:model.live="datos">
             <option value="10">10</option>
             <option value="20">20</option>

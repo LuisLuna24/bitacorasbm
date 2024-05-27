@@ -62,4 +62,8 @@ class User extends Authenticatable
     public function  analises(){
         return $this->hasMany('App\Models\Analise');
     }
+
+    public function pcrs(){
+        return $this->hasMany(pcr::class);
+    }
 }

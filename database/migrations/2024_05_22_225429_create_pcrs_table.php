@@ -24,9 +24,9 @@ return new class extends Migration
             $table->string('agarosa',30)->nullable();
             $table->string('voltaje',30)->nullable();
             $table->string('tiempo',30)->nullable();
-            $table->boolean('sanitizo')->default(false);
-            $table->boolean('tiempouv')->default(false);
-            $table->string('Validado',30)->default('Sin Validacion');
+            $table->boolean('sanitizo')->default(0);
+            $table->boolean('tiempouv')->default(0);
+            $table->string('validacion',30)->default('Sin Validacion');
             $table->timestamps();
         });
     }
