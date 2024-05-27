@@ -15,12 +15,14 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate.hover>
                         {{ __('Bitacoras') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('inventarios.index') }}" :active="request()->routeIs('inventarios.*')" wire:navigate.hover>
-                        {{ __('Inventarios') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('catalogos.index') }}" :active="request()->routeIs('catalogos.*')" wire:navigate.hover>
-                        {{ __('Catalogos') }}
-                    </x-nav-link>
+                    @if(auth()->user()->nivel === 2)
+                        <x-nav-link href="{{ route('inventarios.index') }}" :active="request()->routeIs('inventarios.*')" wire:navigate.hover>
+                            {{ __('Inventarios') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('catalogos.index') }}" :active="request()->routeIs('catalogos.*')" wire:navigate.hover>
+                            {{ __('Catalogos') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -107,10 +109,11 @@
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
-
+                            @if(auth()->user()->nivel === 2)
                             <x-dropdown-link href="{{ route('configuracion.index') }}">
                                 {{ __('Configuracion') }}
                             </x-dropdown-link>
+                            @endif
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
@@ -149,15 +152,17 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('bitacoras.*')" wire:navigate.hover>
+            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate.hover>
                 {{ __('Bitacoras') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('inventarios.index') }}" :active="request()->routeIs('inventarios.*')" wire:navigate.hover>
-                {{ __('Inventarios') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('catalogos.index') }}" :active="request()->routeIs('catalogos.*')" wire:navigate.hover>
-                {{ __('Catalogos') }}
-            </x-responsive-nav-link>
+            @if(auth()->user()->nivel === 2)
+                <x-responsive-nav-link href="{{ route('inventarios.index') }}" :active="request()->routeIs('inventarios.*')" wire:navigate.hover>
+                    {{ __('Inventarios') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('catalogos.index') }}" :active="request()->routeIs('catalogos.*')" wire:navigate.hover>
+                    {{ __('Catalogos') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

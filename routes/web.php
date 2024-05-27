@@ -25,14 +25,30 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('bitacoras.dashboard');
     })->name('dashboard');
+
     Route::get('/inventarios', function () {
-        return view('inventarios.index');
+        if (auth()->user()->nivel != 2){
+            abort(403);
+        }else{
+            return view('inventarios.index');   
+        }
+        
     })->name('inventarios.index');
+
     Route::get('/catalogos', function () {
-        return view('catalogos.index');
+        if (auth()->user()->nivel != 2){
+            abort(403);
+        }else{
+            return view('catalogos.index');
+        }
     })->name('catalogos.index');
+
     Route::get('/configuracion',function () {
-        return view('configuracion.index');
+        if (auth()->user()->nivel != 2){
+            abort(403);
+        }else{
+            return view('configuracion.index');
+        }
     })->name('configuracion.index');
 });
 
@@ -43,10 +59,18 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/inventarios/equipos', function () {
-        return view('inventarios.equipos');
+        if (auth()->user()->nivel != 2){
+            abort(403);
+        }else{
+            return view('inventarios.equipos');
+        }
     })->name('inventarios.equipos');
     Route::get('/inventarios/reactivos', function () {
-        return view('inventarios.reactivos');
+        if (auth()->user()->nivel != 2){
+            abort(403);
+        }else{
+            return view('inventarios.reactivos');
+        }
     })->name('inventarios.reactivos');
 });
 
@@ -57,13 +81,25 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/catalogos/especies', function () {
-        return view('catalogos.especies');
+        if (auth()->user()->nivel != 2){
+            abort(403);
+        }else{
+            return view('catalogos.especies');
+        }
     })->name('catalogos.especies');
     Route::get('/catalogos/analisis', function () {
-        return view('catalogos.analises');
+        if (auth()->user()->nivel != 2){
+            abort(403);
+        }else{
+            return view('catalogos.analises');
+        }
     })->name('catalogos.analises');
     Route::get('/catalogos/metodos', function () {
-        return view('catalogos.metodos');
+        if (auth()->user()->nivel != 2){
+            abort(403);
+        }else{
+            return view('catalogos.metodos');
+        }
     })->name('catalogos.metodos');
 });
 
