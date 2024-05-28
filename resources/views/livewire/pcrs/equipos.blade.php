@@ -27,5 +27,6 @@
             </tbody>
         </table>
     </div>
+    <br>
     {{$equipos_pcr->links()}}
 </div>

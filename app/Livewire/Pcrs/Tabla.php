@@ -174,7 +174,7 @@ class Tabla extends Component
         $pcr = pcr::find($id);
         $this->pcrEdit = [
             'no_registro' => $pcr->no_registro,
-            'analisis' => $pcr->analisis->nombre,
+            'analisis' => $pcr->analisis_id,
             'fecha' => $pcr->fecha,
             'resultado' => $pcr->resultado,
             'agarosa' => $pcr->agarosa,

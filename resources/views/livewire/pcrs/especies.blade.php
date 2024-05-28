@@ -20,5 +20,6 @@
             </tbody>
         </table>
     </div>
+    <br>
     {{$especies_pcr->links()}}
 </div>

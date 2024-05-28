@@ -22,32 +22,36 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/bitacoras', function () {
-        return view('bitacoras.dashboard');
+    Route::get('/dashboard', function () {
+        if (auth()->user()->nivel >= 1){
+            return view('bitacoras.dashboard');
+        }else{
+            abort(403);
+        }
     })->name('dashboard');
 
     Route::get('/inventarios', function () {
-        if (auth()->user()->nivel != 2){
-            abort(403);
+        if (auth()->user()->nivel >= 2){
+            return view('inventarios.index'); 
         }else{
-            return view('inventarios.index');   
+            abort(403);
         }
         
     })->name('inventarios.index');
 
     Route::get('/catalogos', function () {
-        if (auth()->user()->nivel != 2){
-            abort(403);
-        }else{
+        if (auth()->user()->nivel >= 2){
             return view('catalogos.index');
+        }else{
+            abort(403);
         }
     })->name('catalogos.index');
 
     Route::get('/configuracion',function () {
-        if (auth()->user()->nivel != 2){
-            abort(403);
-        }else{
+        if (auth()->user()->nivel >= 2){
             return view('configuracion.index');
+        }else{
+            abort(403);
         }
     })->name('configuracion.index');
 });
@@ -59,17 +63,17 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/inventarios/equipos', function () {
-        if (auth()->user()->nivel != 2){
-            abort(403);
-        }else{
+        if (auth()->user()->nivel >= 2){
             return view('inventarios.equipos');
+        }else{
+            abort(403);
         }
     })->name('inventarios.equipos');
     Route::get('/inventarios/reactivos', function () {
-        if (auth()->user()->nivel != 2){
-            abort(403);
-        }else{
+        if (auth()->user()->nivel >= 2){
             return view('inventarios.reactivos');
+        }else{
+            abort(403);
         }
     })->name('inventarios.reactivos');
 });
@@ -81,24 +85,26 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/catalogos/especies', function () {
-        if (auth()->user()->nivel != 2){
-            abort(403);
-        }else{
+        if (auth()->user()->nivel >= 2){
             return view('catalogos.especies');
+        }else{
+            abort(403);
         }
     })->name('catalogos.especies');
+
     Route::get('/catalogos/analisis', function () {
-        if (auth()->user()->nivel != 2){
-            abort(403);
-        }else{
+        if (auth()->user()->nivel >= 2){
             return view('catalogos.analises');
+        }else{
+            abort(403);
         }
     })->name('catalogos.analises');
+
     Route::get('/catalogos/metodos', function () {
-        if (auth()->user()->nivel != 2){
-            abort(403);
-        }else{
+        if (auth()->user()->nivel >= 2){
             return view('catalogos.metodos');
+        }else{
+            abort(403);
         }
     })->name('catalogos.metodos');
 });
@@ -110,15 +116,34 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/bitacoras/pcr', function () {
-        return view('bitacoras.pcr');
+        if (auth()->user()->nivel >= 1){
+            return view('bitacoras.pcr');
+        }else{
+            abort(403);
+        }
     })->name('bitacoras.pcr');
+
     Route::get('/bitacoras/pcr_tiemporeal', function () {
-        return view('bitacoras.pcreal');
+        if (auth()->user()->nivel >= 1){
+            return view('bitacoras.pcreal');
+        }else{
+            abort(403);
+        }
     })->name('bitacoras.pcreal');
+
     Route::get('/bitacoras/extraccion', function () {
-        return view('bitacoras.extraccion');
+        if (auth()->user()->nivel >= 1){
+            return view('bitacoras.extraccion');
+        }else{
+            abort(403);
+        }
     })->name('bitacoras.extraccion');
+
     Route::get('/bitacoras/reactivos', function () {
-        return view('bitacoras.reactivos');
+        if (auth()->user()->nivel >= 1){
+            return view('bitacoras.reactivos');
+        }else{
+            abort(403);
+        }
     })->name('bitacoras.reactivos');
 });
