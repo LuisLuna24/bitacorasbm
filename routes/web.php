@@ -47,6 +47,14 @@ Route::middleware([
         }
     })->name('catalogos.index');
 
+    Route::get('/registro', function () {
+        if (auth()->user()->nivel >= 2){
+            return view('auth.register');
+        }else{
+            abort(403);
+        }
+    })->name('registrar');
+
     Route::get('/configuracion',function () {
         if (auth()->user()->nivel >= 2){
             return view('configuracion.index');

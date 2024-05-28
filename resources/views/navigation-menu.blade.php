@@ -15,7 +15,7 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate.hover>
                         {{ __('Bitacoras') }}
                     </x-nav-link>
-                    @if(auth()->user()->nivel === 2)
+                    @if(auth()->user()->nivel >= 2)
                         <x-nav-link href="{{ route('inventarios.index') }}" :active="request()->routeIs('inventarios.*')" wire:navigate.hover>
                             {{ __('Inventarios') }}
                         </x-nav-link>
@@ -109,7 +109,7 @@
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
-                            @if(auth()->user()->nivel === 2)
+                            @if(auth()->user()->nivel >= 2)
                             <x-dropdown-link href="{{ route('configuracion.index') }}">
                                 {{ __('Configuracion') }}
                             </x-dropdown-link>
@@ -155,7 +155,7 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate.hover>
                 {{ __('Bitacoras') }}
             </x-responsive-nav-link>
-            @if(auth()->user()->nivel === 2)
+            @if(auth()->user()->nivel >= 2)
                 <x-responsive-nav-link href="{{ route('inventarios.index') }}" :active="request()->routeIs('inventarios.*')" wire:navigate.hover>
                     {{ __('Inventarios') }}
                 </x-responsive-nav-link>
@@ -185,6 +185,11 @@
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+                @if(auth()->user()->nivel >= 2)
+                    <x-responsive-nav-link href="{{ route('configuracion.index') }}">
+                        {{ __('Configuracion') }}
+                    </x-responsive-nav-link>
+                @endif
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
