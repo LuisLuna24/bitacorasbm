@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -23,7 +25,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        if (auth()->user()->nivel >= 1){
+        if (auth()->user()->nivel != 0){
             return view('bitacoras.dashboard');
         }else{
             abort(403);

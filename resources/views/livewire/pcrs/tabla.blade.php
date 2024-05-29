@@ -32,7 +32,7 @@
             </x-select>
         </div>
         <div class="flex gap-3 m-2 w-full max-md:flex-col">
-            <x-input class="w-full" placeholder="Buscar Analisis (nombre)" wire:model.live="search" />
+            <x-input class="w-full" placeholder="Buscar PCR (No. registro)" wire:model.live="search" />
             <div>
                 <label for="" class="text-black dark:text-white md:hidden">Fecha:</label>
                 <x-input class=" max-md:w-full" type="date" wire:model.live="date" />

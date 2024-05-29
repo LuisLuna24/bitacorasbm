@@ -291,7 +291,7 @@ class Tabla extends Component
 
     public function render()
     {
-        $pcrs = pcr::where('validacion','LIKE','%'.$this->estate.'%')->where('no_registro','LIKE','%'.$this->search.'%')->where('fecha','LIKE','%'.$this->date.'%')->paginate($this->datos);
+        $pcrs = pcr::where('validacion','LIKE','%'.$this->estate.'%')->where('no_registro','LIKE','%' . $this->search . '%')->where('fecha','LIKE','%' . $this->date . '%')->paginate($this->datos);
         return view('livewire.pcrs.tabla', compact('pcrs'));
     }
 }
