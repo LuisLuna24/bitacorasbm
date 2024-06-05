@@ -29,8 +29,10 @@
             <option value="Baja">Baja</option>
             <option value="Reparacion">Reparacion</option>
         </x-select>
-        <x-input class="w-full" placeholder="Buscar Analisis (nombre)" wire:model.live="search" />
-        <x-button class="m-2" wire:click="new">Nuevo</x-button>
+        <x-input class="w-full" placeholder="Buscar Equipos (nombre, inventario)" wire:model.live="search" />
+        @if(auth()->user()->nivel != 3 )
+            <x-button class="m-2" wire:click="new">Nuevo</x-button>
+        @endif
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -40,9 +42,11 @@
                     <th scope="col" class="px-6 py-3 text-center">Nombre</th>
                     <th scope="col" class="px-6 py-3 text-center">Descripcion</th>
                     <th scope="col" class="px-6 py-3 text-center">Usuario</th>
-                    <th scope="col" class="px-6 py-3 text-center">Editar</th>
                     <th scope="col" class="px-6 py-3 text-center">Verciones</th>
-                    <th scope="col" class="px-6 py-3 text-center">Estado</th>
+                    @if(auth()->user()->nivel != 3 )
+                        <th scope="col" class="px-6 py-3 text-center">Editar</th>
+                        <th scope="col" class="px-6 py-3 text-center">Estado</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -61,19 +65,21 @@
                                 {{$equipo->user->name}}
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <x-button wire:click="edit({{ $equipo->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg></x-button>
-                            </td>
-                            <td class="px-6 py-4 text-center">
                                 <x-button wire:click="vercion({{ $equipo->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg></x-button>
                             </td>
-                            @if($equipo->estado == 'Activo')
-                            <td class="px-6 py-4 text-center">
-                                <x-danger-button wire:click="down({{ $equipo->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M10 12l4 4m0 -4l-4 4" /></svg></x-danger-button>
-                            </td>
-                            @else
-                            <td class="px-6 py-4 text-center">
-                                <x-button wire:click="active({{ $equipo->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M12 11l0 6" /><path d="M9 14l6 0" /></svg></x-button>
-                            </td>
+                            @if(auth()->user()->nivel != 3 )
+                                <td class="px-6 py-4 text-center">
+                                    <x-button wire:click="edit({{ $equipo->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg></x-button>
+                                </td>
+                                @if($equipo->estado == 'Activo')
+                                    <td class="px-6 py-4 text-center">
+                                        <x-danger-button wire:click="down({{ $equipo->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M10 12l4 4m0 -4l-4 4" /></svg></x-danger-button>
+                                    </td>
+                                @else
+                                    <td class="px-6 py-4 text-center">
+                                        <x-button wire:click="active({{ $equipo->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M12 11l0 6" /><path d="M9 14l6 0" /></svg></x-button>
+                                    </td>
+                                @endif
                             @endif
                         </tr>
                 @endforeach

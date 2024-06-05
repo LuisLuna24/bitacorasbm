@@ -19,5 +19,10 @@ class vpcrs extends Model
     {
         return $this->hasMany(pcr::class);
     }
+
+    public function analisis()
+    {
+        return $this->belongsTo(analises::class);
+    }
     use HasFactory;
 }

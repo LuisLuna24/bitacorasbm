@@ -215,7 +215,7 @@ class Table extends Component
     //---------------Render-------------------------------
     public function render()
     {
-        $equipos = equipos::where('nombre','LIKE','%' . $this->search . '%')->where('estado','=',$this->estate) ->paginate($this->datos);
+        $equipos = equipos::where(function ($query) {$query->where('nombre', 'LIKE', '%' . $this->search . '%')->orWhere('inventario', 'LIKE', '%' . $this->search . '%');})->where('estado','=',$this->estate) ->paginate($this->datos);
         return view('livewire.equipos.table',compact('equipos'));
     }
 }

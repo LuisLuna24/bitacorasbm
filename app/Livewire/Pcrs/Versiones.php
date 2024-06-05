@@ -2,22 +2,22 @@
 
 namespace App\Livewire\Pcrs;
 
-use App\Models\pcr;
-use App\Models\pcrs_especies;
+use App\Models\vpcrs;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Lazy]
-class Especies extends Component
+
+#[Lazy()]
+class Versiones extends Component
 {
+
     use WithPagination;
 
     #[Reactive]
-    public $especiesPcrId;
+    public $pcrVercionId;
 
-    public $datos=5;
 
     //---------------Lazy-------------------------------
     public function placeholder()
@@ -27,8 +27,7 @@ class Especies extends Component
 
     public function render()
     {
-        $especies_pcr = pcrs_especies::where('pcr_id','=',$this->especiesPcrId)->paginate($this->datos);
-        return view('livewire.pcrs.especies',compact('especies_pcr'));
-
+        $vpcrs=vpcrs::where('pcr_id','=',$this->pcrVercionId)->paginate(10);
+        return view('livewire.pcrs.versiones',compact('vpcrs'));
     }
 }

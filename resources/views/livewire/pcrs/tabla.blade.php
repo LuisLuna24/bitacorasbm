@@ -38,7 +38,9 @@
                 <x-input class=" max-md:w-full" type="date" wire:model.live="date" />
             </div>
         </div>
-        <x-button class="m-2 max-md:w-full" wire:click="new">Nuevo</x-button>
+        @if(auth()->user()->nivel != 3 )
+            <x-button class="m-2 max-md:w-full" wire:click="new">Nuevo</x-button>
+        @endif
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" wire:model="currentPageTable1">
@@ -51,8 +53,11 @@
                     <th scope="col" class="px-6 py-3 text-center">Especies</th>
                     <th scope="col" class="px-6 py-3 text-center">Validado</th>
                     <th scope="col" class="px-6 py-3 text-center">Usuario</th>
-                    <th scope="col" class="px-6 py-3 text-center">Editar</th>
+                    @if(auth()->user()->nivel != 3 )
+                        <th scope="col" class="px-6 py-3 text-center">Editar</th>
+                    @endif
                     <th scope="col" class="px-6 py-3 text-center">Ver Bitacora</th>
+                    <th scope="col" class="px-6 py-3 text-center">Verciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,17 +89,22 @@
                             <td class="px-6 py-4 text-center">
                                 {{$pcr->user->name}}
                             </td>
-                            @if ($pcr->validacion=='Sin Validacion' )
-                                <td class="px-6 py-4 text-center">
-                                    <x-button wire:click="edit({{ $pcr->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg></x-button>
-                                </td>
-                            @else
-                                <td class="px-6 py-4 text-center">
-                                </td> 
+                            @if(auth()->user()->nivel != 3 )
+                                @if ($pcr->validacion=='Sin Validacion')
+                                    <td class="px-6 py-4 text-center">
+                                        <x-button wire:click="edit({{ $pcr->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg></x-button>
+                                    </td>
+                                @else
+                                    <td class="px-6 py-4 text-center">
+                                    </td> 
+                                @endif
                             @endif
                             
                             <td class="px-6 py-4 text-center">
                                 <x-button wire:click="view({{ $pcr->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg></x-button>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <x-button wire:click="version({{ $pcr->id }})"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-versions"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /><path d="M7 7l0 10" /><path d="M4 8l0 8" /></svg></x-button>
                             </td>
                         </tr>
                 @endforeach
@@ -395,6 +405,17 @@
                 <x-button wire:click="validar">Validar</x-button>
                 <x-danger-button wire:click="cerrar_validar">Cancelar</x-danger-button>
             </div>
+        </x-slot>
+        <x-slot name='footer'></x-slot>
+    </x-dialog-modal>
+
+    <!-- ------------------------------------------------------------------------------------Verciones------------ -->
+    <x-dialog-modal wire:model="vercion_pcr">
+        <x-slot name='title'>
+            <h2 class="text-center">Verciones PCR</h2>
+        </x-slot>
+        <x-slot name='content'>
+            @livewire('Pcrs.versiones',['pcrVercionId' => $pcrVercionId,])
         </x-slot>
         <x-slot name='footer'></x-slot>
     </x-dialog-modal>

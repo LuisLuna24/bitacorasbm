@@ -283,6 +283,16 @@ class Tabla extends Component
         $this->validar_vitacora = false;
     }
 
+    // ----------------------------------------------------------------Vercion
+
+    public $vercion_pcr=false;
+    public $pcrVercionId;
+
+    public function version($id){
+        $this->vercion_pcr=true;
+        $this->pcrVercionId=$id;
+    }
+
     //---------------Lazy-------------------------------
     public function placeholder()
     {
