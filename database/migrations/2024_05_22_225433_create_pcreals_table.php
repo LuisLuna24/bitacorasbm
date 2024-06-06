@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('tiempouv')->default(false);
             $table->string('resultado',30)->default('Negativo');
             $table->string('observaciones',250)->nullable();
+            $table->string('validacion',30)->default('Sin Validacion');
             $table->timestamps();
         });
     }

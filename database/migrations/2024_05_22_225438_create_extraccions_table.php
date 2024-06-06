@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('conc_ng_ul',50);
             $table->string('dato260_280',50);
             $table->string('dato260_230',50);
+            $table->string('validacion',30)->default('Sin Validacion');
             $table->timestamps();
         });
     }
