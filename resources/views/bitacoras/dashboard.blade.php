@@ -16,7 +16,7 @@
                         <x-slot name="body">
                             <p>Agregar, editar, elimiar y visualisar bitacoras de PCR</p>
                             <br>
-                            <x-button-routing href="{{ route('bitacoras.pcr') }}">Entrar</x-button-routing>
+                            <x-button-routing href="{{ route('bitacoras.pcr') }}" wire:navigate.hover>Entrar</x-button-routing>
                         </x-slot>
                     </x-card>
                     <x-card>
@@ -26,7 +26,7 @@
                         <x-slot name="body">
                             <p>Agregar, editar, elimiar y visualisar bitacoras de PCR Tiempo Real </p>
                             <br>
-                            <x-button-routing href="{{ route('bitacoras.pcreal') }}">Entrar</x-button-routing>
+                            <x-button-routing href="{{ route('bitacoras.pcreal') }}" wire:navigate.hover>Entrar</x-button-routing>
                         </x-slot> 
                     </x-card>
                     <x-card>
@@ -36,7 +36,7 @@
                         <x-slot name="body">
                             <p>Agregar, editar, elimiar y visualisar bitacoras de Extraccion</p>
                             <br>
-                            <x-button-routing href="{{ route('bitacoras.extraccion') }}">Entrar</x-button-routing>
+                            <x-button-routing href="{{ route('bitacoras.extraccion') }}" wire:navigate.hover>Entrar</x-button-routing>
                         </x-slot>
                     </x-card>
                     <x-card>
@@ -46,7 +46,7 @@
                         <x-slot name="body">
                             <p>Agregar, editar, elimiar y visualisar bitacoras de Reactivos</p>
                             <br>
-                            <x-button-routing  href="{{ route('bitacoras.reactivos') }}">Entrar</x-button-routing>
+                            <x-button-routing  href="{{ route('bitacoras.reactivos') }}" wire:navigate.hover>Entrar</x-button-routing>
                         </x-slot>
                     </x-card>
                 </div>

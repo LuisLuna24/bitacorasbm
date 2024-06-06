@@ -156,3 +156,53 @@ INSERT INTO vreactivos (
 SET NEW.version = OLD.version + 1;
 
 END
+
+
+----------------------------------------------------------------pcreals
+BEGIN
+
+SET @pcreal_id=OLD.id;
+SET @version=OLD.version;
+SET @usuario_anterior=OLD.user_id;
+SET @no_registro=OLD.no_registro;
+SET @fecha=OLD.fecha;
+SET @analisis_id=OLD.analisis_id;
+SET @sanitizo=OLD.sanitizo;
+SET @tiempouv=OLD.tiempouv;
+SET @resultado=OLD.resultado;
+SET @observaciones=OLD.observaciones;
+SET @validacion=OLD.validacion;
+
+INSERT INTO vpcreals (
+	pcreal_id,
+    version,
+    user_id,
+    no_registro,
+    fecha,
+    analisis_id,
+    sanitizo,
+    tiempouv,
+    resultado,
+    observaciones,
+    validacion,
+    created_at,
+    updated_at
+)VALUES(
+    @pcreal_id,
+    @version,
+    @usuario_anterior,
+    @no_registro,
+    @fecha,
+    @analisis_id,
+    @sanitizo,
+    @tiempouv,
+    @resultado,
+    @observaciones,
+    @validacion,
+    CURRENT_DATE,
+    CURRENT_DATE
+);
+
+SET NEW.version = OLD.version + 1;
+
+END

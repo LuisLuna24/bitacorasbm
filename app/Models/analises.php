@@ -29,6 +29,11 @@ class analises extends Model
         return $this->hasMany(pcr::class);
     }
 
+    public function pcreal()
+    {
+        return $this->hasMany(pcreal::class);
+    }
+
     public function vpcr()
     {
         return $this->hasMany(vpcrs::class);
