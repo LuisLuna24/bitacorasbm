@@ -230,6 +230,7 @@ class Table extends Component
             'validacion' => 'Validado',
         ]);
         $this->validar_vitacora = false;
+        $this->view_view = false;
         $this->reset(['pcrealVal']);
         session()->flash('message', 'Registro validado con exito');
     }

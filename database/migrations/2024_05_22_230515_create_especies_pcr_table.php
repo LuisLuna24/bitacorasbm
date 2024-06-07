@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('especies_pcr', function (Blueprint $table) {
-            $table->id();
-            $table->integer('version')->default(1);  
+            $table->id(); 
             $table->unsignedBigInteger('especies_id');
             $table->foreign('especies_id')->references('id')->on('especies')->onDelete('cascade');
             $table->unsignedBigInteger('pcr_id');
