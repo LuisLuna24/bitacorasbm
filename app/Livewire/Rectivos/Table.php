@@ -21,7 +21,7 @@ class Table extends Component
 
     //---------------Create----------------------------------
     public $create_new=false;
-    public $nombre,$lote,$descripcion,$existencia;
+    public $nombre,$lote,$descripcion,$existencia,$fecha_caducidad;
 
     Public function new(){
         $this->create_new=true;
@@ -32,6 +32,7 @@ class Table extends Component
             'nombre' =>'required|min:3|max:30|',
             'lote' =>'required|min:3|max:30|',
             'existencia' =>'required|integer',
+            'fecha_caducidad' =>'required|date',
         ],[
             'lote.required' => 'El nombre del equipo es requerido',
             'nombre.min' => 'El nombre debe tener minimo 3 caracteres',
@@ -41,12 +42,15 @@ class Table extends Component
             'lote.max' => 'El lote del equipo debe tener maximo 30 caracteres',
             'existencia.required' => 'La catidad de existencia es requerida',
             'existencia.integer' => 'Este campo deve contener numeros enteros',
+            'fecha_caducidad.required' => 'La fecha de caducidad es requerida',
+            'fecha_caducidad.date' => 'La fecha de caducidad debe ser una fecha valida',
         ]);
         reactivos::create([
             'nombre' => $this->nombre,
             'lote' => $this->lote,
             'description' => $this->descripcion,
             'existencia' => $this->existencia,
+            'fecha_caducidad' => $this->fecha_caducidad,
             'user_id' => auth()->user()->id,
         ]);
 
@@ -67,6 +71,7 @@ class Table extends Component
         'lote' => '',
         'descripcion' => '',
         'existencia' => '',
+        'fecha_caducidad' => '',
     ];
 
     public function edit($reactivoId){
@@ -78,6 +83,7 @@ class Table extends Component
             'lote' => $equipo->lote,
             'descripcion' => $equipo->description,
             'existencia' => $equipo->existencia,
+            'fecha_caducidad' => $equipo->fecha_caducidad,
         ];
     }
 
@@ -88,6 +94,7 @@ class Table extends Component
             'reactivoEdit.lote' =>'required|min:3|max:30|',
             'reactivoEdit.descripcion' =>'required|min:3|max:30',
             'reactivoEdit.existencia' =>'required|integer',
+            'reactivoEdit.fecha_caducidad' =>'required|date',
         ],[
             'reactivoEdit.nombre.required' => 'El nombre de relactivo es requerido',
             'reactivoEdit.nombre.min' => 'El nombre de reactivo debe tener minimo 3 caracteres',
@@ -100,6 +107,8 @@ class Table extends Component
             'reactivoEdit.descripcion.max' => 'La descripcion del reactivo debe tener maximo 30 caracteres',
             'reactivoEdit.existencia.required' => 'La existencia del reactivo es requerida',
             'reactivoEdit.existencia.integer' => 'Este campo deve contener numeros enteros',
+            'reactivoEdit.fecha_caducidad.required' => 'La fecha de caducidad es requerida',
+            'reactivoEdit.fecha_caducidad.date' => 'La fecha de caducidad debe ser una fecha valida',
         ]);
 
         //Actualizar
@@ -108,6 +117,7 @@ class Table extends Component
             'lote' => $this->reactivoEdit['lote'],
             'description' => $this->reactivoEdit['descripcion'],
             'existencia' => $this->reactivoEdit['existencia'],
+            'fecha_caducidad' => $this->reactivoEdit['fecha_caducidad'],
         ]);
 
         $this->update_new=false;

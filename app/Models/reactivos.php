@@ -13,6 +13,7 @@ class reactivos extends Model
         'description',
         'lote',
         'existencia',
+        'fecha_caducidad',
         'user_id'
     ];
 

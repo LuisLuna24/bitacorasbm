@@ -42,6 +42,7 @@
                     <th scope="col" class="px-6 py-3 text-center">Lote</th>
                     <th scope="col" class="px-6 py-3 text-center">Descripcion</th>
                     <th scope="col" class="px-6 py-3 text-center">Usuario</th>
+                    <th scope="col" class="px-6 py-3 text-center">Fecha Caducidad</th>
                     <th scope="col" class="px-6 py-3 text-center">Existencia</th>
                     @if(auth()->user()->nivel != 3 )
                         <th scope="col" class="px-6 py-3 text-center">Editar</th>
@@ -63,6 +64,9 @@
                             </td>
                             <td class="px-6 py-4 text-center">
                                 {{$reactivo->user->name}}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                {{$reactivo->fecha_caducidad}}
                             </td>
                             <td class="px-6 py-4 text-center">
                                 {{$reactivo->existencia}}
@@ -109,6 +113,11 @@
                     <x-label>Existencia:</x-label>
                     <x-input wire:model="existencia" type="text" class="block mt-1 w-full" />
                     <x-input-error for="existencia" />
+                </div>
+                <div>
+                    <x-label>Fecha Caducidad:</x-label>
+                    <x-input type="date" wire:model="fecha_caducidad" class="block mt-1 w-full" />
+                    <x-input-error for="fecha_caducidad" />
                 </div>
                 <div class="mt-5 flex justify-around">
                     <x-button>Agregar</x-button>
@@ -159,6 +168,11 @@
                     <x-label>existencia:</x-label>
                     <x-input wire:model="reactivoEdit.existencia" type="text" class="block mt-1 w-full" />
                     <x-input-error for="reactivoEdit.existencia" />
+                </div>
+                <div>
+                    <x-label>Fecha Caducidad:</x-label>
+                    <x-input type="date" wire:model="reactivoEdit.fecha_caducidad" class="block mt-1 w-full" />
+                    <x-input-error for="reactivoEdit.fecha_caducidad" />
                 </div>
                 <div class="mt-5 flex justify-around">
                     <x-button>Guardar</x-button>
