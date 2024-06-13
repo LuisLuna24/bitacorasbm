@@ -44,6 +44,7 @@ class Tabla extends Component
     {
         $this->create_new = true;
     }
+    
 
     public function create()
     {
