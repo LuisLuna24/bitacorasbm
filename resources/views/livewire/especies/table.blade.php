@@ -7,7 +7,7 @@
     
     @if (session('up_msg'))
         <x-alert-up>
-            <x-slot name="content">{{session('up_analisis')}}</x-slot>
+            <x-slot name="content">{{session('up_msg')}}</x-slot>
         </x-alert-up>
     @endif
     

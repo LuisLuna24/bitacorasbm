@@ -71,4 +71,8 @@ class User extends Authenticatable
     public function extraccion(){
         return $this->hasMany(extraccion::class);
     }
+
+    public function vextraccion(){
+        return $this->hasMany(vextraccion::class);
+    }
 }

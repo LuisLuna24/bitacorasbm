@@ -192,6 +192,11 @@ class Table extends Component
         ];
     }
 
+    public function cancelar_ver(){
+        $this->ver_registro = false;
+        $this->reset(['extraVer']);
+    }
+
     //---------------Validar Regsitros----------------------------------------------------------------------
 
     public function validar_registro(){
@@ -205,7 +210,19 @@ class Table extends Component
     }
 
 
+    //---------------Versiones--------------------------------------------------------------------------------
 
+    public $versiones=false;
+    public $extraccionIdVercion;
+
+    public function version($id){
+        $this->versiones=true;  
+        $this->extraccionIdVercion = $id;      
+    }
+
+    public function close_version(){
+        $this->versiones=false;
+    }
 
     //---------------Lazy ---------------------------------------------------------------------------------
     public function placeholder()

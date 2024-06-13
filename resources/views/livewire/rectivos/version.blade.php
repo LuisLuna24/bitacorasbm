@@ -9,6 +9,7 @@
                     <th scope="col" class="px-6 py-3 text-center">Version</th>
                     <th scope="col" class="px-6 py-3 text-center">Existencia</th>
                     <th scope="col" class="px-6 py-3 text-center">Usuario</th>
+                    <th scope="col" class="px-6 py-3 text-center">Fecha Edicion</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,9 @@
                             </td>
                             <td class="px-6 py-4 text-center">
                                 {{$reactivos->user->name}}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                {{$reactivos->created_at->format('d-m-Y') }}
                             </td>
                         </tr>
                 @endforeach

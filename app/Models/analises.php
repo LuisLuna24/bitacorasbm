@@ -45,5 +45,10 @@ class analises extends Model
         return $this->hasMany(extraccion::class);
     }
 
+    public function vextraccion()
+    {
+        return $this->hasMany(vextraccion::class);
+    }
+
     use HasFactory;
 }

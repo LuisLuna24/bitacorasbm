@@ -6,6 +6,7 @@
                     <th scope="col" class="px-6 py-3 text-center">Nombre</th>
                     <th scope="col" class="px-6 py-3 text-center">vercion</th>
                     <th scope="col" class="px-6 py-3 text-center">Usuario</th>
+                    <th scope="col" class="px-6 py-3 text-center">Fecha Edicion</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +21,9 @@
                             <td class="px-6 py-4 text-center">
                                 {{$metodo->user->name}}
                             </td>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
+                                {{$metodo->created_at->format('d-m-Y')}}
+                            </th>
                         </tr>
                 @endforeach
                 

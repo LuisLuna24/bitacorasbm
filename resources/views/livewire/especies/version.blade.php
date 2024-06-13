@@ -6,6 +6,7 @@
                     <th scope="col" class="px-6 py-3 text-center">Nombre</th>
                     <th scope="col" class="px-6 py-3 text-center">vercion</th>
                     <th scope="col" class="px-6 py-3 text-center">Usuario</th>
+                    <th scope="col" class="px-6 py-3 text-center">Fecha Edicion</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +21,10 @@
                             <td class="px-6 py-4 text-center">
                                 {{$especie->user->name}}
                             </td>
+                            <td class="px-6 py-4 text-center">
+                                {{$especie->created_at->format('d-m-Y')}}
+                            </td>
+
                         </tr>
                 @endforeach
                 

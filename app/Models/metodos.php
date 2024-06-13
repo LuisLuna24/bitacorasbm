@@ -24,6 +24,11 @@ class metodos extends Model
         return $this->belongsToMany(extraccion::class);
     }
 
+    public function vextraccion()
+    {
+        return $this->belongsToMany(vextraccion::class);
+    }
+
     //relacion de uno a muchos con vanalises
     public function vmetodos(){
         return $this->hasMany(vmetodos::class);

@@ -49,5 +49,10 @@ class equipos extends Model
         return $this->belongsToMany(extraccion::class);
     }
 
+    public function vextracion()
+    {
+        return $this->belongsToMany(vextraccion::class);
+    }
+
     use HasFactory;
 }

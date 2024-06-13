@@ -143,7 +143,7 @@
     </div>
 
 
-{{--------------------------------------------------------------Crear Registro-----------------------------------------}}
+    {{-- ------------------------------------------------------------Crear Registro--------------------------------------- --}}
     <x-dialog-modal wire:model="nuevo_registro">
         <x-slot name='title'>
             <h2 class="text-center">Nueva Extraccion</h2>
@@ -196,8 +196,9 @@
                     <h2>Equipos:</h2>
                     <hr class="mb-2">
                     <ul class="flex flex-wrap justify-around gap-5 overflow-auto max-h-36 v-scroll">
-                        @foreach($equipos as $equipo)
-                            <li><x-checkbox wire:model="selectEquipos" value="{{$equipo->id}} " /><span class="text-white">{{$equipo->nombre}}</span></li>
+                        @foreach ($equipos as $equipo)
+                            <li><x-checkbox wire:model="selectEquipos" value="{{ $equipo->id }} " /><span
+                                    class="text-white">{{ $equipo->nombre }}</span></li>
                         @endforeach
                     </ul>
                     <x-input-error for="selectEquipos" />
@@ -218,7 +219,7 @@
     </x-dialog-modal>
 
 
-    {{--------------------------------------------------------------Editar Registro-----------------------------------------}}
+    {{-- ------------------------------------------------------------Editar Registro--------------------------------------- --}}
     <x-dialog-modal wire:model="editar_registro">
         <x-slot name='title'>
             <h2 class="text-center">Editar Extraccion</h2>
@@ -271,8 +272,9 @@
                     <h2>Equipos:</h2>
                     <hr class="mb-2">
                     <ul class="flex flex-wrap justify-around gap-5 overflow-auto max-h-36 v-scroll">
-                        @foreach($equipos as $equipo)
-                            <li><x-checkbox wire:model="extraEdit.selectEquipos" value="{{$equipo->id}} " /><span class="text-white">{{$equipo->nombre}}</span></li>
+                        @foreach ($equipos as $equipo)
+                            <li><x-checkbox wire:model="extraEdit.selectEquipos" value="{{ $equipo->id }} " /><span
+                                    class="text-white">{{ $equipo->nombre }}</span></li>
                         @endforeach
                     </ul>
                     <x-input-error for="extraEdit.selectEquipos" />
@@ -293,7 +295,7 @@
     </x-dialog-modal>
 
 
-    {{--------------------------------------------------------------Ver Registro-----------------------------------------}}
+    {{-- ------------------------------------------------------------Ver Registro--------------------------------------- --}}
     <x-dialog-modal wire:model="ver_registro">
         <x-slot name='title'>
             <h2 class="text-center">Bitacora Extraccion</h2>
@@ -303,47 +305,46 @@
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">No. Registro:</label>
-                        <x-input wire:model="extraVer.no_registro" disabled/>
+                        <x-input wire:model="extraVer.no_registro" disabled />
                         <x-input-error for="extraVer.no_registro" />
                     </div>
                     <div class="flex flex-col">
                         <label for="">Fecha:</label>
-                        <x-input type="date" wire:model="extraVer.fecha" disabled/>
+                        <x-input type="date" wire:model="extraVer.fecha" disabled />
                         <x-input-error for="extraVer.fecha" />
                     </div>
                 </div>
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">Analisis:</label>
-                        <x-input wire:model="extraVer.analisis" disabled/>
+                        <x-input wire:model="extraVer.analisis" disabled />
                         <x-input-error for="extraVer.analisis" />
                     </div>
                     <div class="flex flex-col">
                         <label for="">Metodo:</label>
-                        <x-input wire:model="extraVer.metodo" disabled/>
+                        <x-input wire:model="extraVer.metodo" disabled />
                         <x-input-error for="extraVer.metodo" />
                     </div>
                 </div>
                 <div class="dark:text-white grid grid-cols-3 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">Conc ng/ul:</label>
-                        <x-input wire:model="extraVer.conc_ng_ul" disabled/>
+                        <x-input wire:model="extraVer.conc_ng_ul" disabled />
                         <x-input-error for="extraVer.conc_ng_ul" />
                     </div>
                     <div class="flex flex-col">
                         <label for="">260/280:</label>
-                        <x-input wire:model="extraVer.d260_280" disabled/>
+                        <x-input wire:model="extraVer.d260_280" disabled />
                         <x-input-error for="extraVer.d260_280" />
                     </div>
                     <div class="flex flex-col">
                         <label for="">260/230:</label>
-                        <x-input wire:model="extraVer.d260_230" disabled/>
+                        <x-input wire:model="extraVer.d260_230" disabled />
                         <x-input-error for="extraVer.d260_230" />
                     </div>
                 </div>
-                @livewire('extraccion.equipos',
-                [
-                    'extraccionIdVer'=> $extraccionIdVer
+                @livewire('extraccion.equipos', [
+                    'extraccionIdVer' => $extraccionIdVer,
                 ])
                 <div class="w-full flex justify-around">
                     <x-button wire:click="validar_registro">Validar</x-button>
@@ -353,6 +354,9 @@
         </x-slot>
         <x-slot name='footer'></x-slot>
     </x-dialog-modal>
+
+
+    {{-- ------------------------------------------------------------Validar Registro--------------------------------------- --}}
 
     <x-dialog-modal wire:model="validar">
         <x-slot name='title'>
@@ -363,47 +367,46 @@
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">No. Registro:</label>
-                        <x-input wire:model="extraVer.no_registro" disabled/>
+                        <x-input wire:model="extraVer.no_registro" disabled />
                         <x-input-error for="extraVer.no_registro" />
                     </div>
                     <div class="flex flex-col">
                         <label for="">Fecha:</label>
-                        <x-input type="date" wire:model="extraVer.fecha" disabled/>
+                        <x-input type="date" wire:model="extraVer.fecha" disabled />
                         <x-input-error for="extraVer.fecha" />
                     </div>
                 </div>
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">Analisis:</label>
-                        <x-input wire:model="extraVer.analisis" disabled/>
+                        <x-input wire:model="extraVer.analisis" disabled />
                         <x-input-error for="extraVer.analisis" />
                     </div>
                     <div class="flex flex-col">
                         <label for="">Metodo:</label>
-                        <x-input wire:model="extraVer.metodo" disabled/>
+                        <x-input wire:model="extraVer.metodo" disabled />
                         <x-input-error for="extraVer.metodo" />
                     </div>
                 </div>
                 <div class="dark:text-white grid grid-cols-3 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">Conc ng/ul:</label>
-                        <x-input wire:model="extraVer.conc_ng_ul" disabled/>
+                        <x-input wire:model="extraVer.conc_ng_ul" disabled />
                         <x-input-error for="extraVer.conc_ng_ul" />
                     </div>
                     <div class="flex flex-col">
                         <label for="">260/280:</label>
-                        <x-input wire:model="extraVer.d260_280" disabled/>
+                        <x-input wire:model="extraVer.d260_280" disabled />
                         <x-input-error for="extraVer.d260_280" />
                     </div>
                     <div class="flex flex-col">
                         <label for="">260/230:</label>
-                        <x-input wire:model="extraVer.d260_230" disabled/>
+                        <x-input wire:model="extraVer.d260_230" disabled />
                         <x-input-error for="extraVer.d260_230" />
                     </div>
                 </div>
-                @livewire('extraccion.equipos',
-                [
-                    'extraccionIdVer'=> $extraccionIdVer
+                @livewire('extraccion.equipos', [
+                    'extraccionIdVer' => $extraccionIdVer,
                 ])
                 <div class="w-full flex justify-around">
                     <x-button wire:click="validar_registro">Validar</x-button>
@@ -414,6 +417,19 @@
         <x-slot name='footer'></x-slot>
     </x-dialog-modal>
 
-
+    {{-- ------------------------------------------------------------Versiones Registro--------------------------------------- --}}
+    <x-dialog-modal wire:model="versiones">
+        <x-slot name='title'>
+            <h2 class="text-center">Versiones</h2>
+        </x-slot>
+        <x-slot name='content'>
+            @livewire('extraccion.versiones', [
+                'extraccionIdVercion' => $extraccionIdVercion
+                ])
+        </x-slot>
+        <x-slot name='footer'>
+            <x-danger-button wire:click="close_version">Cerrar</x-danger-button>
+        </x-slot>
+    </x-dialog-modal>
 
 </div>
