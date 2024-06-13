@@ -54,6 +54,18 @@ class Table extends Component
             'd260_280' => 'required|numeric',
             'd260_230' => 'required|numeric',
             'selectEquipos' => 'required',
+        ], [
+            'no_registro.integer' => 'El No. de Registro debe ser un numero',
+            'no_registro.min' => 'El No. de Registro debe tener minimo 5 caracteres',
+            'conc_ng_ul.numeric' => 'La Concentracion de NG/UL debe ser un numero',
+            'd260_280.numeric' => 'El Dato 260/280 debe ser un numero',
+            'd260_230.numeric' => 'El Dato 260/230 debe ser un numero',
+            'analisis.required' => 'El Analisis es requerido',
+            'metodo.required' => 'El Metodo es requerido',
+            'conc_ng_ul.required' => 'La Concentracion de NG/UL es requerida',
+            'd260_280.required' => 'El Dato 260/280 es requerido',
+            'd260_230.required' => 'El Dato 260/230 es requerido',
+            'selectEquipos.required' => 'Seleccione almenos un equipo'
         ]);
 
         $extraccion = extraccion::create([
@@ -192,14 +204,16 @@ class Table extends Component
         ];
     }
 
-    public function cancelar_ver(){
+    public function cancelar_ver()
+    {
         $this->ver_registro = false;
         $this->reset(['extraVer']);
     }
 
     //---------------Validar Regsitros----------------------------------------------------------------------
 
-    public function validar_registro(){
+    public function validar_registro()
+    {
         $extraccion = extraccion::find($this->extraccionIdVer);
         $extraccion->update([
             'validacion' => 'Validado',
@@ -212,16 +226,18 @@ class Table extends Component
 
     //---------------Versiones--------------------------------------------------------------------------------
 
-    public $versiones=false;
+    public $versiones = false;
     public $extraccionIdVercion;
 
-    public function version($id){
-        $this->versiones=true;  
-        $this->extraccionIdVercion = $id;      
+    public function version($id)
+    {
+        $this->versiones = true;
+        $this->extraccionIdVercion = $id;
     }
 
-    public function close_version(){
-        $this->versiones=false;
+    public function close_version()
+    {
+        $this->versiones = false;
     }
 
     //---------------Lazy ---------------------------------------------------------------------------------
