@@ -39,5 +39,11 @@ class analises extends Model
         return $this->hasMany(vpcrs::class);
     }
 
+
+    public function extraccion()
+    {
+        return $this->hasMany(extraccion::class);
+    }
+
     use HasFactory;
 }

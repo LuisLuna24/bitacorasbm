@@ -38,5 +38,16 @@ class equipos extends Model
         return $this->hasMany(pcrs_equipos::class);
     }
 
+    public function equipos_extraccion()
+    {
+        return $this->hasMany(equipos_extraccion::class);
+    }
+
+
+    public function extracion()
+    {
+        return $this->belongsToMany(extraccion::class);
+    }
+
     use HasFactory;
 }

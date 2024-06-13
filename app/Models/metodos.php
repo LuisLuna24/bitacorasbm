@@ -19,6 +19,11 @@ class metodos extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function extraccion()
+    {
+        return $this->belongsToMany(extraccion::class);
+    }
+
     //relacion de uno a muchos con vanalises
     public function vmetodos(){
         return $this->hasMany(vmetodos::class);

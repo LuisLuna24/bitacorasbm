@@ -34,7 +34,7 @@ class Table extends Component
 
     //----------------------------------------------------------------Create
     public $create_new = false;
-    public $no_registro, $cantidad, $analisis, $fecha, $resultado, $sanitizo = 0, $tiempouv = 0, $observaciones;
+    public $no_registro, $cantidad, $analisis, $fecha, $resultado='Negativo', $sanitizo = 0, $tiempouv = 0, $observaciones;
     public $selectedTagsEspecie = [];
     public $selectedTagsEquipo = [];
 

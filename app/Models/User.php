@@ -67,4 +67,8 @@ class User extends Authenticatable
     public function pcrs(){
         return $this->hasMany(pcr::class);
     }
+
+    public function extraccion(){
+        return $this->hasMany(extraccion::class);
+    }
 }
