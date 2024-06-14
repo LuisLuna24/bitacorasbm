@@ -137,7 +137,7 @@ INSERT INTO vreactivos (
     nombre,
     lote,
     description,
-    fecha_caducidad
+    fecha_caducidad,
     existencia,
     estado,
     created_at,
