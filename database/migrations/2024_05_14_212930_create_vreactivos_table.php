@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nombre',50);
             $table->string('lote',50);
             $table->string('description')->nullable();
+            $table->date('fecha_caducidad');
             $table->integer('existencia');
             $table->string('estado',20)->default('Existencia');
             $table->timestamps();
