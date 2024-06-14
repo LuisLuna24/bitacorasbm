@@ -48,7 +48,7 @@ class Table extends Component
             'no_registro' => 'required|min:5|integer',
             'analisis' => 'required',
             'fecha' => 'required',
-            'cantidad' => 'required|numeric',
+            'cantidad' => 'required|numeric|between:1,20',
         ], [
             'no_registro.required' => 'El No. de registro es obligatorio',
             'no_registro.min' => 'El No. de registro debe tener al menos 5 caracteres',
@@ -60,6 +60,7 @@ class Table extends Component
             'selectedTagsEquipo.required' => 'Seleccione un equipo',
             'cantidad.required' => 'Ingrese la cantidad',
             'cantidad.numeric' => 'La cantidad debe ser un numero',
+            'cantidad.between' => 'La cantidad debe estar entre 1 y 20',
 
         ]);
         for ($i = 0; $i < $this->cantidad; $i++) {

@@ -209,3 +209,108 @@ INSERT INTO vpcreals (
 SET NEW.version = OLD.version + 1;
 
 END
+
+----------------------------------------------------------------extracciones
+BEGIN
+
+SET @extraccion_id=OLD.id;
+SET @version=OLD.version;
+SET @usuario_anterior=OLD.user_id;
+SET @no_registro=OLD.no_registro;
+SET @fecha=OLD.fecha;
+SET @metodo_id=OLD.metodo_id;
+SET @analisis_id=OLD.analisis_id;
+SET @conc_ng_ul=OLD.conc_ng_ul;
+SET @dato260_280=OLD.dato260_280;
+SET @dato260_230=OLD.dato260_230;
+SET @validacion=OLD.validacion;
+
+INSERT INTO vextraccions (
+	extraccion_id,
+    version,
+    user_id,
+    no_registro,
+    fecha,
+    metodo_id,
+    analisis_id,
+    conc_ng_ul,
+    dato260_280,
+    dato260_230,
+    validacion,
+    created_at,
+    updated_at
+)VALUES(
+    @extraccion_id,
+    @version,
+    @usuario_anterior,
+    @no_registro,
+    @fecha,
+    @metodo_id,
+    @analisis_id,
+    @conc_ng_ul,
+    @dato260_280,
+    @dato260_230,
+    @validacion,
+    CURRENT_DATE,
+    CURRENT_DATE
+);
+
+SET NEW.version = OLD.version + 1;
+
+END
+
+----------------------------------------------------------------Pcr
+
+BEGIN
+
+SET @pcr_id=OLD.id;
+SET @version=OLD.version;
+SET @user_id=OLD.user_id;
+SET @no_registro=OLD.no_registro;
+SET @fecha=OLD.fecha;
+SET @analisis_id=OLD.analisis_id;
+SET @resultado=OLD.resultado;
+SET @agarosa=OLD.agarosa;
+SET @voltaje=OLD.voltaje;
+SET @tiempo=OLD.tiempo;
+SET @sanitizo=OLD.sanitizo;
+SET @tiempouv=OLD.tiempouv;
+SET @validacion=OLD.validacion;
+
+INSERT INTO vpcrs (
+	pcr_id,
+    version,
+    user_id,
+    no_registro,
+    fecha,
+    analisis_id,
+    resultado,
+    agarosa,
+    voltaje,
+    tiempo,
+    sanitizo,
+    tiempouv,
+    validacion,
+    created_at,
+    updated_at
+)VALUES(
+    @pcr_id,
+    @version,
+    @user_id,
+    @no_registro,
+    @fecha,
+    @analisis_id,
+    @resultado,
+    @agarosa,
+    @voltaje,
+    @tiempo,
+    @sanitizo,
+    @tiempouv,
+    @validacion,
+    CURRENT_DATE,
+    CURRENT_DATE
+);
+
+SET NEW.version = OLD.version + 1;
+
+END
