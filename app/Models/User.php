@@ -68,6 +68,10 @@ class User extends Authenticatable
         return $this->hasMany(pcr::class);
     }
 
+    public function reactivos_pcrs(){
+        return $this->hasMany(reactivos_pcrs::class);
+    }
+
     public function extraccion(){
         return $this->hasMany(extraccion::class);
     }

@@ -191,7 +191,7 @@
                 <div class="">
                     <h2>Especies:</h2>
                     <hr class="mb-2">
-                    <ul class="flex flex-wrap justify-around gap-5  overflow-auto max-h-36 v-scroll">
+                    <ul class="grid grid-cols-3 place-items-center max-md:grid-cols-1 max-md:place-items-start overflow-auto max-h-36 v-scroll">
                         @foreach($especies as $especie)
                             <li><x-checkbox wire:model="selectedTagsEspecie" value="{{$especie->id}} " /><span class="text-white">{{$especie->nombre}}</span></li>
                         @endforeach
@@ -202,9 +202,9 @@
                 <div class="">
                     <h2>Equipos:</h2>
                     <hr class="mb-2">
-                    <ul class="flex flex-wrap justify-around gap-5 overflow-auto max-h-36 v-scroll">
+                    <ul class="grid grid-cols-3 place-items-center max-md:grid-cols-1 max-md:place-items-start gap-5 overflow-auto max-h-36 v-scroll">
                         @foreach($equipos as $equipo)
-                            <li><x-checkbox wire:model="selectedTagsEquipo" value="{{$equipo->id}} " /><span class="text-white">{{$equipo->nombre}}</span></li>
+                            <li><x-checkbox wire:model="selectedTagsEquipo" value="{{$equipo->id}} " /><span class="text-white">{{$equipo->inventario}}-{{$equipo->nombre}}</span></li>
                         @endforeach
                     </ul>
                     <x-input-error for="selectedTagsEquipo" />
@@ -365,7 +365,7 @@
                 <div class="">
                     <h2>Especies:</h2>
                     <hr class="mb-2">
-                    <ul class="flex flex-wrap justify-around gap-5 overflow-auto max-h-36 v-scroll">
+                    <ul class="grid grid-cols-3 place-items-center max-md:grid-cols-1 max-md:place-items-start gap-5 overflow-auto max-h-36 v-scroll">
                         @foreach($especies as $especie)
                             <li><x-checkbox wire:model="pcrEdit.selectedTagsEspecie" value="{{$especie->id}} " /><span class="text-white">{{$especie->nombre}}</span></li>
                         @endforeach
@@ -375,7 +375,7 @@
                 <div class="">
                     <h2>Equipos:</h2>
                     <hr class="mb-2">
-                    <ul class="flex flex-wrap justify-around gap-5 overflow-auto max-h-36 v-scroll">
+                    <ul class="grid grid-cols-3 place-items-center max-md:grid-cols-1 max-md:place-items-start gap-5 overflow-auto max-h-36 v-scroll">
                         @foreach($equipos as $equipo)
                             <li><x-checkbox wire:model="pcrEdit.selectedTagsEquipo" value="{{$equipo->id}} " /><span class="text-white">{{$equipo->nombre}}</span></li>
                         @endforeach

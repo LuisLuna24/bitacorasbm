@@ -152,11 +152,11 @@ Route::middleware([
         }
     })->name('bitacoras.extraccion');
 
-    Route::get('/bitacoras/reactivos', function () {
+    Route::get('/bitacoras/reactivos/pcr', function () {
         if (auth()->user()->nivel >= 1){
-            return view('bitacoras.reactivos');
+            return view('bitacoras.reactivos_pcr');
         }else{
             abort(403);
         }
-    })->name('bitacoras.reactivos');
+    })->name('bitacoras.reactivos_pcr');
 });

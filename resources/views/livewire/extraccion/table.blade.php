@@ -195,7 +195,8 @@
                 <div>
                     <h2>Equipos:</h2>
                     <hr class="mb-2">
-                    <ul class="flex flex-wrap justify-around gap-5 overflow-auto max-h-36 v-scroll">
+                    <ul
+                        class="grid grid-cols-3 place-items-center max-md:grid-cols-1 max-md:place-items-start gap-5 overflow-auto max-h-36 v-scroll">
                         @foreach ($equipos as $equipo)
                             <li><x-checkbox wire:model="selectEquipos" value="{{ $equipo->id }} " /><span
                                     class="text-white">{{ $equipo->nombre }}</span></li>
@@ -271,7 +272,8 @@
                 <div>
                     <h2>Equipos:</h2>
                     <hr class="mb-2">
-                    <ul class="flex flex-wrap justify-around gap-5 overflow-auto max-h-36 v-scroll">
+                    <ul
+                        class="grid grid-cols-3 place-items-center max-md:grid-cols-1 max-md:place-items-start gap-5 overflow-auto max-h-36 v-scroll">
                         @foreach ($equipos as $equipo)
                             <li><x-checkbox wire:model="extraEdit.selectEquipos" value="{{ $equipo->id }} " /><span
                                     class="text-white">{{ $equipo->nombre }}</span></li>
@@ -424,8 +426,8 @@
         </x-slot>
         <x-slot name='content'>
             @livewire('extraccion.versiones', [
-                'extraccionIdVercion' => $extraccionIdVercion
-                ])
+                'extraccionIdVercion' => $extraccionIdVercion,
+            ])
         </x-slot>
         <x-slot name='footer'>
             <x-danger-button wire:click="close_version">Cerrar</x-danger-button>

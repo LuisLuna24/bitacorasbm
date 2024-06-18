@@ -30,7 +30,7 @@ class Tabla extends Component
     {
         $this->analises = analises::all();
         $this->especies = especies::all();
-        $this->equipos = equipos::all();
+        $this->equipos = equipos::where('estado','=','Activo')->get();
     }
 
 
