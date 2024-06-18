@@ -154,9 +154,9 @@ Route::middleware([
 
     Route::get('/bitacoras/reactivos/pcr', function () {
         if (auth()->user()->nivel >= 1){
-            return view('bitacoras.reactivos_pcr');
+            return view('bitacoras.reactivopcrs');
         }else{
             abort(403);
         }
-    })->name('bitacoras.reactivos_pcr');
+    })->name('bitacoras.reactivopcrs');
 });

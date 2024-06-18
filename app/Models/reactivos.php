@@ -21,9 +21,10 @@ class reactivos extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reactivos_pcrs()
+
+    public function reactivopcr()
     {
-        return $this->hasMany(reactivos_pcrs::class);
+        return $this->belongsToMany(reactivopcrs::class);
     }
 
     //relacion de uno a muchos con vanalises

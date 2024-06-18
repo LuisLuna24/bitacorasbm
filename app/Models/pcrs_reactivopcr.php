@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class pcrs_equipos extends Model
+class pcrs_reactivopcr extends Model
 {
-    protected $table = 'equipos_pcr';
+    protected $table = 'pcr_reactivopcr';
 
-    public function equipos()
-    {
-        return $this->belongsTo(equipos::class);
+    public function pcr(){
+        return $this->belongsTo(pcr::class);
     }
+
     
     use HasFactory;
 }

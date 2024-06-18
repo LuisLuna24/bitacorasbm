@@ -49,7 +49,7 @@
         </x-slot>
         <x-slot name='content'>
             <div class="flex justify-around p-10">
-                <x-button-routing href="{{ route('bitacoras.reactivos_pcr') }}">PCR</x-button-routing>
+                <x-button-routing href="{{ route('bitacoras.reactivopcrs') }}">PCR</x-button-routing>
                 <x-button-routing href="{{ route('bitacoras.pcreal') }}">PCR Tiempo Real</x-button-routing>
                 <x-button-routing href="{{ route('bitacoras.extraccion') }}">Extraccion</x-button-routing>
             </div>
