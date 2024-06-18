@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Rectivos;
+namespace App\Livewire\Reactivos;
 
 use App\Models\reactivos;
 use Livewire\Attributes\Lazy;
@@ -151,6 +151,6 @@ class Table extends Component
     public function render()
     {
         $reactivos = reactivos::where('nombre','LIKE','%' . $this->search . '%')->where('estado','=',$this->estate) ->paginate($this->datos);
-        return view('livewire.rectivos.table',compact('reactivos'));
+        return view('livewire.reactivos.table',compact('reactivos'));
     }
 }

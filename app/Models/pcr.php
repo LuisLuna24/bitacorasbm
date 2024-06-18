@@ -49,7 +49,6 @@ class pcr extends Model
     public function vpcrs(){
         return $this->hasMany(vpcrs::class);
     }
-
-
+    
     use HasFactory;
 }

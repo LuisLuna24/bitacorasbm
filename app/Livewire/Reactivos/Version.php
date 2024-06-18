@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Rectivos;
+namespace App\Livewire\Reactivos;
 
 use App\Models\vreactivos;
 use Livewire\Attributes\Reactive;
@@ -25,6 +25,6 @@ class Version extends Component
     public function render()
     {
         $vreactivos=vreactivos::where('reactivo_id','=',$this->VersionReactivoId)->paginate(10);
-        return view('livewire.rectivos.version',compact('vreactivos'));
+        return view('livewire.reactivos.version',compact('vreactivos'));
     }
 }

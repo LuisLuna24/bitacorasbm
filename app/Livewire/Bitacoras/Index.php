@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Reactivos;
+namespace App\Livewire\Bitacoras;
 
 use Livewire\Component;
 
@@ -16,9 +16,8 @@ class Index extends Component
         $this->tipo_bitacora=false;
     }
 
-
     public function render()
     {
-        return view('livewire.reactivos.index');
+        return view('livewire.bitacoras.index');
     }
 }

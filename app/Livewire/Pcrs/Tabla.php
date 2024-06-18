@@ -23,14 +23,16 @@ class Tabla extends Component
     public $search='';
     public $date=''; 
 
-    public $analises, $especies, $equipos;
+    
 
     //----------------------------------------------------------------Mostrar datos
+    public $analises, $especies, $equipos,$pcr;
     public function mount()
     {
         $this->analises = analises::all();
         $this->especies = especies::all();
         $this->equipos = equipos::where('estado','=','Activo')->get();
+        $this->pcr = pcr::all();
     }
 
 

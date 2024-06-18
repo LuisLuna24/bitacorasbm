@@ -13,7 +13,7 @@ class analises extends Model
         'user_id'
     ];
 
-    //relacion muchos a uno
+    //Relacion con usuarios 
     public function User(){
         return $this->belongsTo(User::class);
     }
@@ -29,16 +29,24 @@ class analises extends Model
         return $this->hasMany(pcr::class);
     }
 
-    public function pcreal()
-    {
-        return $this->hasMany(pcreal::class);
-    }
-
     public function vpcr()
     {
         return $this->hasMany(vpcrs::class);
     }
 
+    //un analisis puede estar en varios Pcreal
+
+    public function pcreal()
+    {
+        return $this->hasMany(pcreal::class);
+    }
+
+    public function vpcreal()
+    {
+        return $this->hasMany(vpcreals::class);
+    }
+
+    //un analisis puede estar en varios extracciones
 
     public function extraccion()
     {
@@ -48,6 +56,13 @@ class analises extends Model
     public function vextraccion()
     {
         return $this->hasMany(vextraccion::class);
+    }
+
+    //un analisis puede estar en varios Pcreal
+
+    public function reactivos_pcr()
+    {
+        return $this->hasMany(reactivos_pcrs::class);
     }
 
     use HasFactory;

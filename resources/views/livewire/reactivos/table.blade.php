@@ -135,7 +135,7 @@
             <h2 class="text-center">Verciones Equipo</h2>
         </x-slot>
         <x-slot name='content'>
-            @livewire('rectivos.version',[
+            @livewire('reactivos.version',[
                 'VersionReactivoId'=>$VersionReactivoId
             ])
         </x-slot>
