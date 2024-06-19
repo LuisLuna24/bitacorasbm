@@ -10,28 +10,64 @@ use Livewire\WithPagination;
 
 class Reactivopcrs extends Component
 {
-    //---------------paginacion-------------------------------
+    //&---------------paginacion-------------------------------
     use WithPagination;
 
-    //&===================================================================Nuevo================================================================
-    public $create_new=false;
+    //&---------------Filtros----------------------------------
+    public $reactivos;
+    public $search_registro = "";
 
-    public function new(){
-        $this->create_new=true;
+    public function mount()
+    {
+        $this->reactivos = reactivos::all();
     }
 
-    public function create(){
+    //&=================================================================== Nuevo ================================================================
+    public $create_new = false;
 
+    public function new()
+    {
+        $this->create_new = true;
     }
 
-    public function cancel_new(){
-        $this->create_new=false;
+    public function create()
+    {
     }
+
+    public function cancel_new()
+    {
+        $this->create_new = false;
+    }
+
+
+    //!=================================================================== Edit ================================================================
+
+    public $edit_register = false;
+    public $ReacPcrEditId;
+    public $rpcrEdit = [
+        'reactivo' => '',
+        'fecha_apertura' => '',
+        'selectedTagsPcr' => [],
+    ];
+
+    public function edit($id)
+    {
+        $this->edit_register = true;
+        $this->ReacPcrEditId = $id;
+        $rpcr = ModelsReactivopcrs::find($id);
+        $this->rpcrEdit = [
+            'reactivo' => $rpcr->reactivo_id,
+            'fecha_apertura' => $rpcr->fecha_apertura,
+            'selectedTagsPcr' => $rpcr->pcrs->pluck('id')->toArray(),
+        ];
+    }
+
 
 
     public function render()
     {
-        $pcrs= ModelsReactivopcrs::all();
-        return view('livewire.bitacoras.reactivopcrs',compact('pcrs'));
+        $pcrs = ModelsReactivopcrs::all();
+        $rpcrs = pcr::where('no_registro', 'LIKE', '%' . $this->search_registro . '%')->paginate(3);
+        return view('livewire.bitacoras.reactivopcrs', compact('pcrs', 'rpcrs'));
     }
 }
