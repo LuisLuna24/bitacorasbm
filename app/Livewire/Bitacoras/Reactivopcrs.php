@@ -32,7 +32,6 @@ class Reactivopcrs extends Component
     public function render()
     {
         $pcrs= ModelsReactivopcrs::all();
-        
         return view('livewire.bitacoras.reactivopcrs',compact('pcrs'));
     }
 }

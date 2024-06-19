@@ -5,6 +5,7 @@
                 <div class="flex flex-col">
                     <label for="">Reactivo:</label>
                     <x-select wire:model="reactivo">
+                        <option value="">Seleccione un reactivo</option>
                         @foreach ($reactivos as $reactivo)
                             <option value="{{ $reactivo->id }}">{{ $reactivo->nombre }}</option>
                         @endforeach
@@ -13,7 +14,7 @@
                 </div>
                 <div class="flex flex-col">
                     <label for="">Fecha Apertura::</label>
-                    <x-input type="date" wire:model='fecha_apertura' />
+                    <x-input type="date" wire:model='fecha_apertura' class="w-full" />
                     <x-input-error for="fecha_apertura" />
                 </div>
             </div>
@@ -36,7 +37,7 @@
                                     <td scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
                                         wire:key="rpcr-{{ $rpcr->id }}">
-                                        <x-checkbox wire:model="selectedTagsEspecie"
+                                        <x-checkbox wire:model="selectedTagsPcr"
                                             value="{{ $rpcr->id }} " /><span
                                             class="text-white">{{ $rpcr->no_registro }}</span>
                                     </td>
@@ -45,11 +46,12 @@
                         </tbody>
                     </table>
                 </div>
+                <x-input-error for="selectedTagsPcr" />
             </div>
         </div>
         <div class="mt-5 flex justify-around">
             <x-button>Agregar</x-button>
-            <x-danger-button wire:click="cancel_new">Cancelar</x-danger-button>
+            
         </div>
     </form>
 </div>

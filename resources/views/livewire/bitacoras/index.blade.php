@@ -48,7 +48,7 @@
             <h2 class="text-center">Seleccione un tipo de bitacora</h2>
         </x-slot>
         <x-slot name='content'>
-            <div class="flex justify-around p-10">
+            <div class="flex justify-around p-10 max-md:flex-col gap-5">
                 <x-button-routing href="{{ route('bitacoras.reactivopcrs') }}">PCR</x-button-routing>
                 <x-button-routing href="{{ route('bitacoras.pcreal') }}">PCR Tiempo Real</x-button-routing>
                 <x-button-routing href="{{ route('bitacoras.extraccion') }}">Extraccion</x-button-routing>

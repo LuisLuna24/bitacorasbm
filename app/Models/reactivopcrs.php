@@ -9,6 +9,10 @@ class reactivopcrs extends Model
 {
     protected $table ='reactivopcrs';
 
+    protected $fillable = [
+       'reactivo_id', 'fecha_apertura','user_id'
+    ];
+
     public function reactivo()
     {
         return $this->belongsTo(reactivos::class);

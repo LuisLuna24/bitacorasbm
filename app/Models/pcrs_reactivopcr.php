@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class pcrs_reactivopcr extends Model
 {
-    protected $table = 'pcr_reactivopcr';
+    protected $table = 'pcrs_reactivopcrs';
 
     public function pcr(){
         return $this->belongsTo(pcr::class);

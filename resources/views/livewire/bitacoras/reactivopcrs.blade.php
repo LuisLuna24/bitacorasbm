@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     @if (session('add_msg'))
         <x-alert-add>
             <x-slot name="content">{{ session('add_msg') }}</x-slot>
@@ -148,6 +148,8 @@
         <x-slot name='content'>
             @livewire('bitacoras.reactivopcrs-new')
         </x-slot>
-        <x-slot name='footer'></x-slot>
+        <x-slot name='footer'>
+            <x-danger-button wire:click="cancel_new">Cerrar</x-danger-button>
+        </x-slot>
     </x-dialog-modal>
 </div>
