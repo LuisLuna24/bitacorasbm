@@ -3,12 +3,16 @@
 namespace App\Livewire\Bitacoras;
 
 use App\Models\pcr;
+use App\Models\pcrs_reactivopcr;
 use App\Models\reactivopcrs as ModelsReactivopcrs;
 use App\Models\reactivos;
 use DragonCode\Contracts\Cashier\Resources\Model;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+
+#[Lazy()]
 class Reactivopcrs extends Component
 {
     //&---------------paginacion-------------------------------
@@ -63,16 +67,17 @@ class Reactivopcrs extends Component
         ];
     }
 
-    public function update(){
+    public function update()
+    {
         $this->validate([
-            'rpcrEdit.reactivo' =>'required',
-            'rpcrEdit.fecha_apertura' =>'required|date',
-            'rpcrEdit.selectedTagsPcr' =>'required',
+            'rpcrEdit.reactivo' => 'required',
+            'rpcrEdit.fecha_apertura' => 'required|date',
+            'rpcrEdit.selectedTagsPcr' => 'required',
         ]);
 
         $rpcr = ModelsReactivopcrs::find($this->ReacPcrEditId);
         $rpcr->update([
-           'reactivo_id' => $this->rpcrEdit['reactivo'],
+            'reactivo_id' => $this->rpcrEdit['reactivo'],
             'fecha_apertura' => $this->rpcrEdit['fecha_apertura'],
         ]);
         $rpcr->pcrs()->sync($this->rpcrEdit['selectedTagsPcr']);
@@ -84,12 +89,70 @@ class Reactivopcrs extends Component
 
     //!=================================================================== View ================================================================
 
+    public $view_register = false;
+    public $ReacPcrViewId;
+    public $rpcrView = [];
+
+    public function view($id)
+    {
+        $this->view_register = true;
+        $this->ReacPcrViewId = $id;
+        $rpcr = ModelsReactivopcrs::find($id);
+        $this->rpcrView = [
+            'reactivo' => $rpcr->reactivo_id,
+            'fecha_apertura' => $rpcr->fecha_apertura,
+            'selectedTagsPcr' => $rpcr->pcrs->pluck('id')->toArray(),
+        ];
+    }
+
+    public function cancel_view()
+    {
+        $this->view_register = false;
+        $this->reset(['rpcrView']);
+    }
+
+    //&=================================================================== Validar ================================================================
+
+    public $validar_register=false;
+
+    public function validar(){
+        $this->validar_register=true;
+
+    }
+
+    public function validar_view(){
+        $rpcr = ModelsReactivopcrs::find($this->ReacPcrViewId);
+        $rpcr->update([
+            'validacion' => 'Validada',
+        ]);
+        $this->validar_register=false;
+        $this->view_register=false;
+        session()->flash('up_msg', 'Registro validado correctamente');
+    }
+
+    public function cancel_validar(){
+        $this->validar_register=false;
+    }
+
+    //!=================================================================== Verciones ================================================================
+
     
+
+
+    //!=================================================================== lazy ================================================================
+
+    public function placeholder()
+    {
+        return view('livewire.placeholders.skeleton');
+    }
+
+    //!=================================================================== render ================================================================
 
     public function render()
     {
         $pcrs = ModelsReactivopcrs::all();
-        $rpcrs = pcr::where('no_registro', 'LIKE', '%' . $this->search_registro . '%')->paginate(3);
-        return view('livewire.bitacoras.reactivopcrs', compact('pcrs', 'rpcrs'));
+        $rpcrs = pcr::where('no_registro', 'LIKE', '%' . $this->search_registro . '%')->paginate(10);
+        $vrpcr = pcrs_reactivopcr::where('reactivopcrs_id', 'LIKE', '%' . $this->ReacPcrViewId . '%')->paginate(10);
+        return view('livewire.bitacoras.reactivopcrs', compact('pcrs', 'rpcrs', 'vrpcr'));
     }
 }

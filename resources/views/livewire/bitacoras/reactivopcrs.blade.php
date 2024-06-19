@@ -57,7 +57,7 @@
                         <th scope="col" class="px-6 py-3 text-center">Editar</th>
                     @endif
                     <th scope="col" class="px-6 py-3 text-center">Ver Bitacora</th>
-                    <th scope="col" class="px-6 py-3 text-center">Verciones</th>
+                    {{--<th scope="col" class="px-6 py-3 text-center">Verciones</th>--}}
                 </tr>
             </thead>
             <tbody>
@@ -122,7 +122,7 @@
                                         d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
                                 </svg></x-button>
                         </td>
-                        <td class="px-6 py-4 text-center">
+                        {{--<td class="px-6 py-4 text-center">
                             <x-button wire:click="version({{ $pcr->id }})"><svg xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -134,7 +134,7 @@
                                     <path d="M7 7l0 10" />
                                     <path d="M4 8l0 8" />
                                 </svg></x-button>
-                        </td>
+                        </td>--}}
                     </tr>
                 @endforeach
             </tbody>
@@ -153,10 +153,10 @@
         </x-slot>
     </x-dialog-modal>
 
-    {{--================================================================================Editar=======================================--}}
+    {{--================================================================================Editar=================================================--}}
     <x-dialog-modal wire:model="edit_register">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Equipo</h2>
+            <h2 class="text-center">Editar Bitacora</h2>
         </x-slot>
         <x-slot name='content'>
             <form class="grid gap-3" wire:submit="update">
@@ -218,5 +218,83 @@
         <x-slot name='footer'>
             <x-danger-button wire:click="cancel_new">Cerrar</x-danger-button>
         </x-slot>
+    </x-dialog-modal>
+
+     {{--================================================================================View=================================================--}}
+     <x-dialog-modal wire:model="view_register">
+        <x-slot name='title'>
+            <h2 class="text-center">Ver Bitacora</h2>
+        </x-slot>
+        <x-slot name='content'>
+            <div class="grid gap-3">
+                <div class="grid grid-cols-1 max-md:grid-cols-1 gap-5">
+                    <div class="grid grid-cols-2 max-md:grid-cols-1 gap-3">
+                        <div class="flex flex-col">
+                            <label for="">Reactivo:</label>
+                            <x-select wire:model="rpcrView.reactivo">
+                                <option value="">Seleccione un reactivo</option>
+                                @foreach ($reactivos as $reactivo)
+                                    <option value="{{ $reactivo->id }}">{{ $reactivo->nombre }}</option>
+                                @endforeach
+                            </x-select>
+                            <x-input-error for="rpcrView.reactivo" />
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="">Fecha Apertura::</label>
+                            <x-input type="date" wire:model='rpcrView.fecha_apertura' class="w-full" />
+                            <x-input-error for="rpcrView.fecha_apertura" />
+                        </div>
+                    </div>
+        
+                    <div class="grid gap-3 w-full">
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-center">No. Registro</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($vrpcr as $rpcr)
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <td scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+                                                wire:key="rpcr-{{ $rpcr->id }}">
+                                                {{ $rpcr->pcr->no_registro }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <x-input-error for="rpcrView.selectedTagsPcr" />
+                    </div>
+                </div>
+                <div class="mt-5 flex justify-around">
+                    <x-button wire:click="validar">Validar</x-button>
+                    <x-danger-button wire:click="cancel_view">Cerrar</x-danger-button> 
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name='footer'></x-slot>
+    </x-dialog-modal>
+
+
+    <x-dialog-modal wire:model="validar_register">
+        <x-slot name='title'>
+            <h2 class="text-center">¿Desea Validar este registro?</h2>
+        </x-slot>
+        <x-slot name='content'>
+            <div class="grid gap-3">
+                <div class="grid grid-cols-1 max-md:grid-cols-1 gap-5">
+                </div>
+                <div class="mt-5 flex justify-around">
+                    <x-button wire:click="validar_view">Validar</x-button>
+                    <x-danger-button wire:click="cancel_validar">Cerrar</x-danger-button> 
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name='footer'></x-slot>
     </x-dialog-modal>
 </div>
