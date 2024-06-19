@@ -159,7 +159,7 @@
             <h2 class="text-center">Nuevo Equipo</h2>
         </x-slot>
         <x-slot name='content'>
-            <form class="grid gap-3" wire:submit="edit">
+            <form class="grid gap-3" wire:submit="update">
                 <div class="grid grid-cols-1 max-md:grid-cols-1 gap-5">
                     <div class="grid grid-cols-2 max-md:grid-cols-1 gap-3">
                         <div class="flex flex-col">
@@ -211,7 +211,7 @@
                     </div>
                 </div>
                 <div class="mt-5 flex justify-around">
-                    <x-button>Actualizar</x-button>
+                    <x-button>Guardar</x-button>
                 </div>
             </form>
         </x-slot>

@@ -5,6 +5,7 @@ namespace App\Livewire\Bitacoras;
 use App\Models\pcr;
 use App\Models\reactivopcrs as ModelsReactivopcrs;
 use App\Models\reactivos;
+use DragonCode\Contracts\Cashier\Resources\Model;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -62,7 +63,28 @@ class Reactivopcrs extends Component
         ];
     }
 
+    public function update(){
+        $this->validate([
+            'rpcrEdit.reactivo' =>'required',
+            'rpcrEdit.fecha_apertura' =>'required|date',
+            'rpcrEdit.selectedTagsPcr' =>'required',
+        ]);
 
+        $rpcr = ModelsReactivopcrs::find($this->ReacPcrEditId);
+        $rpcr->update([
+           'reactivo_id' => $this->rpcrEdit['reactivo'],
+            'fecha_apertura' => $this->rpcrEdit['fecha_apertura'],
+        ]);
+        $rpcr->pcrs()->sync($this->rpcrEdit['selectedTagsPcr']);
+
+        $this->edit_register = false;
+        session()->flash('message', 'Registro actualizado con exito');
+        $this->reset(['rpcrEdit']);
+    }
+
+    //!=================================================================== View ================================================================
+
+    
 
     public function render()
     {
