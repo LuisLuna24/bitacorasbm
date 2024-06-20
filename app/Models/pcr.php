@@ -39,6 +39,11 @@ class pcr extends Model
         return $this->belongsToMany(reactivopcrs::class);
     }
 
+    public function vrpcrs()
+    {
+        return $this->belongsToMany(vreactivopcrs::class);
+    }
+
     //uno a uno
     
     public function analisis()

@@ -10,7 +10,7 @@ class reactivopcrs extends Model
     protected $table ='reactivopcrs';
 
     protected $fillable = [
-       'reactivo_id', 'fecha_apertura','user_id','validacion'
+       'reactivo_id', 'fecha_apertura','user_id','validacion','version'
     ];
 
     public function reactivo()

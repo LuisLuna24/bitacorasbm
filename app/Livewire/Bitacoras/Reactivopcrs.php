@@ -6,6 +6,7 @@ use App\Models\pcr;
 use App\Models\pcrs_reactivopcr;
 use App\Models\reactivopcrs as ModelsReactivopcrs;
 use App\Models\reactivos;
+use App\Models\vreactivopcrs;
 use DragonCode\Contracts\Cashier\Resources\Model;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
@@ -53,7 +54,7 @@ class Reactivopcrs extends Component
     //!=================================================================== Edit ================================================================
 
     public $edit_register = false;
-    public $ReacPcrEditId;
+    public $ReacPcrEditId='';
     public $rpcrEdit = [
         'reactivo' => '',
         'fecha_apertura' => '',
@@ -81,9 +82,23 @@ class Reactivopcrs extends Component
         ]);
 
         $rpcr = ModelsReactivopcrs::find($this->ReacPcrEditId);
+
+        $vrpcr= vreactivopcrs::create([
+            'reactivopcr_id'=>$this->ReacPcrEditId,
+            'version'=>$rpcr->version+1,
+            'reactivo_id' => $rpcr->reactivo_id,
+            'fecha_apertura' => $rpcr->fecha_apertura,
+            'validacion'=> $rpcr->validacion,
+            'user_id' => auth()->user()->id,
+        ]);
+        $vrpcr->pcrs()->sync($this->rpcrEdit['selectedTagsPcr']);
+
+
+
         $rpcr->update([
             'reactivo_id' => $this->rpcrEdit['reactivo'],
             'fecha_apertura' => $this->rpcrEdit['fecha_apertura'],
+            'version'=>$rpcr->version+1,
         ]);
         $rpcr->pcrs()->sync($this->rpcrEdit['selectedTagsPcr']);
 
@@ -141,7 +156,13 @@ class Reactivopcrs extends Component
 
     //!=================================================================== Verciones ================================================================
 
-    
+    public $version_register=false;
+    public $VercionReactivoId;
+
+    public function version($id){
+        $this->version_register=true;
+        $this->VercionReactivoId=$id;
+    }
 
 
     //!=================================================================== lazy ================================================================

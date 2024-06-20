@@ -57,7 +57,7 @@
                         <th scope="col" class="px-6 py-3 text-center">Editar</th>
                     @endif
                     <th scope="col" class="px-6 py-3 text-center">Ver Bitacora</th>
-                    {{--<th scope="col" class="px-6 py-3 text-center">Verciones</th>--}}
+                    <th scope="col" class="px-6 py-3 text-center">Verciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -122,7 +122,7 @@
                                         d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
                                 </svg></x-button>
                         </td>
-                        {{--<td class="px-6 py-4 text-center">
+                        <td class="px-6 py-4 text-center">
                             <x-button wire:click="version({{ $pcr->id }})"><svg xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -134,7 +134,7 @@
                                     <path d="M7 7l0 10" />
                                     <path d="M4 8l0 8" />
                                 </svg></x-button>
-                        </td>--}}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -294,6 +294,19 @@
                     <x-danger-button wire:click="cancel_validar">Cerrar</x-danger-button> 
                 </div>
             </div>
+        </x-slot>
+        <x-slot name='footer'></x-slot>
+    </x-dialog-modal>
+
+    {{--================================================================================Vercion=================================================--}}
+
+
+    <x-dialog-modal wire:model="version_register">
+        <x-slot name='title'>
+            <h2 class="text-center">¿Desea Validar este registro?</h2>
+        </x-slot>
+        <x-slot name='content'>
+            @livewire('bitacoras.versionesreactivopcrs', ['VercionReactivoId' => $VercionReactivoId])
         </x-slot>
         <x-slot name='footer'></x-slot>
     </x-dialog-modal>
