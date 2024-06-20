@@ -18,7 +18,7 @@
 
 
 
-    <div class="flex gap-3 m-2 max-md:flex-col max-md:justify-center">
+    <div class="flex  m-2 max-md:flex-col max-md:justify-center">
         <div class="flex gap-3 m-2 max-md:w-full">
             <x-select wire:model.live="datos">
                 <option value="10">10</option>

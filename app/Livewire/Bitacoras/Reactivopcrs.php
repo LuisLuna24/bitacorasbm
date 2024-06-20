@@ -22,6 +22,11 @@ class Reactivopcrs extends Component
     public $reactivos;
     public $search_registro = "";
 
+    public $datos = 10;
+    public $estate='';
+    public $search='';
+    public $date=''; 
+
     public function mount()
     {
         $this->reactivos = reactivos::all();
@@ -150,7 +155,7 @@ class Reactivopcrs extends Component
 
     public function render()
     {
-        $pcrs = ModelsReactivopcrs::all();
+        $pcrs = ModelsReactivopcrs::where('created_at','LIKE','%' . $this->date . '%')->where('validacion','LIKE','%' . $this->estate . '%')->paginate($this->datos);
         $rpcrs = pcr::where('no_registro', 'LIKE', '%' . $this->search_registro . '%')->paginate(10);
         $vrpcr = pcrs_reactivopcr::where('reactivopcrs_id', 'LIKE', '%' . $this->ReacPcrViewId . '%')->paginate(10);
         return view('livewire.bitacoras.reactivopcrs', compact('pcrs', 'rpcrs', 'vrpcr'));

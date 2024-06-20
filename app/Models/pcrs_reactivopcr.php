@@ -13,6 +13,10 @@ class pcrs_reactivopcr extends Model
         return $this->belongsTo(pcr::class);
     }
 
+    public function reactivopcrs(){
+        return $this->belongsTo(reactivopcrs::class);
+    }
+
     
     use HasFactory;
 }
