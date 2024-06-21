@@ -79,4 +79,9 @@ class User extends Authenticatable
     public function vextraccion(){
         return $this->hasMany(vextraccion::class);
     }
+
+    //relacion con vpcrs
+    public function vpcrs(){
+        return $this->hasMany(vpcrs::class);
+    }
 }

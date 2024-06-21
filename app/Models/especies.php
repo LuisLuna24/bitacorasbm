@@ -34,5 +34,15 @@ class especies extends Model
         return $this->hasMany(pcrs_especies::class);
     }
 
+    public function especies_vpcr(){
+        return $this->hasMany(especies_vpcr::class);    
+    }
+
+    //relacion con vpcrs
+    public function vpcrs(){
+        return $this->belongsToMany(vpcrs::class);
+    }
+
+
     use HasFactory;
 }

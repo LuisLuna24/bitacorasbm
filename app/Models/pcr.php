@@ -20,7 +20,8 @@ class pcr extends Model
         'sanitizo', 
         'tiempouv',
         'user_id',
-        'validacion'
+        'validacion',
+        'version'
     ];
 
     //relacion muchos a muchos con equipos

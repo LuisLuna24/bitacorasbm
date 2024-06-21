@@ -38,6 +38,11 @@ class equipos extends Model
         return $this->hasMany(pcrs_equipos::class);
     }
 
+    public function equipos_vpcr()
+    {
+        return $this->hasMany(equipos_vpcr::class);
+    }
+
     public function equipos_extraccion()
     {
         return $this->hasMany(equipos_extraccion::class);
@@ -52,6 +57,10 @@ class equipos extends Model
     public function vextracion()
     {
         return $this->belongsToMany(vextraccion::class);
+    }
+
+    public function vpcrs(){
+        return $this->belongsToMany(vpcrs::class);
     }
 
     use HasFactory;

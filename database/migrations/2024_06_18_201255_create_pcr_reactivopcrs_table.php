@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pcrs_reactivopcrs', function (Blueprint $table) {
+        Schema::create('pcr_reactivopcrs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pcr_id');
             $table->foreign('pcr_id')->references('id')->on('pcrs')->onDelete('cascade');
-            $table->unsignedBigInteger('reactivopcr_id');
-            $table->foreign('reactivopcr_id')->references('id')->on('reactivopcrs')->onDelete('cascade');
+            $table->unsignedBigInteger('reactivopcrs_id');
+            $table->foreign('reactivopcrs_id')->references('id')->on('reactivopcrs')->onDelete('cascade');
             $table->timestamps();
         });
     }

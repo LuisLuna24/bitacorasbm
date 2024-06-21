@@ -18,7 +18,7 @@ class Versionesreactivopcrs extends Component
 
     public function render()
     {
-        $vrpcr = vreactivopcrs::where('reactivopcr_id', '=',$this->VercionReactivoId)->orderByDesc('id')->paginate(10);
+        $vrpcr = vreactivopcrs::where('reactivopcrs_id', '=',$this->VercionReactivoId)->orderByDesc('id')->paginate(10);
         return view('livewire.bitacoras.versionesreactivopcrs',compact('vrpcr'));
     }
 }

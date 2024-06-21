@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('vreactivopcrs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('reactivopcr_id');
-            $table->foreign('reactivopcr_id')->references('id')->on('reactivopcrs')->onDelete('cascade');
+            $table->unsignedBigInteger('reactivopcrs_id');
+            $table->foreign('reactivopcrs_id')->references('id')->on('reactivopcrs')->onDelete('cascade');
             $table->integer('version')->default(1);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

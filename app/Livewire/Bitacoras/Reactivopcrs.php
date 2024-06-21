@@ -84,14 +84,14 @@ class Reactivopcrs extends Component
         $rpcr = ModelsReactivopcrs::find($this->ReacPcrEditId);
 
         $vrpcr= vreactivopcrs::create([
-            'reactivopcr_id'=>$this->ReacPcrEditId,
+            'reactivopcrs_id'=>$this->ReacPcrEditId,
             'version'=>$rpcr->version+1,
             'reactivo_id' => $rpcr->reactivo_id,
             'fecha_apertura' => $rpcr->fecha_apertura,
             'validacion'=> $rpcr->validacion,
             'user_id' => auth()->user()->id,
         ]);
-        $vrpcr->pcrs()->sync($this->rpcrEdit['selectedTagsPcr']);
+        $vrpcr->pcrs()->sync($rpcr->pcrs->pluck('id')->toArray());
 
 
 

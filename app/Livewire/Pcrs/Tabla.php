@@ -7,6 +7,7 @@ use App\Models\equipos;
 use App\Models\especies;
 use App\Models\pcr;
 use App\Models\pcrs;
+use App\Models\vpcrs;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -154,6 +155,8 @@ class Tabla extends Component
 
     // ----------------------------------------------------------------Update
     public $update_new = false;
+    public $usanitizado = false;
+    public $utiempouvs = false;
     public $pcrIdEdit;
     public $pcrEdit = [
         'no_registro' => '',
@@ -186,8 +189,9 @@ class Tabla extends Component
             'tiempouv' => $pcr->tiempouv,
             'selectedTagsEspecie' => $pcr->especies->pluck('id')->toArray(),
             'selectedTagsEquipo' => $pcr->equipos->pluck('id')->toArray(),
-
         ];
+        $this->usanitizado = $pcr->sanitizo;
+        $this->utiempouvs = $pcr->tiempouv;
     }
 
     public function update()
@@ -220,6 +224,24 @@ class Tabla extends Component
         ]);
 
         $pcr = pcr::find($this->pcrIdEdit);
+
+        $vrpcr= vpcrs::create([
+            'pcr_id' => $this->pcrIdEdit,
+            'no_registro' => $pcr->no_registro,
+            'version' => $pcr->version+1,
+            'fecha' => $pcr->fecha,
+            'analisis_id' => $pcr->analisis_id,
+            'resultado' => $pcr->resultado,
+            'agarosa' => $pcr->agarosa,
+            'voltaje' => $pcr->voltaje,
+            'tiempo' => $pcr->tiempo,
+            'sanitizo' => $pcr->sanitizo,
+            'tiempouv' => $pcr->tiempouv,
+            'user_id' => auth()->user()->id,
+        ]);
+        $vrpcr->especies()->sync($pcr->equipos->pluck('id')->toArray());
+        $vrpcr->equipos()->sync($pcr->equipos->pluck('id')->toArray());
+
         $pcr->update([
             'no_registro' => $this->pcrEdit['no_registro'],
             'fecha' => $this->pcrEdit['fecha'],
@@ -230,6 +252,7 @@ class Tabla extends Component
             'tiempo' => $this->pcrEdit['tiempo'],
             'sanitizo' => $this->pcrEdit['sanitizo'],
             'tiempouv' => $this->pcrEdit['tiempouv'],
+            'version' => $pcr->version+1,
         ]);
         $pcr->especies()->sync($this->pcrEdit['selectedTagsEspecie']);
         $pcr->equipos()->sync($this->pcrEdit['selectedTagsEquipo']);
@@ -295,6 +318,10 @@ class Tabla extends Component
         $this->pcrVercionId=$id;
     }
 
+    public function cerrar_vercion(){
+        $this->vercion_pcr=false;
+    }
+
     //---------------Lazy-------------------------------
     public function placeholder()
     {
@@ -303,7 +330,7 @@ class Tabla extends Component
 
     public function render()
     {
-        $pcrs = pcr::where('validacion','LIKE','%'.$this->estate.'%')->where('no_registro','LIKE','%' . $this->search . '%')->where('fecha','LIKE','%' . $this->date . '%')->paginate($this->datos);
+        $pcrs = pcr::where('validacion','LIKE','%'.$this->estate.'%')->where('no_registro','LIKE','%' . $this->search . '%')->where('fecha','LIKE','%' . $this->date . '%')->orderByDesc('id')->paginate($this->datos);
         return view('livewire.pcrs.tabla', compact('pcrs'));
     }
 }
