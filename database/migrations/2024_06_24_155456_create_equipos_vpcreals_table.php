@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('equipos_vpcrs', function (Blueprint $table) {
+        Schema::create('equipos_vpcreals', function (Blueprint $table) {
             $table->id();
             $table->integer('version')->default(1);  
             $table->unsignedBigInteger('equipos_id');
             $table->foreign('equipos_id')->references('id')->on('equipos');
-            $table->unsignedBigInteger('vpcrs_id');
-            $table->foreign('vpcrs_id')->references('id')->on('vpcrs');
+            $table->unsignedBigInteger('vpcreals_id');
+            $table->foreign('vpcreals_id')->references('id')->on('vpcreals');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('equipos_vpcrs');
+        Schema::dropIfExists('equipos_vpcreals');
     }
 };

@@ -28,7 +28,6 @@ class Table extends Component
 
     public function create(){
         $this->validate([
-
             'inventario' =>'required|min:3|max:30|unique:equipos',
             'nombre' =>'required|min:3|max:30|',
         ],[

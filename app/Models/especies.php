@@ -43,6 +43,10 @@ class especies extends Model
         return $this->belongsToMany(vpcrs::class);
     }
 
+    public function vpcreals(){
+        return $this->belongsToMany(vpcreals::class);
+    }
+
 
     use HasFactory;
 }

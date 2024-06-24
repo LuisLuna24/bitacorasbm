@@ -6,6 +6,7 @@ use App\Models\analises;
 use App\Models\equipos;
 use App\Models\especies;
 use App\Models\pcreal;
+use App\Models\vpcreals;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -176,9 +177,30 @@ class Table extends Component
             'pcrealEdit.selectedTagsEspecie.required' => 'Seleccione una especie',
             'pcrealEdit.selectedTagsEquipo.required' => 'Seleccione un equipo',
         ]);
+        
         $pcreal = pcreal::find($this->pcrealIdEdit);
+
+        $vrpcreal= vpcreals::create([
+            'pcreal_id' => $this->pcrealIdEdit,
+            'version' => $pcreal->version+1,
+            'user_id' => auth()->user()->id,
+            'no_registro' => $pcreal->no_registro,
+            'fecha' => $pcreal->fecha,
+            'analisis_id' => $pcreal->analisis_id,
+            'sanitizo' => $pcreal->sanitizo,
+            'tiempouv' => $pcreal->tiempouv,
+            'resultado' => $pcreal->resultado,
+            'observaciones' => $pcreal->observaciones,
+            'validacion' => $pcreal->validacion,
+            
+        ]);
+        $vrpcreal->especies()->sync($pcreal->equipos->pluck('id')->toArray());
+        $vrpcreal->equipos()->sync($pcreal->equipos->pluck('id')->toArray());
+
+
         $pcreal->update([
             'no_registro' => $this->pcrealEdit['no_registro'],
+            'version' => $pcreal->version+1,
             'analisis_id' => $this->pcrealEdit['analisis'],
             'fecha' => $this->pcrealEdit['fecha'],
             'resultado' => $this->pcrealEdit['resultado'],

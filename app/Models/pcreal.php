@@ -19,6 +19,7 @@ class pcreal extends Model
         "observaciones",
         "user_id",
         "validacion",
+        'version'
     ];
 
     public function equipos()
