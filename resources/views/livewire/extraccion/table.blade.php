@@ -252,12 +252,22 @@
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">Analisis:</label>
-                        <x-input wire:model="extraEdit.analisis" />
+                        <x-select wire:model="extraEdit.analisis">
+                            <option value="0">Seleccione</option>
+                            @foreach ($analises as $analisis)
+                                <option value="{{ $analisis->id }}">{{ $analisis->nombre }}</option>
+                            @endforeach
+                        </x-select>
                         <x-input-error for="extraEdit.analisis" />
                     </div>
                     <div class="flex flex-col">
                         <label for="">Metodo:</label>
-                        <x-input wire:model="extraEdit.metodo" />
+                        <x-select wire:model="extraEdit.metodo" >
+                            <option value="0">Seleccione</option>
+                            @foreach ($metodos as $metodo)
+                                <option value="{{ $metodo->id }}">{{ $metodo->nombre }}</option>
+                            @endforeach
+                        </x-select>
                         <x-input-error for="extraEdit.metodo" />
                     </div>
                 </div>
