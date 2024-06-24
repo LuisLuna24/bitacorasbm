@@ -18,7 +18,7 @@ class EquiposVersion extends Component
 
     public function render()
     {
-        $equipos = equipos_vpcr::where('vpcrs_id','=',$this->versionPcrealId)->paginate(10);
+        $equipos = equipos_vpcr::where('vpcrs_id','=',$this->versionPcrId)->paginate(10);
         return view('livewire.pcrs.equipos-version',compact('equipos'));
     }
 }

@@ -194,8 +194,8 @@ class Table extends Component
             'validacion' => $pcreal->validacion,
             
         ]);
-        $vrpcreal->especies()->sync($pcreal->equipos->pluck('id')->toArray());
-        $vrpcreal->equipos()->sync($pcreal->equipos->pluck('id')->toArray());
+        $vrpcreal->especies()->attach($pcreal->equipos->pluck('id')->toArray());
+        $vrpcreal->equipos()->attach($pcreal->equipos->pluck('id')->toArray());
 
 
         $pcreal->update([

@@ -239,8 +239,9 @@ class Tabla extends Component
             'tiempouv' => $pcr->tiempouv,
             'user_id' => auth()->user()->id,
         ]);
-        $vrpcr->especies()->sync($pcr->equipos->pluck('id')->toArray());
-        $vrpcr->equipos()->sync($pcr->equipos->pluck('id')->toArray());
+        $vrpcr->equipos()->attach($pcr->equipos->pluck('id')->toArray());
+        $vrpcr->especies()->attach($pcr->equipos->pluck('id')->toArray());
+
 
         $pcr->update([
             'no_registro' => $this->pcrEdit['no_registro'],
