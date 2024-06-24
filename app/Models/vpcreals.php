@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class vpcreals extends Model
 {
-    protected $table = 'vpcreals';
 
+    //^==============================================Datos de tabla
+
+    protected $table = 'vpcreals';
     protected $fillable = [
         'pcreal_id',
         'user_id',
@@ -23,28 +25,37 @@ class vpcreals extends Model
         'version'
     ];
 
+    //^==============================================Relacion con usuario
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //^==============================================Relacion con bitacoras
+    //&=====================================Vercion Pcreal
     public function pcreals()
     {
         return $this->hasMany(pcreal::class);
     }
 
+    //^==============================================Relacion con catalogos
+    //&=====================================Analisis
     public function analisis()
     {
         return $this->belongsTo(analises::class);
     }
 
-    //RElacion con usuario
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-
-    // relacion con especies
-    public function especies(){
+    //&=====================================Especies
+    public function especies()
+    {
         return $this->belongsToMany(especies::class);
     }
 
-    // relacion con equipos
-    public function equipos(){
+    //^==============================================Relacion con inventarios
+    //&=====================================Equipos
+    public function equipos()
+    {
         return $this->belongsToMany(equipos::class);
     }
 

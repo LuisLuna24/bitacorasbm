@@ -7,33 +7,45 @@ use Illuminate\Database\Eloquent\Model;
 
 class vextraccion extends Model
 {
+    //^==============================================Datos de tabla
+
     protected $table = 'vextraccions';
 
-    public function extraccins()
+    //^==============================================Relacion con usuarios
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //^==============================================Relacion con extraccion
+
+    public function extraccion()
     {
         return $this->hasMany(extraccion::class);
     }
 
+    //^==============================================Relacion con inventarios
+    //&=====================================Equipos
     public function equipos()
     {
         return $this->belongsToMany(equipos::class);
     }
 
-    //uno a uno
-    
+    //^==============================================Relacion con catalogos
+    //&=====================================Analisis
+
     public function analisis()
     {
         return $this->belongsTo(analises::class);
     }
+
+    //&=====================================Metodos
 
     public function metodo()
     {
         return $this->belongsTo(metodos::class);
     }
 
-    //relacion con usuarios
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
     use HasFactory;
 }

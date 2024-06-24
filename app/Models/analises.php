@@ -7,23 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class analises extends Model
 {
+    //^==============================================Datos de Tablas
+
     protected $table = 'analises';
     protected $fillable = [
         'nombre',
         'user_id'
     ];
 
-    //Relacion con usuarios 
-    public function User(){
+    //^==============================================Relacion con usuarios 
+    public function User()
+    {
         return $this->belongsTo(User::class);
     }
 
-    //relacion de uno a muchos con vanalises
-    public function vanalises(){
-        return $this->hasMany(vanalises::class);
-    }
+    //^==============================================Relacion con bitacoras
+    //&=====================================Pcr
 
-    //un analisis puede estar en varios Pcr
     public function pcr()
     {
         return $this->hasMany(pcr::class);
@@ -33,8 +33,7 @@ class analises extends Model
     {
         return $this->hasMany(vpcrs::class);
     }
-
-    //un analisis puede estar en varios Pcreal
+    //&=====================================Pcreal
 
     public function pcreal()
     {
@@ -45,8 +44,7 @@ class analises extends Model
     {
         return $this->hasMany(vpcreals::class);
     }
-
-    //un analisis puede estar en varios extracciones
+    //&=====================================Extraccion
 
     public function extraccion()
     {
@@ -58,11 +56,11 @@ class analises extends Model
         return $this->hasMany(vextraccion::class);
     }
 
-    //un analisis puede estar en varios Pcreal
+    //^==============================================Version Analisis
 
-    public function reactivos_pcr()
+    public function vanalises()
     {
-        return $this->hasMany(reactivos_pcrs::class);
+        return $this->hasMany(vanalises::class);
     }
 
     use HasFactory;

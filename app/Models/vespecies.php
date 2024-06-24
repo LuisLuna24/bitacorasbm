@@ -7,20 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class vespecies extends Model
 {
-    protected $table = 'vespecies';
+    //^==============================================Datos de tabla
 
+    protected $table = 'vespecies';
     protected $fillable = [
         'nombre'
     ];
 
-    //muchos a uno
-    public function especies(){
+    //^==============================================Relacion con usuarios
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //^==============================================Relacion con especies
+
+    public function especies()
+    {
         return $this->belongsTo(especies::class);
     }
 
-    //usuario a anamises
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
     use HasFactory;
 }

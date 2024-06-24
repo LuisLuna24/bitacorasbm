@@ -7,21 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class vreactivos extends Model
 {
+    //^==============================================Datos de tabla
+
     protected $table = 'vreactivos';
     protected $fillable = [
         'nombre',
     ];
 
-    //muchos a uno
-    public function reactivo(){
-        return $this->belongsTo(reactivos::class);
-    }
+    //^==============================================Relacion de usuarios
 
-    //usuario a anamises
     public function user(){
         return $this->belongsTo(User::class);
     }
 
+    //^==============================================Relacion de inventarios
+    //&=====================================Reactivossd
+    public function reactivo(){
+        return $this->belongsTo(reactivos::class);
+    }
 
     use HasFactory;
 }

@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class vpcrs extends Model
 {
-    protected $table = 'vpcrs';
+    //^==============================================Datos de tabla
 
+    protected $table = 'vpcrs';
     protected $fillable = [
         'no_registro',
         'fecha',
@@ -24,33 +25,40 @@ class vpcrs extends Model
         'user_id',
     ];
 
-    //muchos a uno
+    //^==============================================Datos de usuarios
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //^==============================================Relacion de bitacoras
+    //&=====================================Pcr
     public function pcrs()
     {
         return $this->hasMany(pcr::class);
     }
 
+    //^==============================================Relacion de catalogos
+    //&=====================================Analisis
     public function analisis()
     {
         return $this->belongsTo(analises::class);
     }
 
-    //RElacion con usuario
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
+    //&=====================================Especies
 
-    // relacion con especies
-    public function especies(){
+    public function especies()
+    {
         return $this->belongsToMany(especies::class);
     }
 
-    // relacion con equipos
-    public function equipos(){
+    //^==============================================Relacion de inventarios
+    //&=====================================Equipos
+    public function equipos()
+    {
         return $this->belongsToMany(equipos::class);
     }
-
 
     use HasFactory;
 }

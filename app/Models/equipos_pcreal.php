@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class equipos_pcreal extends Model
 {
+    //^==============================================Datos de Tablas
+
     protected $table = 'equipos_pcreal';
+
+    //^==============================================Relacion con equipo
 
     public function equipos()
     {

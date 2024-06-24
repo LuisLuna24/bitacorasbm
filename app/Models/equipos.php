@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class equipos extends Model
 {
-
+    //^==============================================Datos de Tablas
     protected $table = 'equipos';
     protected $fillable = [
         'user_id',
@@ -17,17 +17,22 @@ class equipos extends Model
         'estado',
     ];
 
-    //relacion muchos a uno
-    public function User(){
+    //^==============================================Relacion con usuarios
+
+    public function User()
+    {
         return $this->belongsTo(User::class);
     }
 
-    //relacion de uno a muchos con vanalises
-    public function vequipos(){
+    //^==============================================Relacion con version equipos
+
+    public function vequipos()
+    {
         return $this->hasMany(vequipos::class);
     }
 
-    //relacion inversa muchos a muchos con pcrs
+    //^==============================================Relacion con bitacoras
+    //&=====================================Pcr
     public function pcr()
     {
         return $this->belongsToMany(pcr::class);
@@ -38,14 +43,42 @@ class equipos extends Model
         return $this->hasMany(pcrs_equipos::class);
     }
 
+    public function vpcrs()
+    {
+        return $this->belongsToMany(vpcrs::class);
+    }
+
     public function equipos_vpcr()
     {
         return $this->hasMany(equipos_vpcr::class);
     }
 
-    public function equipos_vpcreal()
+    //&=====================================Pcreal
+    public function pcreals()
+    {
+        return $this->belongsToMany(pcreal::class);
+    }
+
+    public function equipos_pcreal()
     {
         return $this->hasMany(equipos_pcreal::class);
+    }
+
+    public function vpcreals()
+    {
+        return $this->belongsToMany(vpcreals::class);
+    }
+
+    public function equipos_vpcreal()
+    {
+        return $this->hasMany(equipos_vpcreals::class);
+    }
+
+    //&=====================================Extraccion
+
+    public function extracion()
+    {
+        return $this->belongsToMany(extraccion::class);
     }
 
     public function equipos_extraccion()
@@ -53,26 +86,17 @@ class equipos extends Model
         return $this->hasMany(equipos_extraccion::class);
     }
 
-
-    public function extracion()
-    {
-        return $this->belongsToMany(extraccion::class);
-    }
-
     public function vextracion()
     {
         return $this->belongsToMany(vextraccion::class);
     }
 
-    public function vpcrs(){
-        return $this->belongsToMany(vpcrs::class);
-    }
 
-    public function vpcreals(){
-        return $this->belongsToMany(vpcreals::class);
-    }
 
-    
+
+
+
+
 
     use HasFactory;
 }

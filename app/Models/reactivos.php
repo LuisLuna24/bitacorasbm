@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class reactivos extends Model
 {
-    protected $table ='reactivos';
+
+    //^==============================================Datos de tabla
+
+    protected $table = 'reactivos';
     protected $fillable = [
         'nombre',
         'description',
@@ -17,26 +20,34 @@ class reactivos extends Model
         'user_id'
     ];
 
-    public function User(){
+    //^==============================================Relacion con version reactivos
+
+    public function vreactivos()
+    {
+        return $this->hasMany(vreactivos::class);
+    }
+
+    //^==============================================Relacion con usuarios
+
+    public function User()
+    {
         return $this->belongsTo(User::class);
     }
 
+    //^==============================================Relacion con bitacoras
+    //&=====================================Reactivos pcr
 
     public function reactivopcr()
     {
         return $this->belongsToMany(reactivopcrs::class);
     }
 
+    //&=====================================version reactivos pcr
+
     public function vreactivopcrs()
     {
         return $this->belongsToMany(vreactivopcrs::class);
     }
 
-    //relacion de uno a muchos con vanalises
-    public function vreactivos(){
-        return $this->hasMany(vreactivos::class);
-    }
     use HasFactory;
-
-    
 }

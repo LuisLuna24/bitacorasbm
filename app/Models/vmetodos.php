@@ -7,20 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class vmetodos extends Model
 {
-    protected $table = 'vmetodos';
+    //^==============================================Datos de tabla
 
+    protected $table = 'vmetodos';
     protected $fillable = [
         'nombre'
     ];
 
-    //muchos a uno
-    public function metodos(){
+    //^==============================================Relacion con usuarios
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //^==============================================Relacion con metodos
+    public function metodos()
+    {
         return $this->belongsTo(metodos::class);
     }
 
-    //usuario a anamises
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
     use HasFactory;
 }

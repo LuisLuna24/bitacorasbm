@@ -7,14 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class vpcr_reactivopcrs extends Model
 {
+    //^==============================================Datos de tabla
+
     protected $table = 'vpcr_reactivopcrs';
 
-    public function pcr(){
-        return $this->belongsTo(pcr::class);
+    //^==============================================Relacion bitacoras
+    //&=====================================Vercion Pcr
+    public function vpcr()
+    {
+        return $this->belongsTo(vpcrs::class);
     }
 
-    public function vreactivopcrs(){
+    //&=====================================version reactivo pcr
+    public function vreactivopcrs()
+    {
         return $this->belongsTo(vreactivopcrs::class);
     }
+
     use HasFactory;
 }

@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class pcrs_especies extends Model
 {
+    //^==============================================Datos de tabla
+
     protected $table = 'especies_pcr';
+
+    //^==============================================Relacion con especies
 
     public function especies()
     {

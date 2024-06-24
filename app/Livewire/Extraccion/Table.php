@@ -54,7 +54,7 @@ class Table extends Component
             'd260_280' => 'required|numeric',
             'd260_230' => 'required|numeric',
             'selectEquipos' => 'required',
-            'catidad' => 'required|numeric|between:1,20',
+            //'catidad' => 'required|numeric|between:1,20',
         ], [
             'no_registro.integer' => 'El No. de Registro debe ser un numero',
             'no_registro.min' => 'El No. de Registro debe tener minimo 5 caracteres',
@@ -67,9 +67,9 @@ class Table extends Component
             'd260_280.required' => 'El Dato 260/280 es requerido',
             'd260_230.required' => 'El Dato 260/230 es requerido',
             'selectEquipos.required' => 'Seleccione almenos un equipo',
-            'catidad.required' => 'La catidad de existencia es requerida',
+            /*'catidad.required' => 'La catidad de existencia es requerida',
             'catidad.integer' => 'Este campo deve contener numeros enteros',
-            'catidad.between' => 'La catidad de existencia debe estar entre 1 y 20',
+            'catidad.between' => 'La catidad de existencia debe estar entre 1 y 20',*/
         ]);
 
         $extraccion = extraccion::create([

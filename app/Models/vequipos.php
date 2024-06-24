@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class vequipos extends Model
 {
-    protected $table = 'vequipos';
 
+    //^==============================================Datos de tabla
+
+    protected $table = 'vequipos';
     protected $fillable = [
         'user_id',
         'inventario',
@@ -17,14 +19,19 @@ class vequipos extends Model
         'estado',
     ];
 
-    //muchos a uno
-    public function equipo(){
+    //^==============================================Relacion con usuarios
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //^==============================================Relacion con equipos
+
+    public function equipo()
+    {
         return $this->belongsTo(equipos::class);
     }
 
-    //usuario a anamises
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
     use HasFactory;
 }

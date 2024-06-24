@@ -60,18 +60,74 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+
+    //^==============================================Relacion con catalogos
+    //&=====================================Analisis
     public function  analises(){
-        return $this->hasMany('App\Models\Analise');
+        return $this->hasMany(analises::class);
     }
 
+    public function  vanalises(){
+        return $this->hasMany(vanalises::class);
+    }
+
+    //&=====================================Metodos
+    public function  metodos(){
+        return $this->hasMany(metodos::class);
+    }
+
+    public function  vmetodos(){
+        return $this->hasMany(vmetodos::class);
+    }
+
+    //&=====================================Especies
+    public function  especies(){
+        return $this->hasMany(especies::class);
+    }
+
+    public function  vespecies(){
+        return $this->hasMany(vespecies::class);
+    }
+
+    //^==============================================Relacion con inventarios
+    //&=====================================Equipos
+    public function  equipos(){
+        return $this->hasMany(equipos::class);
+    }
+
+    public function  vequipos(){
+        return $this->hasMany(vequipos::class);
+    }
+
+    //&=====================================Reactivos
+    public function  reactivos(){
+        return $this->hasMany(reactivos::class);
+    }
+
+    public function  vreactivos(){
+        return $this->hasMany(vreactivos::class);
+    }
+
+    //^==============================================Relacion con bitacoras
+    //&=====================================Pcr
     public function pcrs(){
         return $this->hasMany(pcr::class);
     }
 
-    public function reactivos_pcrs(){
-        return $this->hasMany(pcrs_reactivopcr::class);
+    public function vpcrs(){
+        return $this->hasMany(vpcrs::class);
     }
 
+    //&=====================================Pcreal
+    public function pcreals(){
+        return $this->hasMany(pcreal::class);
+    }
+
+    public function vpcreals(){
+        return $this->hasMany(vpcreals::class);
+    }
+
+    //&=====================================Extraccion
     public function extraccion(){
         return $this->hasMany(extraccion::class);
     }
@@ -80,8 +136,14 @@ class User extends Authenticatable
         return $this->hasMany(vextraccion::class);
     }
 
-    //relacion con vpcrs
-    public function vpcrs(){
-        return $this->hasMany(vpcrs::class);
+    //&=====================================Reactivos pcr
+    public function reactivopcrs(){
+        return $this->hasMany(reactivopcrs::class);
     }
+
+    public function vreactivopcrs(){
+        return $this->hasMany(vreactivopcrs::class);
+    }
+
+
 }

@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class extraccion extends Model
 {
-    protected $table = 'extraccions';
+    //^==============================================Datos de Tablas
 
+    protected $table = 'extraccions';
     protected $fillable = [
         'no_registro',
         'fecha',
@@ -19,38 +20,45 @@ class extraccion extends Model
         'dato260_280',
         'dato260_230',
         'validacion',
-        'user_id'
+        'user_id',
 
     ];
 
-    
-    //relacion muchos a muchos con equipos
+    //^==============================================Relacion con versiones extraccion
+
+    public function vextraccions()
+    {
+        return $this->hasMany(vextraccion::class);
+    }
+
+    //^==============================================Relacion con usuarios
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //^==============================================Relacion con inventarios
+    //&=====================================Equipos
     public function equipos()
     {
         return $this->belongsToMany(equipos::class);
     }
 
-    //uno a uno
-    
+    //^==============================================Relacion con catalogos
+    //&=====================================Analisis
+
     public function analisis()
     {
         return $this->belongsTo(analises::class);
     }
+
+    //&=====================================Metodos
 
     public function metodo()
     {
         return $this->belongsTo(metodos::class);
     }
 
-    //relacion con usuarios
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-
-    public function vextraccions(){
-        return $this->hasMany(vextraccion::class);
-    }
-
-    
     use HasFactory;
 }
