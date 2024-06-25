@@ -145,5 +145,14 @@ class User extends Authenticatable
         return $this->hasMany(vreactivopcrs::class);
     }
 
+    //&=====================================Reactivos pcreal
+    public function reactivopcreals(){
+        return $this->hasMany(reactivopcreals::class);
+    }
+
+    public function vreactivopcreals(){
+        return $this->hasMany(vreactivopcrs::class);
+    }
+
 
 }

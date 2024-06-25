@@ -90,7 +90,7 @@
     <!-- ------------------------------------------------------------------------------------Create------------ -->
     <x-dialog-modal wire:model="create_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Equipo</h2>
+            <h2 class="text-center">Nuevo Reactivo</h2>
         </x-slot>
         <x-slot name='content'>
             <form wire:submit="create">

@@ -57,6 +57,19 @@ class pcreal extends Model
         return $this->belongsTo(analises::class);
     }
 
+    //^==============================================Relacion con bitacoras
+    //&=====================================Reactivos pcreal
+    public function rpcreals()
+    {
+        return $this->belongsToMany(reactivopcreals::class);
+    }
+
+    public function vrpcreals()
+    {
+        return $this->belongsToMany(vreactivopcreals::class);
+    }
+
+
 
     use HasFactory;
 }

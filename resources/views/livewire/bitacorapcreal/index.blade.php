@@ -17,7 +17,6 @@
     @endif
 
 
-
     <div class="flex  m-2 max-md:flex-col max-md:justify-center">
         <div class="flex gap-3 m-2 max-md:w-full">
             <x-select wire:model.live="datos">
@@ -32,7 +31,7 @@
             </x-select>
         </div>
         <div class="flex gap-3 m-2 w-full max-md:flex-col">
-            <x-input class="w-full" placeholder="Buscar PCR (No. registro)" wire:model.live="search" />
+            <x-input class="w-full" placeholder="Buscar pcreal (No. registro)" wire:model.live="search" />
             <div>
                 <label for="" class="text-black dark:text-white md:hidden">Fecha:</label>
                 <x-input class=" max-md:w-full" type="date" wire:model.live="date" />
@@ -61,38 +60,38 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pcrs as $pcr)
+                @foreach ($pcreals as $pcreal)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-                            wire:key="analisis-{{ $pcr->id }}">
-                            {{-- Mostrar no_registro de pcr --}}
-                            @foreach ($pcr->pcrs as $pc)
+                            wire:key="analisis-{{ $pcreal->id }}">
+                            {{-- Mostrar no_registro de pcreal --}}
+                            @foreach ($pcreal->pcreals as $pc)
                                 <div class="flex flex-col">
                                     {{ $pc->no_registro }}
                                 </div>
                             @endforeach
                         </th>
                         <td class="px-6 py-4 text-center">
-                            {{ $pcr->reactivo->nombre }}
+                            {{ $pcreal->reactivo->nombre }}
                         </td>
                         <td class="px-6 py-4 text-center">
-                            {{ $pcr->fecha_apertura }}
+                            {{ $pcreal->fecha_apertura }}
                         </td>
                         <td class="px-6 py-4 text-center">
-                            {{ $pcr->reactivo->fecha_caducidad }}
+                            {{ $pcreal->reactivo->fecha_caducidad }}
                         </td>
                         <td class="px-6 py-4 text-center">
-                            {{ $pcr->validacion }}
+                            {{ $pcreal->validacion }}
                         </td>
                         <td class="px-6 py-4 text-center">
-                            {{ $pcr->user->name }}
+                            {{ $pcreal->user->name }}
                         </td>
                         @if (auth()->user()->nivel != 3)
-                            @if ($pcr->validacion == 'Sin Validacion')
+                            @if ($pcreal->validacion == 'Sin Validacion')
                                 <td class="px-6 py-4 text-center">
-                                    <x-button wire:click="edit({{ $pcr->id }})"><svg
+                                    <x-button wire:click="edit({{ $pcreal->id }})"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -111,7 +110,7 @@
                         @endif
 
                         <td class="px-6 py-4 text-center">
-                            <x-button wire:click="view({{ $pcr->id }})"><svg xmlns="http://www.w3.org/2000/svg"
+                            <x-button wire:click="view({{ $pcreal->id }})"><svg xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round"
@@ -123,7 +122,7 @@
                                 </svg></x-button>
                         </td>
                         <td class="px-6 py-4 text-center">
-                            <x-button wire:click="version({{ $pcr->id }})"><svg xmlns="http://www.w3.org/2000/svg"
+                            <x-button wire:click="version({{ $pcreal->id }})"><svg xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round"
@@ -140,13 +139,17 @@
             </tbody>
         </table>
     </div>
+    <div class="p-5">
+        {{$pcreals->links()}}
+    </div>
+
     {{--================================================================================Crear Nuevo=======================================--}}
     <x-dialog-modal wire:model="create_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nueva Bitacora</h2>
+            <h2 class="text-center">Nueba Bitacora</h2>
         </x-slot>
         <x-slot name='content'>
-            @livewire('bitacoras.reactivopcrs-new')
+            @livewire('bitacorapcreal.reactivopcreals-new')
         </x-slot>
         <x-slot name='footer'>
             <x-danger-button wire:click="cancel_new">Cerrar</x-danger-button>
@@ -220,8 +223,8 @@
         </x-slot>
     </x-dialog-modal>
 
-     {{--================================================================================View=================================================--}}
-     <x-dialog-modal wire:model="view_register">
+    {{--================================================================================View=================================================--}}
+    <x-dialog-modal wire:model="view_register">
         <x-slot name='title'>
             <h2 class="text-center">Ver Bitacora</h2>
         </x-slot>
@@ -231,7 +234,7 @@
                     <div class="grid grid-cols-2 max-md:grid-cols-1 gap-3">
                         <div class="flex flex-col">
                             <label for="">Reactivo:</label>
-                            <x-select wire:model="rpcrView.reactivo">
+                            <x-select wire:model="rpcrView.reactivo" disabled>
                                 <option value="">Seleccione un reactivo</option>
                                 @foreach ($reactivos as $reactivo)
                                     <option value="{{ $reactivo->id }}">{{ $reactivo->nombre }}</option>
@@ -241,7 +244,7 @@
                         </div>
                         <div class="flex flex-col">
                             <label for="">Fecha Apertura::</label>
-                            <x-input type="date" wire:model='rpcrView.fecha_apertura' class="w-full" />
+                            <x-input type="date" wire:model='rpcrView.fecha_apertura' class="w-full" disabled/>
                             <x-input-error for="rpcrView.fecha_apertura" />
                         </div>
                     </div>
@@ -261,7 +264,7 @@
                                             <td scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
                                                 wire:key="rpcr-{{ $rpcr->id }}">
-                                                {{ $rpcr->pcr->no_registro }}
+                                                {{ $rpcr->pcreal->no_registro }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -280,6 +283,7 @@
         <x-slot name='footer'></x-slot>
     </x-dialog-modal>
 
+{{--================================================================================ Validar =================================================--}}
 
     <x-dialog-modal wire:model="validar_register">
         <x-slot name='title'>
@@ -306,7 +310,7 @@
             <h2 class="text-center">Versiones de Bitacora</h2>
         </x-slot>
         <x-slot name='content'>
-            @livewire('bitacoras.versionesreactivopcrs', ['VercionReactivoId' => $VercionReactivoId])
+            @livewire('bitacorapcreal.versionesreactivopcreals', ['VercionReactivoId' => $VercionReactivoId])
         </x-slot>
         <x-slot name='footer'></x-slot>
     </x-dialog-modal>
