@@ -10,22 +10,27 @@ use Livewire\WithPagination;
 #[Lazy]
 class Table extends Component
 {
-    //---------------paginacion-------------------------------
+    //^========================================================================Paginacion
     use WithPagination;
 
-    //---------------Filtros----------------------------------
+    //^========================================================================Filtros
+
     public $search = '';
     public $datos=10;
 
-    //---------------Create----------------------------------
+    //^========================================================================Nuevo Registro
+    //&================================Variables
     public $create_new=false;
     public $nombre;
 
+    //&================================Abrir modal crear
     Public function new(){
         $this->create_new=true;
     }
 
+    //&================================Crear Registro
     public function create(){
+        //?===========================================Validaciones
         $this->validate([
             'nombre' =>'required|min:3|max:30|unique:analises',
         ],[
@@ -35,40 +40,47 @@ class Table extends Component
             'nombre.unique' => 'Este analisis ya a sido registrado',
         ]);
 
+        //?===========================================Agregar Regsitro
         analises::create([
             'nombre' => $this->nombre,
             'user_id' => auth()->user()->id,
         ]);
         
+        //?===========================================Cerrar modal
         $this->create_new=false;
+        //?===========================================Reseteo de campos
         $this->reset(['nombre']);
+        //*===========================================Mensaje
         session()->flash('add_msg', 'Analisis agregado correctamente');
     }
+    
+    //&================================Cerrar Modal Crear
 
     public function cancel_new(){
         $this->create_new=false;
     }
 
-    //---------------Verciones----------------------------------
+    //^========================================================================Versiones
+    //&================================Variables
     public $version_view=false;
     public $VersionAnalisId;
     
-
+    //&================================Abrir modal versiones
     public function vercion($versionId){
         $this->version_view=true;
         $this->VersionAnalisId = $versionId;
-
-        
-
     }
 
-    //---------------Actualizar--------------------------------
+    //&================================Abrir modal Edicion
     public $update_new=false;
+
+    //&================================Variables
     public $analisisIdEdit;
     public $analisisEdit=[
         'nombre' => ''
     ];
 
+    //&================================Editar Registro
     public function edit($analisisId){
         $this->update_new=true;
         $this->analisisIdEdit = $analisisId;
