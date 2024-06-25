@@ -49,6 +49,13 @@ class reactivos extends Model
         return $this->belongsToMany(reactivopcrs::class);
     }
 
+    //&=====================================Reactivos extraccion
+
+    public function reactivoextraccion()
+    {
+        return $this->belongsToMany(reactivoextraccions::class);
+    }
+
     //&=====================================version reactivos pcr
 
     public function vreactivopcrs()
@@ -61,6 +68,13 @@ class reactivos extends Model
     public function vreactivopcreals()
     {
         return $this->belongsToMany(vreactivopcreals::class);
+    }
+
+    //&=====================================version reactivos extraccion
+
+    public function vreactivoextraccions()
+    {
+        return $this->belongsToMany(vreactivoextraccions::class);
     }
 
     use HasFactory;

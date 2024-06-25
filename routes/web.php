@@ -167,4 +167,12 @@ Route::middleware([
             abort(403);
         }
     })->name('bitacoras.reactivospcreal');
+
+    Route::get('/bitacoras/reactivos/extraccion', function () {
+        if (auth()->user()->nivel >= 1){
+            return view('bitacoras.reactivosextraccion');
+        }else{
+            abort(403);
+        }
+    })->name('bitacoras.reactivosextraccion');
 });

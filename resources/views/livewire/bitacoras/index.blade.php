@@ -51,7 +51,7 @@
             <div class="flex justify-around p-10 max-md:flex-col gap-5">
                 <x-button-routing href="{{ route('bitacoras.reactivopcrs') }}">PCR</x-button-routing>
                 <x-button-routing href="{{ route('bitacoras.reactivospcreal') }}">PCR Tiempo Real</x-button-routing>
-                <x-button-routing href="{{ route('bitacoras.extraccion') }}">Extraccion</x-button-routing>
+                <x-button-routing href="{{ route('bitacoras.reactivosextraccion') }}">Extraccion</x-button-routing>
             </div>
         </x-slot>
         <x-slot name='footer'>

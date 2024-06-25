@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Livewire\Bitacorapcreal;
+namespace App\Livewire\Bitacoraextraccion;
 
-use App\Models\pcreal;
-use App\Models\pcreal_reactivopcreals;
-use App\Models\reactivopcreals as ModelsReactivopcreals;
+use App\Models\extraccion;
+use App\Models\extraccion_reactivoextraccions;
+use App\Models\reactivoextraccions;
 use App\Models\reactivos;
-use App\Models\vreactivopcreals;
+use App\Models\vreactivoextraccions;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
+
 
 #[Lazy()]
 class Index extends Component
@@ -30,7 +31,6 @@ class Index extends Component
     {
         $this->reactivos = reactivos::all();
     }
-
 
     //&==================================================================Crear Registro
 
@@ -60,11 +60,11 @@ class Index extends Component
     {
         $this->edit_register = true;
         $this->ReacPcrEditId = $id;
-        $rpcr = ModelsReactivopcreals::find($id);
+        $rpcr = reactivoextraccions::find($id);
         $this->rpcrEdit = [
             'reactivo' => $rpcr->reactivo_id,
             'fecha_apertura' => $rpcr->fecha_apertura,
-            'selectedTagsPcr' => $rpcr->pcreals->pluck('id')->toArray(),
+            'selectedTagsPcr' => $rpcr->extraccions->pluck('id')->toArray(),
         ];
     }
 
@@ -76,17 +76,17 @@ class Index extends Component
             'rpcrEdit.selectedTagsPcr' => 'required',
         ]);
 
-        $rpcr = ModelsReactivopcreals::find($this->ReacPcrEditId);
+        $rpcr = reactivoextraccions::find($this->ReacPcrEditId);
 
-        $vrpcr= vreactivopcreals::create([
-            'reactivopcreals_id'=>$this->ReacPcrEditId,
+        $vrpcr= vreactivoextraccions::create([
+            'reactivoextraccions_id'=>$this->ReacPcrEditId,
             'version'=>$rpcr->version+1,
             'reactivo_id' => $rpcr->reactivo_id,
             'fecha_apertura' => $rpcr->fecha_apertura,
             'validacion'=> $rpcr->validacion,
             'user_id' => auth()->user()->id,
         ]);
-        $vrpcr->pcreals()->sync($rpcr->pcreals->pluck('id')->toArray());
+        $vrpcr->extraccions()->sync($rpcr->extraccions->pluck('id')->toArray());
 
 
 
@@ -95,7 +95,7 @@ class Index extends Component
             'fecha_apertura' => $this->rpcrEdit['fecha_apertura'],
             'version'=>$rpcr->version+1,
         ]);
-        $rpcr->pcreals()->sync($this->rpcrEdit['selectedTagsPcr']);
+        $rpcr->extraccions()->sync($this->rpcrEdit['selectedTagsPcr']);
 
         $this->edit_register = false;
         session()->flash('message', 'Registro actualizado con exito');
@@ -112,11 +112,11 @@ class Index extends Component
     {
         $this->view_register = true;
         $this->ReacPcrViewId = $id;
-        $rpcr = ModelsReactivopcreals::find($id);
+        $rpcr = reactivoextraccions::find($id);
         $this->rpcrView = [
             'reactivo' => $rpcr->reactivo_id,
             'fecha_apertura' => $rpcr->fecha_apertura,
-            'selectedTagsPcr' => $rpcr->pcreals->pluck('id')->toArray(),
+            'selectedTagsPcr' => $rpcr->extraccions->pluck('id')->toArray(),
         ];
     }
 
@@ -136,7 +136,7 @@ class Index extends Component
     }
 
     public function validar_view(){
-        $rpcr = ModelsReactivopcreals::find($this->ReacPcrViewId);
+        $rpcr = reactivoextraccions::find($this->ReacPcrViewId);
         $rpcr->update([
             'validacion' => 'Validada',
         ]);
@@ -148,6 +148,7 @@ class Index extends Component
     public function cancel_validar(){
         $this->validar_register=false;
     }
+
     //!=================================================================== Verciones ================================================================
 
     public $version_register=false;
@@ -166,13 +167,11 @@ class Index extends Component
         return view('livewire.placeholders.skeleton');
     }
 
-
-    //&==================================================================Render
     public function render()
     {
-        $pcreals = ModelsReactivopcreals::where('created_at', 'LIKE', '%' . $this->date . '%')->where('validacion', 'LIKE', '%' . $this->estate . '%')->paginate($this->datos);
-        $rpcrs = pcreal::where('no_registro', 'LIKE', '%' . $this->search_registro . '%')->paginate(10);
-        $vrpcr = pcreal_reactivopcreals::where('reactivopcreals_id', 'LIKE', '%' . $this->ReacPcrViewId . '%')->paginate(10);
-        return view('livewire.bitacorapcreal.index', compact('pcreals','rpcrs','vrpcr'));
+        $extraccions = reactivoextraccions::where('created_at', 'LIKE', '%' . $this->date . '%')->where('validacion', 'LIKE', '%' . $this->estate . '%')->paginate($this->datos);
+        $rextraccions = extraccion::where('no_registro', 'LIKE', '%' . $this->search_registro . '%')->paginate(10);
+        $vrextraccions = extraccion_reactivoextraccions::where('reactivoextraccions_id', 'LIKE', '%' . $this->ReacPcrViewId . '%')->paginate(10);
+        return view('livewire.bitacoraextraccion.index',compact('extraccions','rextraccions','vrextraccions'));
     }
 }
