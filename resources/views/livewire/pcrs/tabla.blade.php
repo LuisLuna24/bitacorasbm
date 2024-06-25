@@ -344,7 +344,7 @@
                 <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
                     <div class="flex flex-col">
                         <label for="">No. Registro:</label>
-                        <x-input wire:model='pcrEdit.no_registro' />
+                        <x-input wire:model='pcrEdit.no_registro' disabled />
                         <x-input-error for="pcrEdit.no_registro" />
                     </div>
                     <div class="flex flex-col">

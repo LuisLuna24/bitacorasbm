@@ -10,6 +10,20 @@ class vextraccion extends Model
     //^==============================================Datos de tabla
 
     protected $table = 'vextraccions';
+    protected $fillable = [
+        'extraccion_id',
+        'no_registro',
+        'fecha',
+        'analisis_id',
+        'metodo_id',
+        'user_id',
+        'conc_ng_ul',
+        'dato260_280',
+        'dato260_230',
+        'validacion',
+        'user_id',
+        'version',
+    ];
 
     //^==============================================Relacion con usuarios
 

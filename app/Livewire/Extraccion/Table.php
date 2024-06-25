@@ -6,6 +6,7 @@ use App\Models\analises;
 use App\Models\equipos;
 use App\Models\extraccion;
 use App\Models\metodos;
+use App\Models\vextraccion;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -35,7 +36,7 @@ class Table extends Component
     //---------------Nuevo Regsitros----------------------------------------------------------------------
 
     public $nuevo_registro = false;
-    public $no_registro, $fecha, $analisis, $metodo, $conc_ng_ul, $d260_280, $d260_230,$catidad;
+    public $no_registro, $fecha, $analisis, $metodo, $conc_ng_ul, $d260_280, $d260_230,$catidad=1;
     public $selectEquipos = [];
 
     public function new()
@@ -54,7 +55,7 @@ class Table extends Component
             'd260_280' => 'required|numeric',
             'd260_230' => 'required|numeric',
             'selectEquipos' => 'required',
-            //'catidad' => 'required|numeric|between:1,20',
+            'catidad' => 'required|numeric|between:1,20',
         ], [
             'no_registro.integer' => 'El No. de Registro debe ser un numero',
             'no_registro.min' => 'El No. de Registro debe tener minimo 5 caracteres',
@@ -67,22 +68,25 @@ class Table extends Component
             'd260_280.required' => 'El Dato 260/280 es requerido',
             'd260_230.required' => 'El Dato 260/230 es requerido',
             'selectEquipos.required' => 'Seleccione almenos un equipo',
-            /*'catidad.required' => 'La catidad de existencia es requerida',
+            'catidad.required' => 'La catidad de existencia es requerida',
             'catidad.integer' => 'Este campo deve contener numeros enteros',
-            'catidad.between' => 'La catidad de existencia debe estar entre 1 y 20',*/
+            'catidad.between' => 'La catidad de existencia debe estar entre 1 y 20',
         ]);
 
-        $extraccion = extraccion::create([
-            'no_registro' => $this->no_registro,
-            'fecha' => $this->fecha,
-            'analisis_id' => $this->analisis,
-            'metodo_id' => $this->metodo,
-            'conc_ng_ul' => $this->conc_ng_ul,
-            'dato260_280' => $this->d260_280,
-            'dato260_230' => $this->d260_230,
-            'user_id' => auth()->user()->id,
-        ]);
-        $extraccion->equipos()->attach($this->selectEquipos);
+        for($i=0;$i<$this->catidad;$i++){
+            $extraccion = extraccion::create([
+                'no_registro' => $this->no_registro.'-'.$i+1,
+                'fecha' => $this->fecha,
+                'analisis_id' => $this->analisis,
+                'metodo_id' => $this->metodo,
+                'conc_ng_ul' => $this->conc_ng_ul,
+                'dato260_280' => $this->d260_280,
+                'dato260_230' => $this->d260_230,
+                'user_id' => auth()->user()->id,
+            ]);
+            $extraccion->equipos()->attach($this->selectEquipos);
+        }
+
         $this->nuevo_registro = false;
         session()->flash('message', 'Registro Creado Correctamente');
         $this->reset(['no_registro', 'fecha', 'analisis', 'metodo', 'conc_ng_ul', 'd260_280', 'd260_230', 'selectEquipos']);
@@ -128,7 +132,7 @@ class Table extends Component
     public function update_registro()
     {
         $this->validate([
-            'extraEdit.no_registro' => 'required|min:5|integer',
+            'extraEdit.no_registro' => 'required|min:5',
             'extraEdit.fecha' => 'required',
             'extraEdit.analisis' => 'required',
             'extraEdit.metodo' => 'required',
@@ -153,8 +157,24 @@ class Table extends Component
         ]);
 
         $extraccion = extraccion::find($this->extraccionIdEdit);
+
+        $vextraccion= vextraccion::create([
+            'extraccion_id' => $this->extraccionIdEdit,
+            'no_registro' => $extraccion->no_registro,
+            'version' => $extraccion->version+1,
+            'fecha' => $extraccion->fecha,
+            'analisis_id' => $extraccion->analisis_id,
+            'metodo_id' => $extraccion->metodo_id,
+            'conc_ng_ul' => $extraccion->conc_ng_ul,
+            'dato260_280' => $extraccion->dato260_280,
+            'dato260_230' => $extraccion->dato260_230,
+            'user_id' => auth()->user()->id,
+        ]);
+        $vextraccion->equipos()->attach($extraccion->equipos->pluck('id')->toArray());
+
         $extraccion->update([
             'no_registro' => $this->extraEdit['no_registro'],
+            'version' => $extraccion->version+1,
             'fecha' => $this->extraEdit['fecha'],
             'analisis_id' => $this->extraEdit['analisis'],
             'metodo_id' => $this->extraEdit['metodo'],
@@ -252,7 +272,7 @@ class Table extends Component
     //---------------Render--------------------------------------------------------------------------------
     public function render()
     {
-        $extracciones = extraccion::where('no_registro', 'LIKE', '%' . $this->search . "%")->where('fecha', 'LIKE', '%' . $this->date . '%')->where('validacion', 'LIKE', '%' . $this->validacion . '%')->paginate($this->datos);
+        $extracciones = extraccion::where('no_registro', 'LIKE', '%' . $this->search . "%")->where('fecha', 'LIKE', '%' . $this->date . '%')->where('validacion', 'LIKE', '%' . $this->validacion . '%')->orderByDesc('id')->paginate($this->datos);
         return view('livewire.extraccion.table', compact('extracciones'));
     }
 }

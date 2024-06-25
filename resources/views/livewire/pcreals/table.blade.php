@@ -297,7 +297,7 @@
                 <div class="grid grid-cols-1 max-md:grid-cols-1 gap-5">
                     <div class="flex flex-col">
                         <label for="">No. Registro:</label>
-                        <x-input wire:model='pcrealEdit.no_registro' />
+                        <x-input wire:model='pcrealEdit.no_registro' disabled />
                         <x-input-error for="pcrealEdit.no_registro" />
                     </div>
                 </div>

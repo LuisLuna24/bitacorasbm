@@ -52,7 +52,7 @@ class Tabla extends Component
     public function create()
     {
         $this->validate([
-            'no_registro' => 'required|min:5|integer',
+            'no_registro' => 'required|min:5',
             'analisis' => 'required',
             'fecha' => 'required',
             'agarosa' => 'required|numeric',
@@ -197,7 +197,7 @@ class Tabla extends Component
     public function update()
     {
         $this->validate([
-            'pcrEdit.no_registro' => 'required|min:4',
+            'pcrEdit.no_registro' => 'required|min:5',
             'pcrEdit.analisis' => 'required',
             'pcrEdit.fecha' => 'required',
             'pcrEdit.resultado' => 'required',

@@ -21,7 +21,7 @@ class extraccion extends Model
         'dato260_230',
         'validacion',
         'user_id',
-
+        'version',
     ];
 
     //^==============================================Relacion con versiones extraccion

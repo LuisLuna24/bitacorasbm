@@ -157,16 +157,16 @@
                         <x-input-error for="no_registro" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="">Fecha:</label>
-                        <x-input type="date" wire:model="fecha" />
-                        <x-input-error for="fecha" />
+                        <label for="">Cantidad de registros:</label>
+                        <x-input wire:model="catidad" />
+                        <x-input-error for="catidad" />
                     </div>
                 </div>
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">Analisis:</label>
-                        <x-select wire:model="analisis" >
-                            <option value="0">Seleccione</option>
+                        <x-select wire:model="analisis">
+                            <option value="0">Seleccione una opcion</option>
                             @foreach ($analises as $analisis)
                                 <option value="{{ $analisis->id }}">{{ $analisis->nombre }}</option>
                             @endforeach
@@ -174,22 +174,29 @@
                         <x-input-error for="analisis" />
                     </div>
                     <div class="flex flex-col">
+                        <label for="">Fecha:</label>
+                        <x-input type="date" wire:model="fecha" />
+                        <x-input-error for="fecha" />
+                    </div>
+                </div>
+                <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
+                    <div class="flex flex-col">
                         <label for="">Metodo:</label>
                         <x-select wire:model="metodo">
-                            <option value="0">Seleccione</option>
+                            <option value="0">Seleccione una opcion</option>
                             @foreach ($metodos as $metodo)
                                 <option value="{{ $metodo->id }}">{{ $metodo->nombre }}</option>
                             @endforeach
                         </x-select>
                         <x-input-error for="metodo" />
                     </div>
-                </div>
-                <div class="dark:text-white grid grid-cols-3 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">Conc ng/ul:</label>
                         <x-input wire:model="conc_ng_ul" />
                         <x-input-error for="conc_ng_ul" />
                     </div>
+                </div>
+                <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">260/280:</label>
                         <x-input wire:model="d260_280" />
@@ -201,7 +208,6 @@
                         <x-input-error for="d260_230" />
                     </div>
                 </div>
-
                 <div>
                     <h2>Equipos:</h2>
                     <hr class="mb-2">
@@ -240,7 +246,7 @@
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
                         <label for="">No. Registro:</label>
-                        <x-input wire:model="extraEdit.no_registro" />
+                        <x-input wire:model="extraEdit.no_registro" disabled />
                         <x-input-error for="extraEdit.no_registro" />
                     </div>
                     <div class="flex flex-col">
@@ -262,7 +268,7 @@
                     </div>
                     <div class="flex flex-col">
                         <label for="">Metodo:</label>
-                        <x-select wire:model="extraEdit.metodo" >
+                        <x-select wire:model="extraEdit.metodo">
                             <option value="0">Seleccione</option>
                             @foreach ($metodos as $metodo)
                                 <option value="{{ $metodo->id }}">{{ $metodo->nombre }}</option>

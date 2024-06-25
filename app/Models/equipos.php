@@ -86,7 +86,7 @@ class equipos extends Model
         return $this->hasMany(equipos_extraccion::class);
     }
 
-    public function vextracion()
+    public function vextracions()
     {
         return $this->belongsToMany(vextraccion::class);
     }
