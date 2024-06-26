@@ -11,7 +11,10 @@ class vespecies extends Model
 
     protected $table = 'vespecies';
     protected $fillable = [
-        'nombre'
+        'nombre',
+        'user_id',
+        'version',
+        'especie_id'
     ];
 
     //^==============================================Relacion con usuarios

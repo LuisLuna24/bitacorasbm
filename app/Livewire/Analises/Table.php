@@ -3,6 +3,7 @@
 namespace App\Livewire\Analises;
 
 use App\Models\analises;
+use App\Models\vanalises;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -101,9 +102,17 @@ class Table extends Component
             'analisisEdit.nombre.unique' => 'Analisis existente',
         ]);
 
+        $analises=analises::find($this->analisisIdEdit);
+        $vanalises=vanalises::create([
+            'nombre'=>$analises->nombre,
+            'version'=>$analises->version+1,
+            'analisis_id'=>$analises->id,
+            'user_id' => auth()->user()->id,
+        ]);
         //Actualizar
         analises::find($this->analisisIdEdit)->update([
-            'nombre' => $this->analisisEdit['nombre']
+            'nombre' => $this->analisisEdit['nombre'],
+            'version'=>$analises->version+1,
         ]);
 
         $this->update_new=false;

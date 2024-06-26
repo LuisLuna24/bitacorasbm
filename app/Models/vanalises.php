@@ -11,7 +11,10 @@ class vanalises extends Model
 
     protected $table = 'vanalises';
     protected $fillable = [
-        'nombre'
+        'nombre',
+        'user_id',
+        'version',
+        'analisis_id'
     ];
 
     //^==============================================Relacion con usuarios

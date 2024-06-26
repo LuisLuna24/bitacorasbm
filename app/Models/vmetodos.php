@@ -11,7 +11,10 @@ class vmetodos extends Model
 
     protected $table = 'vmetodos';
     protected $fillable = [
-        'nombre'
+        'nombre',
+        'user_id',
+        'version',
+        'metodo_id',
     ];
 
     //^==============================================Relacion con usuarios

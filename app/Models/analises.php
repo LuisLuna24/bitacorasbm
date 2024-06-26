@@ -12,7 +12,8 @@ class analises extends Model
     protected $table = 'analises';
     protected $fillable = [
         'nombre',
-        'user_id'
+        'user_id',
+        'version'
     ];
 
     //^==============================================Relacion con usuarios 

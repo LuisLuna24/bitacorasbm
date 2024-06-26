@@ -3,6 +3,7 @@
 namespace App\Livewire\Especies;
 
 use App\Models\especies;
+use App\Models\vespecies;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -89,9 +90,18 @@ class Table extends Component
              'especieEdit.nombre.unique' => 'Esta especie ya esta registrada',
          ]);
  
+        $especies=especies::find($this->especieIdEdit);
+        $vespecies=vespecies::create([
+            'nombre'=>$especies->nombre,
+            'version'=>$especies->version+1,
+            'especie_id'=>$especies->id,
+            'user_id' => auth()->user()->id,
+        ]);
+
          //Actualizar
          especies::find($this->especieIdEdit)->update([
-             'nombre' => $this->especieEdit['nombre']
+             'nombre' => $this->especieEdit['nombre'],
+             'version' => $especies->version+1,
          ]);
  
          $this->update_new=false;

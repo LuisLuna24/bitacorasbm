@@ -15,6 +15,7 @@ class equipos extends Model
         'nombre',
         'descripcion',
         'estado',
+        'version'
     ];
 
     //^==============================================Relacion con usuarios

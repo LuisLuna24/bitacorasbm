@@ -3,6 +3,7 @@
 namespace App\Livewire\Metodos;
 
 use App\Models\metodos;
+use App\Models\vmetodos;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -89,9 +90,19 @@ class Table extends Component
             'metodoEdit.nombre.unique' => 'Este metodo ya a sido registrado',
         ]);
 
+        $metodos=metodos::find($this->metodoIdEdit);
+        $vmetodos=vmetodos::create([
+            'nombre'=>$metodos->nombre,
+            'version'=>$metodos->version+1,
+            'metodo_id'=>$metodos->id,
+            'user_id' => auth()->user()->id,
+        ]);
+
         //Actualizar
         metodos::find($this->metodoIdEdit)->update([
-            'nombre' => $this->metodoEdit['nombre']
+            'nombre' => $this->metodoEdit['nombre'],
+            'version'=>$metodos->version+1,
+
         ]);
 
         $this->update_new=false;

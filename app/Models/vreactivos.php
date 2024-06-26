@@ -12,6 +12,13 @@ class vreactivos extends Model
     protected $table = 'vreactivos';
     protected $fillable = [
         'nombre',
+        'description',
+        'lote',
+        'existencia',
+        'fecha_caducidad',
+        'user_id',
+        'version',
+        'reactivo_id'
     ];
 
     //^==============================================Relacion de usuarios

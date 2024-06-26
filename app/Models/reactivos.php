@@ -17,7 +17,8 @@ class reactivos extends Model
         'lote',
         'existencia',
         'fecha_caducidad',
-        'user_id'
+        'user_id',
+        'version'
     ];
 
     //^==============================================Relacion con version reactivos

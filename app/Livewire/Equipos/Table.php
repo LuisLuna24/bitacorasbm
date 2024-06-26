@@ -3,6 +3,7 @@
 namespace App\Livewire\Equipos;
 
 use App\Models\equipos;
+use App\Models\vequipos;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -101,11 +102,22 @@ class Table extends Component
 
         ]);
 
+        $equipos=equipos::find($this->equipoIdEdit);
+        $vequipos=vequipos::create([
+            'nombre'=>$equipos->nombre,
+            'descripcion'=>$equipos->descripcion,
+            'inventario'=>$equipos->inventario,
+            'version'=>$equipos->version+1,
+            'equipo_id'=>$equipos->id,
+            'user_id' => auth()->user()->id,
+        ]);
+
         //Actualizar
         equipos::find($this->equipoIdEdit)->update([
             'nombre' => $this->equipoEdit['nombre'],
             'descripcion' => $this->equipoEdit['descripcion'],
-            'inventario' => $this->equipoEdit['inventario']
+            'inventario' => $this->equipoEdit['inventario'],
+            'version'=>$equipos->version+1,
         ]);
 
         $this->update_new=false;

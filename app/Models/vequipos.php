@@ -17,6 +17,8 @@ class vequipos extends Model
         'nombre',
         'descripcion',
         'estado',
+        'version',
+        'equipo_id'
     ];
 
     //^==============================================Relacion con usuarios

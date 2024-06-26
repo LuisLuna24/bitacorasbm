@@ -3,6 +3,7 @@
 namespace App\Livewire\Reactivos;
 
 use App\Models\reactivos;
+use App\Models\vreactivos;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -111,6 +112,18 @@ class Table extends Component
             'reactivoEdit.fecha_caducidad.date' => 'La fecha de caducidad debe ser una fecha valida',
         ]);
 
+        $reactivos=reactivos::find($this->reactivoIdEdit);
+        $vreactivos=vreactivos::create([
+            'nombre'=>$reactivos->nombre,
+            'lote'=>$reactivos->lote,
+            'description'=>$reactivos->description,
+            'existencia'=>$reactivos->existencia,
+            'fecha_caducidad'=>$reactivos->fecha_caducidad,
+            'version'=>$reactivos->version+1,
+            'reactivo_id'=>$reactivos->id,
+            'user_id' => auth()->user()->id,
+        ]);
+
         //Actualizar
         reactivos::find($this->reactivoIdEdit)->update([
             'nombre' => $this->reactivoEdit['nombre'],
@@ -118,6 +131,7 @@ class Table extends Component
             'description' => $this->reactivoEdit['descripcion'],
             'existencia' => $this->reactivoEdit['existencia'],
             'fecha_caducidad' => $this->reactivoEdit['fecha_caducidad'],
+            'version'=>$reactivos->version+1,
         ]);
 
         $this->update_new=false;

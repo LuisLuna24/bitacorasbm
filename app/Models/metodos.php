@@ -11,7 +11,8 @@ class metodos extends Model
     protected $table = 'metodos';
     protected $fillable = [
         'nombre',
-        'user_id'
+        'user_id',
+        'version'
     ];
 
     //^==============================================Relacion con versiones de metodos

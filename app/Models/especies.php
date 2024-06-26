@@ -11,7 +11,8 @@ class especies extends Model
     protected $table = 'especies';
     protected $fillable = [
         'nombre',
-        'user_id'
+        'user_id',
+        'version',
     ];
 
     //^==============================================Relacion con version especies
