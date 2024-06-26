@@ -4,7 +4,7 @@
             wire:model="currentPageTable1">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3 text-center">Version</th>
+                    <th scope="col" class="px-6 py-3 text-center">Versión</th>
                     <th scope="col" class="px-6 py-3 text-center">No. Registro</th>
                     <th scope="col" class="px-6 py-3 text-center">Reactivo</th>
                     <th scope="col" class="px-6 py-3 text-center">Fecha Apertura</th>
@@ -71,7 +71,7 @@
 
     <x-dialog-modal wire:model="view_register">
         <x-slot name='title'>
-            <h2 class="text-center">Ver Bitacora</h2>
+            <h2 class="text-center">Ver Bitácora</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="grid gap-3">

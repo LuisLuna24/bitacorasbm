@@ -5,8 +5,8 @@
                 <tr>
                     <th scope="col" class="px-6 py-3 text-center">Nombre</th>
                     <th scope="col" class="px-6 py-3 text-center">Lote</th>
-                    <th scope="col" class="px-6 py-3 text-center">Descripcion</th>
-                    <th scope="col" class="px-6 py-3 text-center">Version</th>
+                    <th scope="col" class="px-6 py-3 text-center">Descripción</th>
+                    <th scope="col" class="px-6 py-3 text-center">Versión</th>
                     <th scope="col" class="px-6 py-3 text-center">Existencia</th>
                     <th scope="col" class="px-6 py-3 text-center">Usuario</th>
                     <th scope="col" class="px-6 py-3 text-center">Fecha Edicion</th>

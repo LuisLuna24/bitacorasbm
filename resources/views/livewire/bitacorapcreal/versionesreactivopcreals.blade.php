@@ -71,7 +71,7 @@
 
     <x-dialog-modal wire:model="view_register">
         <x-slot name='title'>
-            <h2 class="text-center">Ver Bitacora</h2>
+            <h2 class="text-center">Ver Bitácora</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="grid gap-3">

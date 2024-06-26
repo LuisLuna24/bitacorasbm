@@ -1,40 +1,40 @@
 <div class="flex flex-wrap justify-center items-center gap-5">
     <x-card>
         <x-slot name="title">
-            Bitacora PCR
+            Bitácora PCR
         </x-slot>
         <x-slot name="body">
-            <p>Agregar, editar, elimiar y visualisar bitacoras de PCR</p>
+            <p>Agregar, editar, eliminar y visualizar bitácoras de PCR</p>
             <br>
             <x-button-routing href="{{ route('bitacoras.pcr') }}">Entrar</x-button-routing>
         </x-slot>
     </x-card>
     <x-card>
         <x-slot name="title">
-            Bitacora PCR Tiempo Real</span>
+            Bitácora PCR Tiempo Real</span>
         </x-slot>
         <x-slot name="body">
-            <p>Agregar, editar, elimiar y visualisar bitacoras de PCR Tiempo Real </p>
+            <p>Agregar, editar, eliminar y visualizar bitácoras de PCR Tiempo Real</p>
             <br>
             <x-button-routing href="{{ route('bitacoras.pcreal') }}">Entrar</x-button-routing>
         </x-slot>
     </x-card>
     <x-card>
         <x-slot name="title">
-            Bitacora Extraccion
+            Bitácora Extracción
         </x-slot>
         <x-slot name="body">
-            <p>Agregar, editar, elimiar y visualisar bitacoras de Extraccion</p>
+            <p>Agregar, editar, eliminar y visualizar bitácoras de Extracción</p>
             <br>
             <x-button-routing href="{{ route('bitacoras.extraccion') }}">Entrar</x-button-routing>
         </x-slot>
     </x-card>
     <x-card>
         <x-slot name="title">
-            Bitacora Reactivos
+            Bitácora Reactivos
         </x-slot>
         <x-slot name="body">
-            <p>Agregar, editar, elimiar y visualisar bitacoras de Reactivos</p>
+            <p>Agregar, editar, eliminar y visualizar bitácoras de Reactivos</p>
             <br>
             <x-button wire:click="tipo">Entrar</x-button>
         </x-slot>
@@ -44,14 +44,14 @@
 
     <x-dialog-modal wire:model="tipo_bitacora">
         <x-slot name='title'>
-            <h2 class="text-center text-4xl">Bitacora Reactivos</h2>
-            <h2 class="text-center">Seleccione un tipo de bitacora</h2>
+            <h2 class="text-center text-4xl">Bitácora Reactivos</h2>
+            <h2 class="text-center">Seleccione un tipo de bitácora</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="flex justify-around p-10 max-md:flex-col gap-5">
                 <x-button-routing href="{{ route('bitacoras.reactivopcrs') }}">PCR</x-button-routing>
                 <x-button-routing href="{{ route('bitacoras.reactivospcreal') }}">PCR Tiempo Real</x-button-routing>
-                <x-button-routing href="{{ route('bitacoras.reactivosextraccion') }}">Extraccion</x-button-routing>
+                <x-button-routing href="{{ route('bitacoras.reactivosextraccion') }}">Extracción</x-button-routing>
             </div>
         </x-slot>
         <x-slot name='footer'>

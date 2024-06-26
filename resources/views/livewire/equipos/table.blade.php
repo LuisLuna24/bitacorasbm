@@ -27,7 +27,7 @@
         <x-select wire:model.live="estate">
             <option value="Activo">Activo</option>
             <option value="Baja">Baja</option>
-            <option value="Reparacion">Reparacion</option>
+            <option value="Reparacion">Reparación</option>
         </x-select>
         <x-input class="w-full" placeholder="Buscar Equipos (nombre, inventario)" wire:model.live="search" />
         @if(auth()->user()->nivel != 3 )
@@ -40,9 +40,9 @@
                 <tr>
                     <th scope="col" class="px-6 py-3 text-center">Inventario</th>
                     <th scope="col" class="px-6 py-3 text-center">Nombre</th>
-                    <th scope="col" class="px-6 py-3 text-center">Descripcion</th>
+                    <th scope="col" class="px-6 py-3 text-center">Descripción</th>
                     <th scope="col" class="px-6 py-3 text-center">Usuario</th>
-                    <th scope="col" class="px-6 py-3 text-center">Verciones</th>
+                    <th scope="col" class="px-6 py-3 text-center">Versiones</th>
                     @if(auth()->user()->nivel != 3 )
                         <th scope="col" class="px-6 py-3 text-center">Editar</th>
                         <th scope="col" class="px-6 py-3 text-center">Estado</th>
@@ -107,7 +107,7 @@
                     <x-input-error for="nombre" />
                 </div>
                 <div>
-                    <x-label>Descripcion:</x-label>
+                    <x-label>Descripción:</x-label>
                     <x-input wire:model="descripcion" type="text" class="block mt-1 w-full" />
                     <x-input-error for="descripcion" />
                 </div>
@@ -124,7 +124,7 @@
     
     <x-dialog-modal wire:model="version_view">
         <x-slot name='title'>
-            <h2 class="text-center">Verciones Equipo</h2>
+            <h2 class="text-center">Versiones Equipo</h2>
         </x-slot>
         <x-slot name='content'>
             @livewire('equipos.version',[
@@ -137,7 +137,7 @@
     <!-- ------------------------------------------------------------------------------------Update------------ -->
     <x-dialog-modal wire:model="update_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Equipo</h2>
+            <h2 class="text-center">Editar Equipo</h2>
         </x-slot>
         <x-slot name='content'>
             <form wire:submit="update">
@@ -152,7 +152,7 @@
                     <x-input-error for="equipoEdit.nombre" />
                 </div>
                 <div>
-                    <x-label>Descripcion:</x-label>
+                    <x-label>Descripción:</x-label>
                     <x-input wire:model="equipoEdit.descripcion" type="text" class="block mt-1 w-full" />
                     <x-input-error for="equipoEdit.descripcion" />
                 </div>
@@ -168,7 +168,7 @@
     <!-- ------------------------------------------------------------------------------------Down------------ -->
     <x-dialog-modal wire:model="down_new">
         <x-slot name='title'>
-            <h2 class="text-center">¿Desea dar de baja o reparacion?</h2>
+            <h2 class="text-center">¿Desea dar de baja o reparación?</h2>
         </x-slot>
         <x-slot name='content'>
             <form wire:submit="down">
@@ -187,7 +187,7 @@
         <x-slot name='footer' class="w-full">
             <div class="mt-5 flex justify-around w-full">
                 <x-danger-button wire:click="down_reg">Baja</x-danger-button>
-                <x-danger-button wire:click="down_rep">Reparacion</x-danger-button>
+                <x-danger-button wire:click="down_rep">Reparación</x-danger-button>
                 <x-button wire:click="cancel_down">Cancelar</x-button>
             </div>
         </x-slot>

@@ -28,7 +28,7 @@
             <x-select wire:model.live="estate" class="max-md:w-full">
                 <option value="">Todos</option>
                 <option value="Validada">Validada</option>
-                <option value="Sin Validacion">Sin Validacion</option>
+                <option value="Sin Validacion">Sin Validación</option>
             </x-select>
         </div>
         <div class="flex gap-3 m-2 w-full max-md:flex-col">
@@ -47,7 +47,7 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3 text-center">No. Registro</th>
-                    <th scope="col" class="px-6 py-3 text-center">Analisis</th>
+                    <th scope="col" class="px-6 py-3 text-center">Análisis</th>
                     <th scope="col" class="px-6 py-3 text-center">Fecha</th>
                     <th scope="col" class="px-6 py-3 text-center">Resultado</th>
                     <th scope="col" class="px-6 py-3 text-center">Especies</th>
@@ -56,8 +56,8 @@
                     @if(auth()->user()->nivel != 3 )
                         <th scope="col" class="px-6 py-3 text-center">Editar</th>
                     @endif
-                    <th scope="col" class="px-6 py-3 text-center">Ver Bitacora</th>
-                    <th scope="col" class="px-6 py-3 text-center">Verciones</th>
+                    <th scope="col" class="px-6 py-3 text-center">Ver Bitácora</th>
+                    <th scope="col" class="px-6 py-3 text-center">Versiones</th>
                 </tr>
             </thead>
             <tbody>
@@ -117,7 +117,7 @@
     <!-- ------------------------------------------------------------------------------------Create------------ -->
     <x-dialog-modal wire:model="create_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Equipo</h2>
+            <h2 class="text-center">Nueva Bitácora</h2>
         </x-slot>
         <x-slot name='content'>
             <form class="grid gap-3" wire:submit="create">
@@ -135,9 +135,9 @@
                 </div>
                 <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-select wire:model='analisis' >
-                            <option value="">Seleccione un analisis</option>
+                            <option value="">Seleccione un análisis</option>
                             @foreach ($analises as $analisis)
                                 <option value="{{ $analisis->id }}">{{ $analisis->nombre }}</option>
                             @endforeach
@@ -212,7 +212,7 @@
     
     <x-dialog-modal wire:model="view_view">
         <x-slot name='title'>
-            <h2 class="text-center">Ver Bitacora de pcr</h2>
+            <h2 class="text-center">Ver Bitácora de PCR</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="grid gap-3">
@@ -225,7 +225,7 @@
                 </div>
                 <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-input wire:model='VerPcreal.analisis' disabled/>
                         <x-input-error for="VerPcreal.analisis" />
                     </div>
@@ -290,7 +290,7 @@
     <!-- ------------------------------------------------------------------------------------Update------------ -->
     <x-dialog-modal wire:model="update_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Equipo</h2>
+            <h2 class="text-center">Editar PCR Tiempo Real</h2>
         </x-slot>
         <x-slot name='content'>
             <form class="grid gap-3" wire:submit="update">
@@ -303,9 +303,9 @@
                 </div>
                 <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-select wire:model='pcrealEdit.analisis' >
-                            <option value="">Seleccione un analisis</option>
+                            <option value="">Seleccione un análisis</option>
                             @foreach ($analises as $analisis)
                                 <option value="{{ $analisis->id }}">{{ $analisis->nombre }}</option>
                             @endforeach
@@ -387,7 +387,7 @@
     <!-- ------------------------------------------------------------------------------------Validar------------ -->
     <x-dialog-modal wire:model="validar_vitacora">
         <x-slot name='title'>
-            <h2 class="text-center">¿Validar bitacora PCR?</h2>
+            <h2 class="text-center">¿Validar bitácora PCR?</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="flex flex-col">
@@ -405,7 +405,7 @@
     <!-- ------------------------------------------------------------------------------------Verciones------------ -->
     <x-dialog-modal wire:model="vercion_pcr">
         <x-slot name='title'>
-            <h2 class="text-center">Verciones PCR</h2>
+            <h2 class="text-center">Versiones PCR</h2>
         </x-slot>
         <x-slot name='content'>
             @livewire('pcreals.versiones',['pcrealVercionId' => $pcrealVercionId,])

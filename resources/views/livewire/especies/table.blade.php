@@ -33,7 +33,7 @@
                     @if(auth()->user()->nivel != 3 )
                         <th scope="col" class="px-6 py-3 text-center">Editar</th>
                     @endif
-                    <th scope="col" class="px-6 py-3 text-center">Verciones</th>
+                    <th scope="col" class="px-6 py-3 text-center">Versiones</th>
                 </tr>
             </thead>
             <tbody>
@@ -86,7 +86,7 @@
     
     <x-dialog-modal wire:model="version_view">
         <x-slot name='title'>
-            <h2 class="text-center">Verciones Especie</h2>
+            <h2 class="text-center">Versiones Especie</h2>
         </x-slot>
         <x-slot name='content'>
             @livewire('especies.version',[
@@ -99,7 +99,7 @@
     <!-- ------------------------------------------------------------------------------------Update------------ -->
     <x-dialog-modal wire:model="update_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Especie</h2>
+            <h2 class="text-center">Editar Especie</h2>
         </x-slot>
         <x-slot name='content'>
             <form wire:submit="update">

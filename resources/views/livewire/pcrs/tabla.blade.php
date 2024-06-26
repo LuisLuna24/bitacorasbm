@@ -150,7 +150,7 @@
     <!-- ------------------------------------------------------------------------------------Create------------ -->
     <x-dialog-modal wire:model="create_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Equipo</h2>
+            <h2 class="text-center">Nueva Bitácora PCR</h2>
         </x-slot>
         <x-slot name='content'>
             <form class="grid gap-3" wire:submit="create">
@@ -168,9 +168,9 @@
                 </div>
                 <div class="grid grid-cols-2 max-md:grid-cols-1 gap-5">
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-select wire:model='analisis'>
-                            <option value="">Seleccione un analisis</option>
+                            <option value="">Seleccione un análisis</option>
                             @foreach ($analises as $analisis)
                                 <option value="{{ $analisis->id }}">{{ $analisis->nombre }}</option>
                             @endforeach
@@ -259,7 +259,7 @@
 
     <x-dialog-modal wire:model="view_view">
         <x-slot name='title'>
-            <h2 class="text-center">Ver Bitacora de pcr</h2>
+            <h2 class="text-center">Ver Bitácora de PCR</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="grid gap-3">
@@ -269,7 +269,7 @@
                         <x-input wire:model='VerPcr.no_registro' disabled />
                     </div>
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-input wire:model='VerPcr.analisis' disabled />
                     </div>
                 </div>
@@ -337,7 +337,7 @@
     <!-- ------------------------------------------------------------------------------------Update------------ -->
     <x-dialog-modal wire:model="update_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Equipo</h2>
+            <h2 class="text-center">Editar Bitácora PCR</h2>
         </x-slot>
         <x-slot name='content'>
             <form class="grid gap-3" wire:submit="update">
@@ -348,9 +348,9 @@
                         <x-input-error for="pcrEdit.no_registro" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-select wire:model='pcrEdit.analisis'>
-                            <option value="">Seleccione un analisis</option>
+                            <option value="">Seleccione un análisis</option>
                             @foreach ($analises as $analisis)
                                 <option value="{{ $analisis->id }}">{{ $analisis->nombre }}</option>
                             @endforeach
@@ -449,7 +449,7 @@
     <!-- ------------------------------------------------------------------------------------Validar------------ -->
     <x-dialog-modal wire:model="validar_vitacora">
         <x-slot name='title'>
-            <h2 class="text-center">¿Validar bitacora PCR?</h2>
+            <h2 class="text-center">¿Validar Bitácora PCR?</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="flex flex-col">
@@ -467,7 +467,7 @@
     <!-- ------------------------------------------------------------------------------------Verciones------------ -->
     <x-dialog-modal wire:model="vercion_pcr">
         <x-slot name='title'>
-            <h2 class="text-center">Verciones PCR</h2>
+            <h2 class="text-center">Versiones PCR</h2>
         </x-slot>
         <x-slot name='content'>
             @livewire('Pcrs.versiones', ['pcrVercionId' => $pcrVercionId])

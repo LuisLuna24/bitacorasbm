@@ -54,14 +54,14 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-center">No. Registro</th>
-                        <th scope="col" class="px-6 py-3 text-center">Analisis</th>
+                        <th scope="col" class="px-6 py-3 text-center">Análisis</th>
                         <th scope="col" class="px-6 py-3 text-center">Fecha</th>
                         <th scope="col" class="px-6 py-3 text-center">Validado</th>
                         <th scope="col" class="px-6 py-3 text-center">Usuario</th>
                         @if (auth()->user()->nivel != 3)
                             <th scope="col" class="px-6 py-3 text-center">Editar</th>
                         @endif
-                        <th scope="col" class="px-6 py-3 text-center">Ver Bitacora</th>
+                        <th scope="col" class="px-6 py-3 text-center">Ver Bitácora</th>
                         <th scope="col" class="px-6 py-3 text-center">Verciones</th>
                     </tr>
                 </thead>
@@ -146,7 +146,7 @@
     {{-- ------------------------------------------------------------Crear Registro--------------------------------------- --}}
     <x-dialog-modal wire:model="nuevo_registro">
         <x-slot name='title'>
-            <h2 class="text-center">Nueva Extraccion</h2>
+            <h2 class="text-center">Nueva Extracción</h2>
         </x-slot>
         <x-slot name='content'>
             <form wire:submit="crear_registro" class="grid gap-3">
@@ -164,7 +164,7 @@
                 </div>
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-select wire:model="analisis">
                             <option value="0">Seleccione una opcion</option>
                             @foreach ($analises as $analisis)
@@ -181,7 +181,7 @@
                 </div>
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
-                        <label for="">Metodo:</label>
+                        <label for="">Método:</label>
                         <x-select wire:model="metodo">
                             <option value="0">Seleccione una opcion</option>
                             @foreach ($metodos as $metodo)
@@ -239,7 +239,7 @@
     {{-- ------------------------------------------------------------Editar Registro--------------------------------------- --}}
     <x-dialog-modal wire:model="editar_registro">
         <x-slot name='title'>
-            <h2 class="text-center">Editar Extraccion</h2>
+            <h2 class="text-center">Editar Extracción</h2>
         </x-slot>
         <x-slot name='content'>
             <form wire:submit="update_registro" class="grid gap-3">
@@ -257,7 +257,7 @@
                 </div>
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-select wire:model="extraEdit.analisis">
                             <option value="0">Seleccione</option>
                             @foreach ($analises as $analisis)
@@ -267,7 +267,7 @@
                         <x-input-error for="extraEdit.analisis" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="">Metodo:</label>
+                        <label for="">Método:</label>
                         <x-select wire:model="extraEdit.metodo">
                             <option value="0">Seleccione</option>
                             @foreach ($metodos as $metodo)
@@ -326,7 +326,7 @@
     {{-- ------------------------------------------------------------Ver Registro--------------------------------------- --}}
     <x-dialog-modal wire:model="ver_registro">
         <x-slot name='title'>
-            <h2 class="text-center">Bitacora Extraccion</h2>
+            <h2 class="text-center">Bitácora Extracción</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="grid gap-5">
@@ -344,12 +344,12 @@
                 </div>
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-input wire:model="extraVer.analisis" disabled />
                         <x-input-error for="extraVer.analisis" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="">Metodo:</label>
+                        <label for="">Método:</label>
                         <x-input wire:model="extraVer.metodo" disabled />
                         <x-input-error for="extraVer.metodo" />
                     </div>
@@ -388,7 +388,7 @@
 
     <x-dialog-modal wire:model="validar">
         <x-slot name='title'>
-            <h2 class="text-center">Bitacora Extraccion</h2>
+            <h2 class="text-center">Bitácora Extracción</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="grid gap-5">
@@ -406,12 +406,12 @@
                 </div>
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-input wire:model="extraVer.analisis" disabled />
                         <x-input-error for="extraVer.analisis" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="">Metodo:</label>
+                        <label for="">Método:</label>
                         <x-input wire:model="extraVer.metodo" disabled />
                         <x-input-error for="extraVer.metodo" />
                     </div>

@@ -27,7 +27,7 @@
             <x-select wire:model.live="estate" class="max-md:w-full">
                 <option value="">Todos</option>
                 <option value="Validada">Validada</option>
-                <option value="Sin Validacion">Sin Validacion</option>
+                <option value="Sin Validacion">Sin Validación</option>
             </x-select>
         </div>
         <div class="flex gap-3 m-2 w-full max-md:flex-col">
@@ -55,8 +55,8 @@
                     @if (auth()->user()->nivel != 3)
                         <th scope="col" class="px-6 py-3 text-center">Editar</th>
                     @endif
-                    <th scope="col" class="px-6 py-3 text-center">Ver Bitacora</th>
-                    <th scope="col" class="px-6 py-3 text-center">Verciones</th>
+                    <th scope="col" class="px-6 py-3 text-center">Ver Bitácora</th>
+                    <th scope="col" class="px-6 py-3 text-center">Versiones</th>
                 </tr>
             </thead>
             <tbody>
@@ -146,7 +146,7 @@
     {{-- ================================================================================Crear Nuevo======================================= --}}
     <x-dialog-modal wire:model="create_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nueba Bitacora</h2>
+            <h2 class="text-center">Nueva Bitácora</h2>
         </x-slot>
         <x-slot name='content'>
             @livewire('bitacoraextraccion.reactivoextraccions-new')
@@ -159,7 +159,7 @@
     {{-- ================================================================================Editar================================================= --}}
     <x-dialog-modal wire:model="edit_register">
         <x-slot name='title'>
-            <h2 class="text-center">Editar Bitacora</h2>
+            <h2 class="text-center">Editar Bitácora</h2>
         </x-slot>
         <x-slot name='content'>
             <form class="grid gap-3" wire:submit="update">
@@ -228,7 +228,7 @@
     {{--================================================================================View=================================================--}}
     <x-dialog-modal wire:model="view_register">
         <x-slot name='title'>
-            <h2 class="text-center">Ver Bitacora</h2>
+            <h2 class="text-center">Ver Bitácora</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="grid gap-3">
@@ -308,7 +308,7 @@
 
     <x-dialog-modal wire:model="version_register">
         <x-slot name='title'>
-            <h2 class="text-center">Versiones de Bitacora</h2>
+            <h2 class="text-center">Versiones de Bitácora</h2>
         </x-slot>
         <x-slot name='content'>
             @livewire('bitacoraextraccion.versionesreactivoextraccions', ['VercionReactivoId' => $VercionReactivoId])

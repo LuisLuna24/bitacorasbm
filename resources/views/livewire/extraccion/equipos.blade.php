@@ -4,7 +4,7 @@
             <tr>
                 <th scope="col" class="px-6 py-3 text-center">Inventario</th>
                 <th scope="col" class="px-6 py-3 text-center">Equipo</th>
-                <th scope="col" class="px-6 py-3 text-center">Descripcion</th>
+                <th scope="col" class="px-6 py-3 text-center">Descripción</th>
             </tr>
         </thead>
         <tbody>

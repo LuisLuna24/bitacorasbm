@@ -5,13 +5,13 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3 text-center">No. Registro</th>
-                    <th scope="col" class="px-6 py-3 text-center">Version</th>
-                    <th scope="col" class="px-6 py-3 text-center">Analisis</th>
-                    <th scope="col" class="px-6 py-3 text-center">Metodo</th>
+                    <th scope="col" class="px-6 py-3 text-center">Versión</th>
+                    <th scope="col" class="px-6 py-3 text-center">Análisis</th>
+                    <th scope="col" class="px-6 py-3 text-center">Método</th>
                     <th scope="col" class="px-6 py-3 text-center">Conc ng/ul</th>
                     <th scope="col" class="px-6 py-3 text-center">260-280</th>
                     <th scope="col" class="px-6 py-3 text-center">260-230</th>
-                    <th scope="col" class="px-6 py-3 text-center">Validacion</th>
+                    <th scope="col" class="px-6 py-3 text-center">Validación</th>
                     <th scope="col" class="px-6 py-3 text-center">Fecha Edicion</th>
                     <th scope="col" class="px-6 py-3 text-center">Ver</th>
                 </tr>
@@ -76,7 +76,7 @@
 
     <x-dialog-modal wire:model="view_version">
         <x-slot name='title'>
-            <h2 class="text-center">Vercion PCR</h2>
+            <h2 class="text-center">Versiones PCR</h2>
         </x-slot>
         <x-slot name='content'>
             <div class="grid gap-3">
@@ -94,12 +94,12 @@
                 </div>
                 <div class="dark:text-white grid grid-cols-2 max-md:grid-cols-1 gap-3">
                     <div class="flex flex-col">
-                        <label for="">Analisis:</label>
+                        <label for="">Análisis:</label>
                         <x-input wire:model="extraVer.analisis" disabled />
                         <x-input-error for="extraVer.analisis" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="">Metodo:</label>
+                        <label for="">Método:</label>
                         <x-input wire:model="extraVer.metodo" disabled />
                         <x-input-error for="extraVer.metodo" />
                     </div>

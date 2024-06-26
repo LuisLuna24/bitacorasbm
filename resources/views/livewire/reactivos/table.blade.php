@@ -105,7 +105,7 @@
                     <x-input-error for="lote" />
                 </div>
                 <div>
-                    <x-label>Descripcion:</x-label>
+                    <x-label>Descripción:</x-label>
                     <x-input wire:model="descripcion" type="text" class="block mt-1 w-full" />
                     <x-input-error for="descripcion" />
                 </div>
@@ -132,7 +132,7 @@
     
     <x-dialog-modal wire:model="version_view">
         <x-slot name='title'>
-            <h2 class="text-center">Verciones Equipo</h2>
+            <h2 class="text-center">Versiones Reactivos</h2>
         </x-slot>
         <x-slot name='content'>
             @livewire('reactivos.version',[
@@ -145,7 +145,7 @@
     <!-- ------------------------------------------------------------------------------------Update------------ -->
     <x-dialog-modal wire:model="update_new">
         <x-slot name='title'>
-            <h2 class="text-center">Nuevo Equipo</h2>
+            <h2 class="text-center">Editar Reactivo</h2>
         </x-slot>
         <x-slot name='content'>
             <form wire:submit="update">
@@ -155,17 +155,17 @@
                     <x-input-error for="reactivoEdit.nombre" />
                 </div>
                 <div>
-                    <x-label>Nombre:</x-label>
+                    <x-label>Lote:</x-label>
                     <x-input wire:model="reactivoEdit.lote" type="text" class="block mt-1 w-full" />
                     <x-input-error for="reactivoEdit.lote" />
                 </div>
                 <div>
-                    <x-label>Descripcion:</x-label>
+                    <x-label>Descripción:</x-label>
                     <x-input wire:model="reactivoEdit.descripcion" type="text" class="block mt-1 w-full" />
                     <x-input-error for="reactivoEdit.descripcion" />
                 </div>
                 <div>
-                    <x-label>existencia:</x-label>
+                    <x-label>Existencia:</x-label>
                     <x-input wire:model="reactivoEdit.existencia" type="text" class="block mt-1 w-full" />
                     <x-input-error for="reactivoEdit.existencia" />
                 </div>
@@ -181,61 +181,5 @@
             </form>
         </x-slot>
         <x-slot name='footer'></x-slot>
-    </x-dialog-modal>
-
-    <!-- ------------------------------------------------------------------------------------Down------------ -->
-    <x-dialog-modal wire:model="down_new">
-        <x-slot name='title'>
-            <h2 class="text-center">¿Desea dar de baja o reparacion?</h2>
-        </x-slot>
-        <x-slot name='content'>
-            <form wire:submit="down">
-                <div>
-                    <x-label>Inventario:</x-label>
-                    <x-input wire:model="equipoDown.inventario" type="text" class="block mt-1 w-full" readonly/>
-                    <x-input-error for="equipoDown.inventario" />
-                </div>
-                <div>
-                    <x-label>Nombre:</x-label>
-                    <x-input wire:model="equipoDown.nombre" type="text" class="block mt-1 w-full" readonly/>
-                    <x-input-error for="equipoDown.nombre" />
-                </div>
-            </form>
-        </x-slot>
-        <x-slot name='footer' class="w-full">
-            <div class="mt-5 flex justify-around w-full">
-                <x-danger-button wire:click="down_reg">Baja</x-danger-button>
-                <x-danger-button wire:click="down_rep">Reparacion</x-danger-button>
-                <x-button wire:click="cancel_down">Cancelar</x-button>
-            </div>
-        </x-slot>
-    </x-dialog-modal>
-
-    <!-- ------------------------------------------------------------------------------------active------------ -->
-    <x-dialog-modal wire:model="active_new">
-        <x-slot name='title'>
-            <h2 class="text-center">¿Desea activar el equipo?</h2>
-        </x-slot>
-        <x-slot name='content'>
-            <form wire:submit="active">
-                <div>
-                    <x-label>Inventario:</x-label>
-                    <x-input wire:model="equipoActive.inventario" type="text" class="block mt-1 w-full" readonly/>
-                    <x-input-error for="equipoActive.inventario" />
-                </div>
-                <div>
-                    <x-label>Nombre:</x-label>
-                    <x-input wire:model="equipoActive.nombre" type="text" class="block mt-1 w-full" readonly/>
-                    <x-input-error for="equipoActive.nombre" />
-                </div>
-            </form>
-            
-        </x-slot>
-        <x-slot name='footer' class="w-full">
-            <div class="mt-5 flex justify-around w-full">
-                <x-button wire:click="active_reg">Activar</x-button>
-                <x-danger-button wire:click="cancel_active">Cancelar</x-danger-button>
-            </div>
-        </x-slot>
     </x-dialog-modal>
 </div>

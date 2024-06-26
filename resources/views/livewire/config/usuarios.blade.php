@@ -163,7 +163,7 @@
             </form>
         </x-slot>
         <x-slot name='footer'>
-            <x-button wire:click="update_password">Recuperer Contaseña</x-button>
+            <x-button wire:click="update_password">Recuperar Contraseña</x-button>
         </x-slot>
     </x-dialog-modal>
 
@@ -211,7 +211,7 @@
                         class="block mt-1 w-full" />
                 </div>
                 <div>
-                    <x-label>Validar Contraseñ:</x-label>
+                    <x-label>Validar Contraseña:</x-label>
                     <x-input-password wire:model="password_confirmation" type="text" class="block mt-1 w-full" />
                     <x-input-error for="password_confirmation" />
                     <x-input-error for="password" />
