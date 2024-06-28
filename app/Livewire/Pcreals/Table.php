@@ -28,6 +28,16 @@ class Table extends Component
 
     public function mount()
     {
+        //validacion
+        $this->validate([
+            'datos' => 'required|integer|between:1,100',
+            'estate' => 'required|in:Todos,Activo,Inactivo',
+            'date' => 'required|date',
+        ]);
+
+        //mostrar datos
+        $this->analises = analises::all();
+        $this->especies =
         $this->analises = analises::all();
         $this->especies = especies::all();
         $this->equipos = equipos::all();
