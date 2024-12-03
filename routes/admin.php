@@ -8,14 +8,48 @@ Route::get('/panel', function () {
 
 
 //^=====================================================================Catalogos
-Route::get('/catalogo/analisis', function () {
+Route::get('/catalogos/analisis', function () {
     return view('administrador.catalogos.analisis');
 })->name('catalogos.analisis');
 
-Route::get('/catalogo/metodos', function () {
+Route::get('/catalogos/metodos', function () {
     return view('administrador.catalogos.metodos');
 })->name('catalogos.metodos');
 
-Route::get('/catalogo/especies', function () {
+Route::get('/catalogos/especies', function () {
     return view('administrador.catalogos.especies');
 })->name('catalogos.especies');
+
+//^=====================================================================Inventarios
+
+Route::get('/inventarios/equipos', function () {
+    return view('administrador.inventarios.equipos');
+})->name('inventarios.equipos');
+
+Route::get('/inventarios/reactivos', function () {
+    return view('administrador.inventarios.reactivos');
+})->name('inventarios.reactivos');
+
+//^=====================================================================Bitacora
+
+Route::get('/bitacoras/pcr', function () {
+    return view('administrador.bitacoras.pcr');
+})->name('bitacoras.pcr');
+
+Route::get('/bitacoras/pcr_tiempo_real', function () {
+    return view('administrador.bitacoras.pcreal');
+})->name('bitacoras.pcreal');
+
+Route::get('/bitacoras/extraccion', function () {
+    return view('administrador.bitacoras.extraccion');
+})->name('bitacoras.extraccion');
+
+Route::get('/bitacoras/bitacora_de_reactivos', function () {
+    return view('administrador.bitacoras.bit_reactivo');
+})->name('bitacoras.bit_reactivo');
+
+//^=====================================================================Registros
+
+Route::get('/registros/empleados', function () {
+    return view('administrador.registros.empleados');
+})->name('registros.empleados');
