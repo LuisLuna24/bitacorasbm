@@ -20,6 +20,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->integer('estatus')->default(1);
+            $table->foreignId('tipo_usuario_id')->unsigned()->default(1);
+            $table->foreign('tipo_usuario_id')->references('id')->on('tipo_usuarios');
             $table->timestamps();
         });
 

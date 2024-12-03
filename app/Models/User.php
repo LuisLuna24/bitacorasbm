@@ -64,4 +64,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function hasRole($role)
+    {
+        return $this->where('email', $this->email)->where('tipo_usuario_id', $role)->exists();
+    }
 }
