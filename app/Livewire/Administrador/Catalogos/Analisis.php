@@ -20,7 +20,10 @@ class Analisis extends Component
     public $search = '';
     public $pageView = 10;
     public $estatus;
-
+    public function resetSerch(){
+        $this->search = '';
+        $this->resetPage();
+    }
 
     //&================================================================Crear
     public $modal = false;

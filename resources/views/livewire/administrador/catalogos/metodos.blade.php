@@ -1,7 +1,7 @@
 <div>
     <x-message />
     <section class="flex flex-col md:flex-row w-full gap-3 mb-5 items-end">
-        <div class="flex flex-col">
+        <div class="flex flex-col max-md:w-full">
             <label for="">Mostar:</label>
             <x-select wire:model.change="pageView">
                 <option value="10">10</option>
@@ -9,7 +9,7 @@
                 <option value="30">30</option>
             </x-select>
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-col max-md:w-full">
             <label for="">Estatus:</label>
             <x-select wire:model.change="estatus">
                 <option value="">Todos</option>
@@ -17,12 +17,13 @@
                 <option value="2">Inactivos</option>
             </x-select>
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full relative ">
             <label for="">Buscar:</label>
             <x-input wire:model.live.debounce.500ms="search" placeholder="(Nombre)" />
+            <button type="button" class="absolute  right-3 -translate-y-1/2 top-2/3 p-1 text-white text-2xl" wire:click="resetSerch" >x</button>
         </div>
-        <div>
-            <x-button-new wire:click="newRegister" />
+        <div class="max-md:w-full">
+            <x-button-new wire:click="newRegister" class="max-md:w-full" />
         </div>
     </section>
     <section>

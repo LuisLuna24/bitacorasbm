@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('stock_anterior')->default(0);
             $table->date('caducidad');
             $table->date('caducidad_anterior');
+            $table->string('razon_cambio',255);
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('users');
             $table->timestamps();

@@ -23,7 +23,7 @@
             <button type="button" class="absolute  right-3 -translate-y-1/2 top-2/3 p-1 text-white text-2xl" wire:click="resetSerch" >x</button>
         </div>
         <div class="max-md:w-full">
-            <x-button-new wire:click="newRegister" class="max-md:w-full" />
+            <x-button-new wire:click="newRegister" class="max-md:w-full"/>
         </div>
     </section>
     <section>
@@ -31,6 +31,7 @@
             <x-slot name="titles">
                 <x-th>No.</x-th>
                 <x-th>Nombre</x-th>
+                <x-th>Descripcion</x-th>
                 <x-th>Versión</x-th>
                 <x-th>Editar</x-th>
                 <x-th>Versiónes</x-th>
@@ -39,8 +40,9 @@
             <x-slot name="content">
                 @forelse ($collection as $index => $item)
                     <x-tr>
-                        <x-td wire:key="ite-{{ $item->id }}">{{ $index + 1 }}</x-td>
+                        <x-td wire:key="ite-{{ $item->id }}">{{ $item->no_inventario }}</x-td>
                         <x-td>{{ $item->nombre }}</x-td>
+                        <x-td>{{ $item->descripcion }}</x-td>
                         <x-td>{{ $item->version }}</x-td>
                         <x-td><x-button-edit wire:click="editRegister({{ $item->id }})"></x-button-edit></x-td>
                         <x-td><x-button-version wire:click="vercionRegister({{$item->id}})"></x-button-version></x-td>
@@ -76,13 +78,13 @@
                     </x-tr>
                 @empty
                     <x-tr>
-                        <td colspan="6" class="px-6 py-4 text-center">Sin Resultados</td>
+                        <td colspan="7" class="px-6 py-4 text-center">Sin Resultados</td>
                     </x-tr>
                 @endforelse
 
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hidden"
                     wire:loading.class.remove="hidden" wire:target="search,pageView,estatus">
-                    <th scope="row" colspan="6">
+                    <th scope="row" colspan="7">
                         <div class="flex flex-row gap-2 justify-center px-6 py-3">
                             <div class="w-4 h-4 rounded-full bg-lime-700 animate-bounce"></div>
                             <div class="w-4 h-4 rounded-full bg-lime-700 animate-bounce [animation-delay:-.3s]"></div>
@@ -99,13 +101,24 @@
 
     <x-dialog-modal wire:model="modal">
         <x-slot name="title">
-            <h2 class="text-center">Especie</h2>
+            <h2 class="text-center">Análisis</h2>
         </x-slot>
         <x-slot name="content">
             <form wire:submit="submitForm">
                 <div class="flex flex-col">
+                    <label for="">No. Inventario:</label>
+                    <x-input type="number" wire:model="no_inventario" />
+                    <x-input-error for="no_inventario" />
+                </div>
+                <div class="flex flex-col">
                     <label for="">Nombre:</label>
                     <x-input wire:model="nombre" />
+                    <x-input-error for="nombre" />
+                </div>
+                <div class="flex flex-col">
+                    <label for="">Descripcion:</label>
+                    <x-textarea wire:model="descripcion"></x-textarea>
+                    <x-input-error for="descripcion" />
                 </div>
                 @if ($tipeForm == 2)
                     <div class="flex flex-col">
@@ -182,7 +195,7 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-danger-button wire:click="closeVersionModal">Cerrar</x-button>
+            <x-danger-button wire:click="closeVersionModal">Cerrar</x-danger-button>
         </x-slot>
     </x-dialog-modal>
 
