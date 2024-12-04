@@ -81,8 +81,8 @@ class Analisis extends Component
 
             DB::commit();
         } catch (\Exception $e) {
-            //abort(500);
-            dd($e);
+            abort(500);
+            //dd($e);
             DB::rollback();
         }
     }

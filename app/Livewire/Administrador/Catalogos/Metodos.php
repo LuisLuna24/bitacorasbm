@@ -69,7 +69,7 @@ class Metodos extends Component
                 version_metodos::create([
                     'nombre' => $this->nombre,
                     'nombre_anterior' => $this->nom_ante,
-                    'id_especie' => $this->idRegister,
+                    'id_metodo' => $this->idRegister,
                     'razon_cambio' => $this->razon_cambio,
                     'id_usuario' => Auth::id(),
                 ]);
@@ -81,8 +81,8 @@ class Metodos extends Component
 
             DB::commit();
         } catch (\Exception $e) {
-            //abort(500);
-            dd($e);
+            abort(500);
+            //dd($e);
             DB::rollback();
         }
     }
