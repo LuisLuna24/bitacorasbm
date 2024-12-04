@@ -413,7 +413,7 @@
 
                                 <li class="mt-3 link">
                                     <div
-                                        class="list_item list_button {{ request()->routeIs('admin.registros.*') ? 'bg-lime-600' : '' }}">
+                                        class="list_item list_button {{ request()->routeIs('admin.registros.*') || request()->routeIs('admin.empleados.*') ? 'bg-lime-600' : '' }}">
                                         <img src="{{ asset('images/registro.svg') }}" alt="" class="list_image">
                                         <span class="list_span">Registros</span>
                                         <img src="{{ asset('images/arrow.svg') }}" alt=""
@@ -426,7 +426,7 @@
                                                 <li class="">
                                                     <div class="h-1"></div>
                                                     <a href="{{ route($ruta->route) }}"
-                                                        class="list_item {{ request()->routeIs($ruta->route) ? 'link_select' : '' }} ">
+                                                        class="list_item {{ request()->routeIs($ruta->route) || request()->routeIs('admin.empleados.*') ? 'link_select' : '' }} ">
                                                         <img src="{{ asset('images/option.svg') }}" alt=""
                                                             class="list_image">
                                                         <span class="list_span-aside">{{ $ruta->nombre }}</span>

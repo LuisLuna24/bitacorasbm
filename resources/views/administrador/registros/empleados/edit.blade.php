@@ -1,10 +1,12 @@
 @extends('paneles.personal')
 @section('titulo')
-    Empleados
+    Editar Empleado
 @endsection
 
 @section('content')
-    @livewire('administrador.registros.empledos')
+    @livewire('administrador.registros.empledos.edit',[
+        'id' => $id
+    ])
 
     <script src="{{ asset('js/mayusculas.js') }}"></script>
 

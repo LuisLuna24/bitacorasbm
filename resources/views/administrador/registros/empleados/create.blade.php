@@ -1,10 +1,10 @@
 @extends('paneles.personal')
 @section('titulo')
-    Empleados
+    Nuevo Empleado
 @endsection
 
 @section('content')
-    @livewire('administrador.registros.empledos')
+    @livewire('administrador.registros.empledos.create')
 
     <script src="{{ asset('js/mayusculas.js') }}"></script>
 

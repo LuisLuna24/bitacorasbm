@@ -53,3 +53,11 @@ Route::get('/bitacoras/bitacora_de_reactivos', function () {
 Route::get('/registros/empleados', function () {
     return view('administrador.registros.empleados');
 })->name('registros.empleados');
+
+Route::get('/registros/empleados/nuevo', function () {
+    return view('administrador.registros.empleados.create');
+})->name('empleados.create');
+
+Route::get('/registros/empleados/{id}/editar', function ($id) {
+    return view('administrador.registros.empleados.edit', compact('id'));
+})->name('empleados.edit');
