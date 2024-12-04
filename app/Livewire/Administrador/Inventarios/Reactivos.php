@@ -30,9 +30,9 @@ class Reactivos extends Component
     //&================================================================Crear
     public $modal = false;
     public $idRegister = null;
-    public $nombre, $descripcion, $razon_cambio, $lote,$stock,$caducidad;
+    public $nombre, $descripcion, $razon_cambio, $lote, $stock, $caducidad;
     public $tipeForm; // 1 = Crear, 2 = Editar
-    public $nom_ante, $des_ante, $lote_anterior,$stock_anterior,$caducidad_anterior, $version;
+    public $nom_ante, $des_ante, $lote_anterior, $stock_anterior, $caducidad_anterior, $version;
 
     public function newRegister()
     {
@@ -90,8 +90,8 @@ class Reactivos extends Component
             } elseif ($this->tipeForm === 2) {
                 $this->validate(['razon_cambio' => 'required|max:250']);
                 ModelsReactivos::findOrFail($this->idRegister)->update([
-                    'nombre' => $this->nombre, 
-                    'descripcion' => $this->descripcion, 
+                    'nombre' => $this->nombre,
+                    'descripcion' => $this->descripcion,
                     'version' => $this->version,
                     'lote' => $this->lote,
                     'caducidad' => $this->caducidad,
@@ -120,8 +120,8 @@ class Reactivos extends Component
 
             DB::commit();
         } catch (\Exception $e) {
-            //abort(500);
-            dd($e);
+            abort(500);
+            //dd($e);
             DB::rollback();
         }
     }
