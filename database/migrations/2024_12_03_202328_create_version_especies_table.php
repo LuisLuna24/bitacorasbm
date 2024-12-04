@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('version_especies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_epsecie');
-            $table->foreign('id_epsecie')->references('id')->on('especies')->delete('cascade');
+            $table->unsignedBigInteger('id_especie');
+            $table->foreign('id_especie')->references('id')->on('especies')->delete('cascade');
             $table->string('nombre',50);
             $table->string('nombre_anterior',50);
             $table->string('razon_cambio',255);

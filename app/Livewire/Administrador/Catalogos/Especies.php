@@ -2,16 +2,16 @@
 
 namespace App\Livewire\Administrador\Catalogos;
 
-use App\Models\analises;
-use App\Models\version_analises;
-use \Illuminate\Support\Facades\Auth;
+use App\Models\especies as ModelsEspecies;
+use App\Models\version_especies;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Lazy()]
-class Analisis extends Component
+class Especies extends Component
 {
     //&================================================================Paginacion
     use WithPagination;
@@ -40,7 +40,7 @@ class Analisis extends Component
         $this->resetForm();
 
         $this->idRegister = $id;
-        $analisis = analises::findOrFail($id);
+        $analisis = ModelsEspecies::findOrFail($id);
 
         $this->nombre = $analisis->nombre;
         $this->tipeForm = 2;
@@ -61,15 +61,15 @@ class Analisis extends Component
             ]);
 
             if ($this->tipeForm === 1) {
-                analises::create(['nombre' => $this->nombre]);
+                ModelsEspecies::create(['nombre' => $this->nombre]);
                 session()->flash('green', 'Agregada correctamente');
             } elseif ($this->tipeForm === 2) {
                 $this->validate(['razon_cambio'=>'required|max:250']);
-                analises::findOrFail($this->idRegister)->update(['nombre' => $this->nombre,'version' => $this->version]);
-                version_analises::create([
+                ModelsEspecies::findOrFail($this->idRegister)->update(['nombre' => $this->nombre,'version' => $this->version]);
+                version_especies::create([
                     'nombre' => $this->nombre,
                     'nombre_anterior' => $this->nom_ante,
-                    'id_analisis' => $this->idRegister,
+                    'id_especie' => $this->idRegister,
                     'razon_cambio' => $this->razon_cambio,
                     'id_usuario' => Auth::id(),
                 ]);
@@ -115,14 +115,14 @@ class Analisis extends Component
     {
         // Optimización: Usar una única consulta para asignar directamente el estado
         $this->statusId = $id;
-        $this->estatusModal = analises::where('id', $id)->value('estatus');
+        $this->estatusModal = ModelsEspecies::where('id', $id)->value('estatus');
         $this->statusModal = true;
     }
 
     public function statusUpdate()
     {
         // Optimización: Usar el método `update()` para evitar cargar completamente el modelo
-        analises::where('id', $this->statusId)->update([
+        ModelsEspecies::where('id', $this->statusId)->update([
             'estatus' => $this->estatusModal == '1' ? '0' : '1'
         ]);
 
@@ -160,7 +160,7 @@ class Analisis extends Component
     //&================================================================Render
     public function render()
     {
-        $collection = analises::query();
+        $collection = ModelsEspecies::query();
 
         if ($this->estatus) {
             switch ($this->estatus) {
@@ -178,11 +178,11 @@ class Analisis extends Component
             $collection->where('nombre', 'like', '%' . $this->search . '%');
         }
 
-        $verciones = version_analises::query();
+        $verciones = version_especies::query();
 
-        return view('livewire.administrador.catalogos.analisis', [
+        return view('livewire.administrador.catalogos.especies', [
             'collection' => $collection->orderBy('created_at', 'desc')->paginate($this->pageView, pageName: 'collections'),
-            'versiones' => $verciones->where('id_analisis', $this->idVersion)->orderBy('created_at', 'desc')->paginate(5, ['*'], 'versiones-page'),
+            'versiones' => $verciones->where('id_especie', $this->idVersion)->orderBy('created_at', 'desc')->paginate(5, ['*'], 'versiones-page'),
         ]);
     }
 }

@@ -98,7 +98,7 @@
 
     <x-dialog-modal wire:model="modal">
         <x-slot name="title">
-            <h2 class="text-center">Análisis</h2>
+            <h2 class="text-center">Especie</h2>
         </x-slot>
         <x-slot name="content">
             <form wire:submit="submitForm">
@@ -181,7 +181,7 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-danger-button wire:click="closeVersionModal">Cerrar</x-danger-button>
+            <x-danger-button wire:click="closeVersionModal">Cerrar</x-button>
         </x-slot>
     </x-dialog-modal>
 

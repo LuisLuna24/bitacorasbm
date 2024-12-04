@@ -13,34 +13,7 @@
                 </div>
 
                 <div class="hidden lg:block">
-                    <nav aria-label="Global">
-                        <ul class="flex items-center gap-6 text-lg">
-                            <li>
-                                <x-nav-link href="{{ route('welcome') }}" :active="request()->routeIs('welcome')">
-                                    {{ __('Inicio') }}
-                                </x-nav-link>
-                            </li>
-
-                            <li>
-                                <x-nav-link href="" :active="request()->routeIs('')">
-                                    {{ __('Empresa') }}
-                                </x-nav-link>
-                            </li>
-
-                            <li>
-                                <x-nav-link href="" :active="request()->routeIs('')">
-                                    {{ __('Servicios') }}
-                                </x-nav-link>
-                            </li>
-
-                            <li>
-                                <x-nav-link href="" :active="request()->routeIs('')">
-                                    {{ __('Reconocimientos') }}
-                                </x-nav-link>
-                            </li>
-
-                        </ul>
-                    </nav>
+                    
                 </div>
 
                 <div class="flex items-center gap-4">

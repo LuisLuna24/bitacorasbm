@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    @livewire('administrador.catalogos.analisis')
+    @livewire('administrador.catalogos.metodos')
 
     <script src="{{ asset('js/mayusculas.js') }}"></script>
 

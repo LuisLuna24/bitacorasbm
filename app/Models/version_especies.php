@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class version_especies extends Model
 {
     protected $table ='version_especies';
-    protected $fillable = ['id_epsecie','nombre','nombre_anterior','razon_cambio','id_usuario'];
+    protected $fillable = ['id_especie','nombre','nombre_anterior','razon_cambio','id_usuario'];
 
     public function especie(){
         return $this->belongsTo(especies::class, 'id_epsecie', 'id');
