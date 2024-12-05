@@ -32,21 +32,33 @@ Route::get('/inventarios/reactivos', function () {
 
 //^=====================================================================Bitacora
 
+//~===============================================PCR
 Route::get('/bitacoras/pcr', function () {
     return view('administrador.bitacoras.pcr');
 })->name('bitacoras.pcr');
 
+Route::get('/bitacoras/pcr/nuevo', function () {
+    return view('administrador.bitacoras.pcr.create');
+})->name('pcr.create');
+
+//~===============================================PCR Tiempo Real
 Route::get('/bitacoras/pcr_tiempo_real', function () {
     return view('administrador.bitacoras.pcreal');
 })->name('bitacoras.pcreal');
 
+//~===============================================Extraccion
 Route::get('/bitacoras/extraccion', function () {
     return view('administrador.bitacoras.extraccion');
 })->name('bitacoras.extraccion');
 
+//~===============================================Reactivos
 Route::get('/bitacoras/bitacora_de_reactivos', function () {
     return view('administrador.bitacoras.bit_reactivo');
 })->name('bitacoras.bit_reactivo');
+
+Route::get('/bitacoras/bitacora_de_reactivos/nuevo', function () {
+    return view('administrador.bitacoras.bit_reactivos.create');
+})->name('bit_reactivos.create');
 
 //^=====================================================================Registros
 

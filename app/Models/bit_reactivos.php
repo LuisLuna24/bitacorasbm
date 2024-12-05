@@ -10,14 +10,14 @@ class bit_reactivos extends Model
     protected $table = 'bit_reactivos';
     protected $fillable = ['id', 'id_usuario', 'id_reactivo', 'no_registro', 'apertura', 'version', 'estatus'];
 
-    public function user()
+    public function usuario()
     {
         return $this->belongsTo(User::class, 'id_usuario', 'id');
     }
 
     public function reactivo()
     {
-        return $this->belongsTo(bit_reactivos::class, 'id_reactivo', 'id');
+        return $this->belongsTo(reactivos::class, 'id_reactivo', 'id');
     }
     
     use HasFactory;

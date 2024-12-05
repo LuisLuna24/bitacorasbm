@@ -1,10 +1,10 @@
 @extends('paneles.personal')
 @section('titulo')
-    Bitácora de reactivos
+    Nueva Bitácora de PCR
 @endsection
 
 @section('content')
-    @livewire('administrador.bitacoras.reactivos')
+    @livewire('administrador.bitacoras.pcr.create')
 
     <script src="{{ asset('js/mayusculas.js') }}"></script>
 
