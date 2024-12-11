@@ -37,6 +37,7 @@
                 <x-th>Usuario</x-th>
                 <x-th>Especies</x-th>
                 <x-th>Editar</x-th>
+                <x-th>Validación</x-th>
                 <x-th>Estatus</x-th>
             </x-slot>
             <x-slot name="content">
@@ -50,6 +51,7 @@
                         <x-td>{{ $item->usuario->name }}</x-td>
                         <x-td><x-button-catalogo wire:click="especiesRegister({{ $item->id }})"></x-button-catalogo></x-td>
                         <x-td><x-button-edit wire:click="editRegister({{ $item->id }})"></x-button-edit></x-td>
+                        <x-td><x-button-validation wire:click="validateRegister({{ $item->id }})"></x-button-validation></x-td>
                         <x-td>
                             <label for="{{ $item->id }}"
                                 class="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-green-500"
@@ -82,7 +84,7 @@
                     </x-tr>
                 @empty
                     <x-tr>
-                        <td colspan="7" class="px-6 py-4 text-center">Sin Resultados</td>
+                        <td colspan="10" class="px-6 py-4 text-center">Sin Resultados</td>
                     </x-tr>
                 @endforelse
 

@@ -22,7 +22,7 @@
             <form wire:submit.prevent="register" class="bg-slate-300 dark:bg-slate-800 p-5 rounded-md mt-3">
 
                 @if ($currentStep == 1)
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <fieldset class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div class="flex flex-col">
                             <label for="">No. Registro:</label>
                             <x-input wire:model="no_registro" placeholder="Numero de la bitacora" />
@@ -57,7 +57,7 @@
                             </x-select>
                             <x-input-error for="tiempouv" class="mt-2" />
                         </div>
-                    </div>
+                    </fieldset>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
                         <div class="flex flex-col">
                             <label for="">Agaroza:</label>
@@ -79,6 +79,58 @@
                 @endif
 
                 @if ($currentStep == 2)
+                    <fieldset>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="flex flex-col">
+                                <label for="">Especie:</label>
+                                <x-select wire:model="especie">
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    @foreach ($especies as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                    @endforeach
+                                </x-select>
+                                <x-input-error for="no_empleado" class="mt-2" />
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="">Resultado:</label>
+                                <x-select wire:model="resultado">
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value="1">Positivo</option>
+                                    <option value="2">Negativo</option>
+                                </x-select>
+                                <x-input-error for="nombre" class="mt-2" />
+                            </div>
+                        </div>
+                        <div class="flex justify-center md:justify-end max-md:w-full my-3">
+                            <x-button type="button" wire:click="addSubcategory">Agregar</x-button>
+                        </div>
+                        <div>
+                            <x-table>
+                                <x-slot name="titles">
+                                    <x-th>No.</x-th>
+                                    <x-th>Especie</x-th>
+                                    <x-th>Resultado</x-th>
+                                    <x-th>Eliminar</x-th>
+                                </x-slot>
+                                <x-slot name="content">
+                                    @forelse ($listName as $index => $item)
+                                        <x-tr>
+                                            <x-td wire:key="espe-{{$index}}">{{ $index + 1 }}</x-td>
+                                            <x-td>{{ $item['especie_nomb'] }}</x-td>
+                                            <x-td>{{ $item['resultado_nomb'] }}</x-td>
+                                            <x-td>
+                                                <x-danger-button wire:click="deteSubcategory({{$index}})">X</x-danger-button>
+                                            </x-td>
+                                        </x-tr>
+                                    @empty
+                                        <x-tr>
+                                            <td colspan="3" class="text-center px-6 py-4">No hay resultados disponibles</td>
+                                        </x-tr>
+                                    @endforelse
+                                </x-slot>
+                            </x-table>
+                        </div>
+                    </fieldset>
                 @endif
 
                 @if ($currentStep == 3)

@@ -3,6 +3,7 @@
 namespace App\Livewire\Administrador\Bitacoras\Pcr;
 
 use App\Models\analises;
+use App\Models\especies;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Locked;
@@ -15,6 +16,12 @@ class Create extends Component
     //^=================================Step 1: Datos de bitacora
     public $analises = [];
     public $analisis = '', $sanitizo = '', $tiempouv = '', $no_rtegistro, $agaroza, $tiempo, $voltaje;
+
+    //^=================================Step 2: Datos de muestra
+
+    public $especies = [];
+
+    public $especie = '', $resultado = '';
 
 
 
@@ -34,11 +41,15 @@ class Create extends Component
     public function mount()
     {
         $this->totalSteps = 4;
-        $this->currentStep = 1;
+        $this->currentStep = 2;
         $this->updated_porsentaje();
 
         //^=================================Step 1: Datos de bitacora
         $this->analises = analises::where('estatus', 1)->get();
+
+        //^=================================Step 2: Datos de muestras
+
+        $this->especies = especies::where('estatus', 1)->get();
     }
 
 
@@ -90,6 +101,54 @@ class Create extends Component
         if ($this->currentStep < 1) {
             $this->currentStep = 1;
         }
+    }
+
+    //&====================================================================================== Agregar Especie
+    public $list_sub = [], $listName=[];
+    public function addSubcategory()  //^Agregar subcategorias a un array
+    {
+
+        $exist = false;
+        foreach ($this->list_sub as $sub) {
+            if ($this->especie == $sub) {
+                $exist = true;
+            }
+        }
+
+        //dd($exist);
+        if (!$exist) {
+            //agregar regra
+            $this->validate([
+                'especie' => 'required',
+                'resultado' => 'required'
+            ]);
+            $nuevoRegistro = [
+                'especie' => $this->especie,
+                'resultado' => $this->resultado
+            ];
+
+            $this->list_sub[] = $nuevoRegistro;
+
+            $listas = collect($this->list_sub);
+
+            $this->listName = $listas->map(function ($item) {
+                return [
+                    'especie_nomb' => especies::find($item['especie'])->nombre ?? 'sin especie',
+                    'resultado_nomb' => $item['resultado'] == 1 ? "Positivo" : ($item['resultado'] == 2 ? "Negativo" : "Sin especificar")
+                ];
+            });
+
+            //dd($this->list_sub);
+
+            $this->reset('especie', 'resultado');
+        } else {
+            session()->flash('alerttm', 'Subcategoría ya ha sido registrada');
+        }
+    }
+
+    public function deteSubcategory($index)  //^Eliminar subcategorias del array
+    {
+        unset($this->list_sub[$index]);
     }
 
     //&=================================================================Nuevo registro
