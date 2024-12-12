@@ -3,15 +3,20 @@
 namespace App\Livewire\Administrador\Bitacoras\Pcr;
 
 use App\Models\analises;
+use App\Models\equipos;
 use App\Models\especies;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Lazy()]
 class Create extends Component
 {
+    //&=================================================================Paginate
+    use WithPagination;
+
     //&=================================================================Bariables
     //^=================================Step 1: Datos de bitacora
     public $analises = [];
@@ -23,6 +28,10 @@ class Create extends Component
 
     public $especie = '', $resultado = '';
 
+    //^=================================Step 2: Datos de muestra
+
+    public $selectedTagsEquipo=[];
+
 
 
     //&=================================================================Steps
@@ -33,7 +42,7 @@ class Create extends Component
 
     public $titles = [
         '1' => 'Datos de la bitacora',
-        '2' => 'Muestras',
+        '2' => 'Especies',
         '3' => 'Equipos',
         '4' => 'Resumen',
     ];
@@ -41,7 +50,7 @@ class Create extends Component
     public function mount()
     {
         $this->totalSteps = 4;
-        $this->currentStep = 2;
+        $this->currentStep = 3;
         $this->updated_porsentaje();
 
         //^=================================Step 1: Datos de bitacora
@@ -50,6 +59,11 @@ class Create extends Component
         //^=================================Step 2: Datos de muestras
 
         $this->especies = especies::where('estatus', 1)->get();
+
+        //^=================================Step 3: Datos de equipos
+
+
+
     }
 
 
@@ -64,15 +78,29 @@ class Create extends Component
         switch ($this->currentStep) {
 
             case 1:
+                $this->validate([
+                    'no_rtegistro' => 'required|min:3|max:50|unique:pcrs,no_registro',
+                    'analisis' => 'required',
+                    'sanitizo' => 'required',
+                    'tiempouv' => 'required',
+                    'agaroza' => 'required|max:50',
+                    'tiempo' => 'required|max:50',
+                    'voltaje' => 'required|max:50',
+                ]);
 
                 break;
 
             case 2:
 
+                $this->validate([
+                    'list_sub' => "required"
+                ]);
                 break;
 
             case 3:
-
+                // $this->validate([
+                //     'list_equip' => "required"
+                // ]);
                 break;
         }
     }
@@ -104,13 +132,13 @@ class Create extends Component
     }
 
     //&====================================================================================== Agregar Especie
-    public $list_sub = [], $listName=[];
+    public $list_sub = [], $listName = [];
     public function addSubcategory()  //^Agregar subcategorias a un array
     {
 
         $exist = false;
         foreach ($this->list_sub as $sub) {
-            if ($this->especie == $sub) {
+            if ($this->especie == $sub['especie']) {
                 $exist = true;
             }
         }
@@ -142,13 +170,14 @@ class Create extends Component
 
             $this->reset('especie', 'resultado');
         } else {
-            session()->flash('alerttm', 'Subcategoría ya ha sido registrada');
+            session()->flash('red', 'Esta especie ya fue agregaada');
         }
     }
 
     public function deteSubcategory($index)  //^Eliminar subcategorias del array
     {
         unset($this->list_sub[$index]);
+        unset($this->listName[$index]);
     }
 
     //&=================================================================Nuevo registro
@@ -164,7 +193,7 @@ class Create extends Component
 
             $this->currentStep = 1;
 
-            $this->totalSteps = 3;
+            $this->totalSteps = 4;
 
             session()->flash('green', '.');
         } catch (\Exception $e) {
@@ -180,9 +209,18 @@ class Create extends Component
     {
         return redirect()->route('admin.registros.empleados');
     }
+
+    //&=================================================================Lazy Load
+    public function placeholder()
+    {
+        return view('livewire.placeholders.skeleton');
+    }
+
     //&=================================================================Render
     public function render()
     {
-        return view('livewire.administrador.bitacoras.pcr.create');
+        $equipos = equipos::where('estatus',1)->paginate(2, pageName: 'equipos-page');
+
+        return view('livewire.administrador.bitacoras.pcr.create',compact('equipos'));
     }
 }

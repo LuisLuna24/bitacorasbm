@@ -1,4 +1,5 @@
 <div>
+    <x-message />
     <div>
         <style>
             .porsentaje {
@@ -17,7 +18,7 @@
                 </div>
             </div>
 
-            <x-message />
+
 
             <form wire:submit.prevent="register" class="bg-slate-300 dark:bg-slate-800 p-5 rounded-md mt-3">
 
@@ -89,7 +90,7 @@
                                         <option value="{{ $item->id }}">{{ $item->nombre }}</option>
                                     @endforeach
                                 </x-select>
-                                <x-input-error for="no_empleado" class="mt-2" />
+                                <x-input-error for="especie" class="mt-2" />
                             </div>
                             <div class="flex flex-col">
                                 <label for="">Resultado:</label>
@@ -98,7 +99,7 @@
                                     <option value="1">Positivo</option>
                                     <option value="2">Negativo</option>
                                 </x-select>
-                                <x-input-error for="nombre" class="mt-2" />
+                                <x-input-error for="resultado" class="mt-2" />
                             </div>
                         </div>
                         <div class="flex justify-center md:justify-end max-md:w-full my-3">
@@ -115,16 +116,18 @@
                                 <x-slot name="content">
                                     @forelse ($listName as $index => $item)
                                         <x-tr>
-                                            <x-td wire:key="espe-{{$index}}">{{ $index + 1 }}</x-td>
+                                            <x-td wire:key="espe-{{ $index }}">{{ $index + 1 }}</x-td>
                                             <x-td>{{ $item['especie_nomb'] }}</x-td>
                                             <x-td>{{ $item['resultado_nomb'] }}</x-td>
                                             <x-td>
-                                                <x-danger-button wire:click="deteSubcategory({{$index}})">X</x-danger-button>
+                                                <x-danger-button
+                                                    wire:click="deteSubcategory({{ $index }})">X</x-danger-button>
                                             </x-td>
                                         </x-tr>
                                     @empty
                                         <x-tr>
-                                            <td colspan="3" class="text-center px-6 py-4">No hay resultados disponibles</td>
+                                            <td colspan="3" class="text-center px-6 py-4">No hay resultados
+                                                disponibles</td>
                                         </x-tr>
                                     @endforelse
                                 </x-slot>
@@ -134,6 +137,36 @@
                 @endif
 
                 @if ($currentStep == 3)
+                    <fieldset>
+                        <x-table>
+                            <x-slot name="titles">
+                                <x-th></x-th>
+                                <x-th>No. de inventario</x-th>
+                                <x-th>Nombre</x-th>
+                            </x-slot>
+                            <x-slot name="content">
+                                @forelse ($equipos as $item)
+                                    <x-tr>
+                                        <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+                                            wire:key="{{ $item->id }}">
+                                            <x-checkbox type="checkbox" wire:model="selectedTagsEquipo"
+                                                value="{{  $item->id }} " />
+                                        </th>
+                                        <x-td>{{ $item->no_inventario }}</x-td>
+                                        <x-td>{{ $item->nombre }}</x-td>
+                                    </x-tr>
+                                @empty
+                                    <x-tr>
+                                        <td colspan="4" class="text-center px-6 py-4">No hay datos disponibles</td>
+                                    </x-tr>
+                                @endforelse
+                            </x-slot>
+
+                        </x-table>
+                        <div class="mt-3">
+                            {{ $equipos->onEachSide(1)->links() }}
+                        </div>
+                    </fieldset>
                 @endif
 
                 @if ($currentStep == 4)
