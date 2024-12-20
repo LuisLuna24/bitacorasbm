@@ -14,7 +14,7 @@ class pcr extends Model
         'no_registro',
         'sanitizo',
         'tiempouv',
-        'agarosa',
+        'agaroza',
         'tiempo',
         'voltaje',
         'version',
@@ -28,6 +28,21 @@ class pcr extends Model
     public function usuario(){
         return $this->belongsTo(User::class, 'id_usuario');
     }
-    
+
+    //equipos
+    public function equipos(){
+        return $this->belongsToMany(equipos::class, 'pcr_equipos', 'id_pcr', 'id_equipo');
+    }
+
+    //especies
+    public function especies(){
+        return $this->belongsToMany(especies::class, 'pcr_especies', 'id_pcr', 'id_especie');
+    }
+
+    //validacion
+    public function validacion(){
+        return $this->hasOne(pcr_validacions::class, 'id_pcr');
+    }
+
     use HasFactory;
 }

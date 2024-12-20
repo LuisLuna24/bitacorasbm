@@ -6,16 +6,24 @@ use App\Models\analises;
 use App\Models\equipos;
 use App\Models\especies;
 use App\Models\pcr;
-use Illuminate\Support\Facades\Auth;
+use App\Models\pcr_especies;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+
 #[Lazy()]
-class Create extends Component
+class Edit extends Component
 {
+
+    #[Reactive]
+    public $idPcr;
+
+    public $noRegistro;
+
     //&=================================================================Paginate
     use WithPagination;
 
@@ -26,16 +34,15 @@ class Create extends Component
 
     //^=================================Step 2: Datos de muestra
 
+    public $list_sub = [], $listName = [];
+
     public $especies = [];
 
     public $especie = '', $resultado = '';
 
-    //^=================================Step 2: Datos de muestra
+    //^=================================Step 3: Equipos
 
     public $selectedTagsEquipo = [];
-
-
-
     //&=================================================================Steps
     #[Locked]
     public $totalSteps;
@@ -55,16 +62,46 @@ class Create extends Component
         $this->currentStep = 1;
         $this->updated_porsentaje();
 
+
+
         //^=================================Step 1: Datos de bitacora
         $this->analises = analises::where('estatus', 1)->get();
+
+        $data = pcr::find($this->idPcr);
+
+        $this->noRegistro = $this->no_registro = $data->no_registro ?? null;
+        $this->analisis = $data->id_analisis ?? null;
+        $this->sanitizo = $data->sanitizo ?? null;
+        $this->tiempouv = $data->tiempouv ?? null;
+        $this->agaroza = $data->agaroza ?? null;
+        $this->tiempo = $data->tiempo ?? null;
+        $this->voltaje = $data->voltaje ?? null;
 
         //^=================================Step 2: Datos de muestras
 
         $this->especies = especies::where('estatus', 1)->get();
 
+        $especiesSelect = pcr_especies::where('id_pcr', $this->idPcr)->get();
+
+        foreach ($especiesSelect as $especie) {
+            $this->list_sub[] = [
+                'especie' => $especie->id_especie,
+                'resultado' => $especie->resultado
+            ];
+        }
+
+        $listas = collect($this->list_sub);
+
+        $this->listName = $listas->map(function ($item) {
+            return [
+                'especie_nomb' => especies::find($item['especie'])->nombre ?? 'sin especie',
+                'resultado_nomb' => $item['resultado'] == 1 ? "Positivo" : ($item['resultado'] == 2 ? "Negativo" : "Sin especificar")
+            ];
+        });
+
         //^=================================Step 3: Datos de equipos
 
-
+        $this->selectedTagsEquipo = $data->equipos->pluck('id')->toArray();
     }
 
 
@@ -80,7 +117,7 @@ class Create extends Component
 
             case 1:
                 $this->validate([
-                    'no_registro' => 'required|min:3|max:50|unique:pcrs,no_registro',
+                    'no_registro' => 'required|min:3|max:50|unique:pcrs,no_registro,' . $this->idPcr . ',id',
                     'analisis' => 'required',
                     'sanitizo' => 'required',
                     'tiempouv' => 'required',
@@ -93,13 +130,7 @@ class Create extends Component
 
             case 2:
 
-                $this->validate([
-                    'list_sub' => "required"
-                ], [
-                    'list_sub.required' => 'Debe agregar al menos una especie'
-                ]);
                 break;
-
             case 3:
                 $this->validate([
                     'selectedTagsEquipo' => "required"
@@ -137,7 +168,7 @@ class Create extends Component
     }
 
     //&====================================================================================== Agregar Especie
-    public $list_sub = [], $listName = [];
+
     public function addSubcategory()  //^Agregar subcategorias a un array
     {
 
@@ -185,43 +216,44 @@ class Create extends Component
         unset($this->listName[$index]);
     }
 
-    //&=================================================================Nuevo registro
+    //&====================================================================================== Editar
+
     public function register()
     {
-        DB::beginTransaction();
+
         try {
 
-            $pcr = pcr::create([
-                'id_usuario' => Auth::id(),
-                'id_analisis' => $this->analisis,
-                'no_registro' => $this->no_registro, // corregido de no_rtegistro a no_registro
-                'sanitizo' => $this->sanitizo,
-                'tiempouv' => $this->tiempouv,
-                'agaroza' => $this->agaroza, // corregido de agaroza a agaroza
-                'tiempo' => $this->tiempo,
-                'voltaje' => $this->voltaje,
-                'version' => 1,
-            ]);
+            $data = pcr::find($this->idPcr);
+
+            $data->no_registro = $this->no_registro;
+            $data->id_analisis = $this->analisis;
+            $data->sanitizo = $this->sanitizo;
+            $data->tiempouv = $this->tiempouv;
+            $data->agaroza = $this->agaroza;
+            $data->tiempo = $this->tiempo;
+            $data->voltaje = $this->voltaje;
+
+            $data->save();
+
+            $data->equipos()->sync($this->selectedTagsEquipo);
+
+            pcr_especies::where('id_pcr', $this->idPcr)->delete();
 
             foreach ($this->list_sub as $sub) {
-                $pcr->especies()->attach($sub['especie'], ['resultado' => $sub['resultado']]);
+                $data->especies()->attach($sub['especie'], ['resultado' => $sub['resultado']]);
             }
-
-            $pcr->equipos()->sync($this->selectedTagsEquipo);
 
             DB::commit();
 
-            $this->reset();
+            $this->totalSteps = 4;
 
             $this->currentStep = 1;
 
-            $this->totalSteps = 4;
-
-            session()->flash('green', 'Agregado correctamente.');
+            session()->flash('blue', 'Registro actualizado correctamente');
         } catch (\Exception $e) {
-            DB::rollback();
-            abort(500);
+            DB::rollBack();
             //dd($e->getMessage());
+            abort(500);
         }
     }
 
@@ -238,11 +270,15 @@ class Create extends Component
         return view('livewire.placeholders.skeleton');
     }
 
-    //&=================================================================Render
     public function render()
     {
+
+        $especiesSelect = pcr_especies::where('id_pcr', $this->idPcr)->get();
         $equipos = equipos::where('estatus', 1)->paginate(10, pageName: 'equipos-page');
 
-        return view('livewire.administrador.bitacoras.pcr.create', compact('equipos'));
+        return view('livewire.administrador.bitacoras.pcr.edit', [
+            'especiesSelect' => $especiesSelect,
+            'equipos' => $equipos
+        ]);
     }
 }

@@ -41,6 +41,10 @@ Route::get('/bitacoras/pcr/nuevo', function () {
     return view('administrador.bitacoras.pcr.create');
 })->name('pcr.create');
 
+Route::get('/bitacoras/pcr/{id}/editar', function ($id) {
+    return view('administrador.bitacoras.pcr.edit', compact('id'));
+})->name('pcr.edit');
+
 //~===============================================PCR Tiempo Real
 Route::get('/bitacoras/pcr_tiempo_real', function () {
     return view('administrador.bitacoras.pcreal');

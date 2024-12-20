@@ -20,10 +20,11 @@
         <div class="flex flex-col w-full relative ">
             <label for="">Buscar:</label>
             <x-input wire:model.live.debounce.500ms="search" placeholder="(Nombre)" />
-            <button type="button" class="absolute  right-3 -translate-y-1/2 top-2/3 p-1 text-white text-2xl" wire:click="resetSerch" >x</button>
+            <button type="button" class="absolute  right-3 -translate-y-1/2 top-2/3 p-1 text-white text-2xl"
+                wire:click="resetSerch">x</button>
         </div>
         <div class="max-md:w-full">
-            <x-button-new wire:click="newRegister" class="max-md:w-full"/>
+            <x-button-new wire:click="newRegister" class="max-md:w-full" />
         </div>
     </section>
     <section>
@@ -45,13 +46,19 @@
                     <x-tr>
                         <x-td wire:key="ite-{{ $item->id }}">{{ $item->no_registro }}</x-td>
                         <x-td>{{ $item->analisis->nombre }}</x-td>
-                        <x-td>{{ $item->agarosa }}</x-td>
+                        <x-td>{{ $item->agaroza }}</x-td>
                         <x-td>{{ $item->voltaje }}</x-td>
                         <x-td>{{ $item->tiempo }}</x-td>
                         <x-td>{{ $item->usuario->name }}</x-td>
-                        <x-td><x-button-catalogo wire:click="especiesRegister({{ $item->id }})"></x-button-catalogo></x-td>
+                        <x-td><x-button-catalogo
+                                wire:click="especiesRegister({{ $item->id }})"></x-button-catalogo></x-td>
                         <x-td><x-button-edit wire:click="editRegister({{ $item->id }})"></x-button-edit></x-td>
-                        <x-td><x-button-validation wire:click="validateRegister({{ $item->id }})"></x-button-validation></x-td>
+                        <x-td>
+                            @if (Auth::user()->tipo_usuario_id == 1)
+                                <x-button-validation
+                                    wire:click="validateRegister({{ $item->id }})"></x-button-validation>
+                            @endif
+                        </x-td>
                         <x-td>
                             <label for="{{ $item->id }}"
                                 class="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-green-500"
@@ -61,7 +68,7 @@
 
                                 <input type="checkbox" id="{{ $item->id }}"
                                     class="peer sr-only [&:checked_+_span_svg[data-checked-icon]]:block [&:checked_+_span_svg[data-unchecked-icon]]:hidden"
-                                    @if ($item->estatus) checked @endif @disabled(true) />
+                                    @if ($item->estado) checked @endif @disabled(true) />
 
                                 <span
                                     class="absolute inset-y-0 start-0 z-10 m-1 inline-flex size-6 items-center justify-center rounded-full bg-white text-gray-400 transition-all peer-checked:start-6 peer-checked:text-green-600">
@@ -128,9 +135,67 @@
         <x-slot name="footer"></x-slot>
     </x-dialog-modal>
 
+    <x-dialog-modal wire:model="validateModal">
+        <x-slot name="title">
+            <h2 class="text-center">Validación</h2>
+        </x-slot>
+        <x-slot name="content">
+            <form wire:submit="validateSubmit">
+                <div class="flex flex-col">
+                    <label for="validacion">Validación:</label>
+                    <x-select wire:model="validacion">
+                        <option value="" disabled>Seleccione una opción</option>
+                        <option value="1">Aprobado</option>
+                        <option value="2">Rechazado</option>
+                    </x-select>
+                </div>
+                <div class="flex flex-col">
+                    <label for="observaciones">Observaciones:</label>
+                    <x-input wire:model="observaciones" />
+                </div>
+                <div class="flex justify-between mt-3">
+                    <x-button>Guardar</x-button>
+                    <x-danger-button wire:click="closeValidateModal">Cancelar</x-danger-button>
+                </div>
+            </form>
+        </x-slot>
+        <x-slot name="footer"></x-slot>
+    </x-dialog-modal>
+
+    <x-dialog-modal wire:model="especiesModal">
+        <x-slot name="title">
+            <h2 class="text-center">Especies</h2>
+        </x-slot>
+        <x-slot name="content">
+            <x-table>
+                <x-slot name="titles">
+                    <x-th>No.</x-th>
+                    <x-th>Especie</x-th>
+                    <x-th>Resultado</x-th>
+                </x-slot>
+                <x-slot name="content">
+                    @forelse ($especies as $index => $item)
+                        <x-tr>
+                            <x-td wire:key="esp-{{ $item->id }}">{{ $index + 1 }}</x-td>
+                            <x-td>{{ $item->especies->nombre }}</x-td>
+                            <x-td><x-resultado :resultado="$item->resultado" /></x-td>
+                        </x-tr>
+                    @empty
+                        <x-tr>
+                            <td colspan="2" class="px-6 py-4 text-center">Sin Resultados</td>
+                        </x-tr>
+                    @endforelse
+                </x-slot>
+            </x-table>
+        </x-slot>
+        <x-slot name="footer">
+                <x-danger-button wire:click="closeEspeciesModal">Cerrar</x-danger-button>
+        </x-slot>
+    </x-dialog-modal>
+
     <div class="bg-gray-500 dark:bg-gray-900 opacity-75 fixed z-[10000] left-0 top-0 h-screen w-full  items-center justify-center hidden"
         wire:loading.class.remove="hidden" wire:loading.class="flex"
-        wire:target="newRegister,editRegister,statusRegister,statusUpdate,submitForm,vercionRegister">
+        wire:target="newRegister,editRegister,statusRegister,statusUpdate,submitForm,vercionRegister,validateRegister,validateSubmit">
 
         <div class="preloader_box">
             <img src="{{ asset('images/G_Logo.png') }}" alt="" class="preloader_img">
