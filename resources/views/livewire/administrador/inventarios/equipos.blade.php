@@ -40,7 +40,7 @@
             <x-slot name="content">
                 @forelse ($collection as $index => $item)
                     <x-tr>
-                        <x-td wire:key="ite-{{ $item->id }}">{{ $item->no_inventario }}</x-td>
+                        <x-td wire:key="ite-{{ $item->id }}">GIS-{{ $item->no_inventario }}</x-td>
                         <x-td>{{ $item->nombre }}</x-td>
                         <x-td>{{ $item->descripcion }}</x-td>
                         <x-td>{{ $item->version }}</x-td>

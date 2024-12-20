@@ -44,15 +44,20 @@ class Equipos extends Component
         $this->resetForm();
 
         $this->idRegister = $id;
-        $analisis = ModelsEquipos::findOrFail($id);
+        $equipos = ModelsEquipos::findOrFail($id);
 
-        $this->nombre = $analisis->nombre;
+        $this->no_inventario = $equipos->no_inventario;
+        $this->nombre = $equipos->nombre;
+        $this->descripcion = $equipos->descripcion;
+
+
+
         $this->tipeForm = 2;
         $this->modal = true;
-        $this->nom_ante = $analisis->nombre;
-        $this->version = $analisis->version + 1;
-        $this->des_ante = $analisis->descripcion;
-        $this->no_inventario_anterior = $analisis->no_inventario;
+        $this->nom_ante = $equipos->nombre;
+        $this->version = $equipos->version + 1;
+        $this->des_ante = $equipos->descripcion;
+        $this->no_inventario_anterior = $equipos->no_inventario;
     }
 
     /**
@@ -69,14 +74,14 @@ class Equipos extends Component
             ]);
 
             if ($this->tipeForm === 1) {
-                ModelsEquipos::create(['nombre' => $this->nombre, 'descripcion' => $this->descripcion, 'no_inventario' => 'GIS-' . $this->no_inventario]);
+                ModelsEquipos::create(['nombre' => $this->nombre, 'descripcion' => $this->descripcion, 'no_inventario' => $this->no_inventario]);
                 session()->flash('green', 'Agregada correctamente');
             } elseif ($this->tipeForm === 2) {
                 $this->validate(['razon_cambio' => 'required|max:250']);
                 ModelsEquipos::findOrFail($this->idRegister)->update(['nombre' => $this->nombre, 'descripcion' => $this->descripcion, 'version' => $this->version]);
                 version_equipos::create([
-                    'no_inventario' => 'GIS-' . $this->no_inventario,
-                    'no_inventario_anterior' => 'GIS-' . $this->no_inventario_anterior,
+                    'no_inventario' => $this->no_inventario,
+                    'no_inventario_anterior' => $this->no_inventario_anterior,
                     'nombre' => $this->nombre,
                     'nombre_anterior' => $this->nom_ante,
                     'descripcion' => $this->descripcion,
