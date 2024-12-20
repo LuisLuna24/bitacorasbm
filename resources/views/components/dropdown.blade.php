@@ -1,18 +1,28 @@
 @props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white dark:bg-gray-700', 'dropdownClasses' => ''])
 
 @php
-$alignmentClasses = match ($align) {
-    'left' => 'ltr:origin-top-left rtl:origin-top-right start-0',
-    'top' => 'origin-top',
-    'none', 'false' => '',
-    default => 'ltr:origin-top-right rtl:origin-top-left end-0',
-};
+switch ($align) {
+    case 'left':
+        $alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right start-0';
+        break;
+    case 'top':
+        $alignmentClasses = 'origin-top';
+        break;
+    case 'none':
+    case 'false':
+        $alignmentClasses = '';
+        break;
+    case 'right':
+    default:
+        $alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
+        break;
+}
 
-$width = match ($width) {
-    '48' => 'w-48',
-    '60' => 'w-60',
-    default => 'w-48',
-};
+switch ($width) {
+    case '48':
+        $width = 'w-48';
+        break;
+}
 @endphp
 
 <div class="relative" x-data="{ open: false }" @click.away="open = false" @close.stop="open = false">
@@ -29,7 +39,7 @@ $width = match ($width) {
             x-transition:leave-end="transform opacity-0 scale-95"
             class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }} {{ $dropdownClasses }}"
             style="display: none;"
-            @click="open = false">
+            {{--@click="open = false"--}}>{{-- Este permite al dar clic se cierre de manera automatica  --}}
         <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">
             {{ $content }}
         </div>
